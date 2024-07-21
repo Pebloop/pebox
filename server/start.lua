@@ -76,6 +76,7 @@ function keepAlive()
         -- Add players as they join
         local event, modemSide, senderChannel,
         replyChannel, message, senderDistance = os.pullEvent()
+        print(event)
         if event == 'modem_message' then
             if PeboxCore.command(message) == "CODE_START" and PeboxCore.args(message)[1] == code then
                 local playerID = PeboxCore.args(message)[1]
