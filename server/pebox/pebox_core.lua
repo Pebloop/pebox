@@ -52,7 +52,7 @@ function PeboxCore.keepAlive(playerID, onDisconnect)
             modem.transmit( 6, 5, playerID .. " KEEP_ALIVE")
             local timer = os.time()
             while os.time() - timer < 3 do
-                print(os.time() - timer < 3)
+                print(os.time() - timer)
                 local event, modemSide, senderChannel,
                 replyChannel, message, senderDistance = os.pullEvent()
                 if event == "modem_message" then
