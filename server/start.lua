@@ -74,6 +74,7 @@ function keepAlive()
         local event, modemSide, senderChannel,
         replyChannel, message, senderDistance = os.pullEvent()
         if event == 'modem_message' then
+            print(message)
             if PeboxCore.command(message) == "CODE_START" and PeboxCore.args(message)[1] == code then
                 local playerID = PeboxCore.args(message)[1]
                 nbPlayers = PeboxUtils.len(clients) + 1
@@ -82,7 +83,6 @@ function keepAlive()
 
             end
         else
-            print(event)
             os.queueEvent(event, modemSide, senderChannel, replyChannel, message, senderDistance)
         end
     end
