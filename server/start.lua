@@ -78,6 +78,7 @@ function keepAlive()
                 nbPlayers = PeboxUtils.len(clients) + 1
                 clients[nbPlayers] = playerID
                 clientsNames[nbPlayers] = PeboxCore.args(message)[2]
+            end
         end
 
 
