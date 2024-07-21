@@ -16,7 +16,6 @@ while true do
     local event, modemSide, senderChannel, 
   replyChannel, message, senderDistance = os.pullEvent("modem_message")
 
-    print(message)
     if PeboxCore.id(message) == tostring(id) then
         local command = PeboxCore.command(message)
         if command == "CODE_ACCEPTED" then
