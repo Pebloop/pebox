@@ -41,6 +41,7 @@ function PeboxCore.keepAlive()
     local routine = coroutine.create(function()
         modem.transmit( 5, 6, id .. " KEEP_ALIVE")
         while true do
+            print("tst")
             local event, modemSide, senderChannel,
             replyChannel, message, senderDistance = os.pullEvent()
             if event == "modem_message" then
