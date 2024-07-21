@@ -9,6 +9,7 @@
 
 local PeboxCommands = require("pebox.pebox_commands")
 local PeboxCore = require("pebox.pebox_core")
+local HomeScreen = require("pebox.screens.home_screen")
 
 local clients = {}
 local clientsNames = {}
@@ -30,16 +31,7 @@ if not monitor then
     return
 end
 
-local monitorW, monitorH = monitor.getSize()
-monitor.clear()
-monitor.setCursorPos(monitorW / 2 - 2, monitorH / 2 - 3)
-monitor.write("Pebox" )
-monitor.setCursorPos(monitorW / 2 - 2,monitorH / 2)
-monitor.write(code)
-for i = 1, 8 do
-    monitor.setCursorPos(1, monitorH - 8 + i)
-    monitor.write(i .. ":")
-end
+HomeScreen.draw({}, code)
 
 while true do
     local event, modemSide, senderChannel, 
@@ -55,10 +47,8 @@ while true do
             nbPlayers = nbPlayers + 1
             PeboxCommands.acceptCode(PeboxCore.id(message), nbPlayers)
             clientsNames[nbPlayers] = playerName
-            monitor.setCursorPos(3, monitorH - 8 + nbPlayers)
-            monitor.write(clientsNames[nbPlayers])
             clients[nbPlayers] = PeboxCore.id(message)
-
+            HomeScreen.draw({}, code)
         else
             print("Code is incorrect!")
             PeboxCommands.rejectCode(PeboxCore.id(message))
