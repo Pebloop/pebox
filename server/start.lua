@@ -40,7 +40,7 @@ function gameStart()
         local event, modemSide, senderChannel,
         replyChannel, message, senderDistance = os.pullEvent()
 
-        --print(message)
+        print(message)
         if event == "modem_message" then
             if PeboxCore.command(message) == ("CODE_START") then
                 if PeboxCore.args(message)[1] == code then
@@ -58,6 +58,9 @@ function gameStart()
                     PeboxCommands.rejectCode(PeboxCore.id(message))
                 end
             end
+
+        else
+            os.queueEvent(event, modemSide, senderChannel, replyChannel, message, senderDistance)
         end
 
         while true do
@@ -74,13 +77,11 @@ function keepAlive()
         local event, modemSide, senderChannel,
         replyChannel, message, senderDistance = os.pullEvent()
         if event == 'modem_message' then
-            print(message)
             if PeboxCore.command(message) == "CODE_START" and PeboxCore.args(message)[1] == code then
                 local playerID = PeboxCore.args(message)[1]
                 nbPlayers = PeboxUtils.len(clients) + 1
                 clients[nbPlayers] = playerID
                 clientsNames[nbPlayers] = PeboxCore.args(message)[2]
-
             end
         else
             os.queueEvent(event, modemSide, senderChannel, replyChannel, message, senderDistance)
