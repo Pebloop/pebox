@@ -68,6 +68,19 @@ end
 
 function keepAlive()
     while true do
+
+        -- Add players as they join
+        local event, modemSide, senderChannel,
+        replyChannel, message, senderDistance = os.pullEvent()
+        if event == 'modem_message' then
+            if PeboxCore.command(message) == "CODE_START" and PeboxCore.args(message)[1] == code then
+                local playerID = PeboxCore.args(message)[1]
+                nbPlayers = PeboxUtils.len(clients) + 1
+                clients[nbPlayers] = playerID
+                clientsNames[nbPlayers] = PeboxCore.args(message)[2]
+        end
+
+
         for i = 1, nbPlayers do
             modem.transmit(6, 5, clients[i] .. " KEEP_ALIVE")
             local timer = os.time()
@@ -82,7 +95,7 @@ function keepAlive()
                 end
             end
         end
-    end 
+    end
 end
 
 parallel.waitForAny(gameStart, keepAlive)
