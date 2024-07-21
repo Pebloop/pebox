@@ -12,6 +12,7 @@ local PeboxCore = require("pebox.pebox_core")
 
 local clients = {}
 local clientsNames = {}
+local nbPlayers = 0
 local code = PeboxCore.generateaConexionCode()
 
 print("launching server")
@@ -47,12 +48,16 @@ while true do
     print(message)
     if PeboxCore.command(message) == ("CODE_START") then
         if PeboxCore.args(message)[1] == code then
-            print("Code is correct! Welcome player " .. #clients)
-            PeboxCommands.acceptCode(PeboxCore.id(message), #clients)
-            clientsNames[#clients] = PeboxCore.args(message)[2]
-            monitor.setCursorPos(3, monitorH - 7 + #clients)
-            monitor.write(clientsNames[#clients])
-            clients[#clients] = PeboxCore.id(message)
+            local deviceID = PeboxCore.id(message)
+            local playerName = PeboxCore.args(message)[2]
+
+            print("New player " .. playerName .. " with deviceID " .. deviceID)
+            nbPlayers = nbPlayers + 1
+            PeboxCommands.acceptCode(PeboxCore.id(message), nbPlayers)
+            clientsNames[nbPlayers] = playerName
+            monitor.setCursorPos(3, monitorH - 8 + nbPlayers)
+            monitor.write(clientsNames[nbPlayers])
+            clients[nbPlayers] = PeboxCore.id(message)
 
         else
             print("Code is incorrect!")
