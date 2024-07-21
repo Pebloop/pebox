@@ -34,47 +34,55 @@ end
 
 HomeScreen.draw({}, code)
 
-while true do
-    local event, modemSide, senderChannel,
-    replyChannel, message, senderDistance = os.pullEvent()
+function gameStart()
+    while true do
+        local event, modemSide, senderChannel,
+        replyChannel, message, senderDistance = os.pullEvent()
 
-    --print(message)
-    if event == "modem_message" then
-        if PeboxCore.command(message) == ("CODE_START") then
-            if PeboxCore.args(message)[1] == code then
-                local deviceID = PeboxCore.id(message)
-                local playerName = PeboxCore.args(message)[2]
+        --print(message)
+        if event == "modem_message" then
+            if PeboxCore.command(message) == ("CODE_START") then
+                if PeboxCore.args(message)[1] == code then
+                    local deviceID = PeboxCore.id(message)
+                    local playerName = PeboxCore.args(message)[2]
 
-                print("New player " .. playerName .. " with deviceID " .. deviceID)
-                nbPlayers = PeboxUtils.len(clients) + 1
-                PeboxCommands.acceptCode(PeboxCore.id(message))
-                clientsNames[nbPlayers] = playerName
-                clients[nbPlayers] = PeboxCore.id(message)
-                HomeScreen.draw(clientsNames, code)
-                local keepAlive = PeboxCore.keepAlive(PeboxCore.id(message), function()
-                    table.remove(clients, PeboxCore.id(message))
-                    table.remove(clientsNames, PeboxCore.id(message))
-                    nbPlayers = PeboxUtils.len(clients)
+                    print("New player " .. playerName .. " with deviceID " .. deviceID)
+                    nbPlayers = PeboxUtils.len(clients) + 1
+                    PeboxCommands.acceptCode(PeboxCore.id(message))
+                    clientsNames[nbPlayers] = playerName
+                    clients[nbPlayers] = PeboxCore.id(message)
                     HomeScreen.draw(clientsNames, code)
-                end)
-            else
-                print("Code is incorrect!")
-                PeboxCommands.rejectCode(PeboxCore.id(message))
+                else
+                    print("Code is incorrect!")
+                    PeboxCommands.rejectCode(PeboxCore.id(message))
+                end
             end
-        elseif PeboxCore.command(message) == ("GAME_START") then
-            if PeboxCore.id(message) == clients[1] then
-                monitor.clear()
-                monitor.setCursorPos(monitorW / 2 - 8, monitorH / 2)
-                monitor.write("Game is starting!")
-                break
-            else
-                print("Only player 1 can start the game!")
-            end
+        end
+
+        while true do
+            local event, modemSide, senderChannel,
+            replyChannel, message, senderDistance = os.pullEvent("modem_message")
         end
     end
 end
 
-while true do
-    local event, modemSide, senderChannel,
-    replyChannel, message, senderDistance = os.pullEvent("modem_message")
+function keepAlive()
+    while true do
+        for i = 1, nbPlayers do
+            modem.transmit(6, 5, clients[i] .. " KEEP_ALIVE")
+            local timer = os.time()
+            while os.time() - timer < 3 do
+                local event, modemSide, senderChannel,
+                replyChannel, message, senderDistance = os.pullEvent()
+                if event == "modem_message" then
+                    print(message)
+                    if PeboxCore.id(message) == clients[i] and PeboxCore.command(message) == "KEEP_ALIVE" then
+                        modem.transmit(6, 5, clients[i] .. " KEEP_ALIVE")
+                    end
+                end
+            end
+        end
+    end 
 end
+
+parallel.waitForAny(gameStart, keepAlive)
