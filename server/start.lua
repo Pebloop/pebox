@@ -8,8 +8,10 @@
 -- [playerID] CODE_REJECTED : Rejects the code
 
 local PeboxCommands = require("pebox.pebox_commands")
+local PeboxCore = require("pebox.pebox_core")
 
 local clients = {}
+local code = PeboxCore.generateaConexionCode()
 
 print("launching server")
 
@@ -28,21 +30,20 @@ end
 
 local monitorW, monitorH = monitor.getSize()
 monitor.clear()
-monitor.setCursorPos(monitorW / 2 - 3, 2)
+monitor.setCursorPos(monitorW / 2 - 2, monitorH / 2 - 3)
 monitor.write("Pebox" )
-monitor.setCursorPos(monitorW / 2 - 3,monitorH / 2)
+monitor.setCursorPos(monitorW / 2 - 2,monitorH / 2)
 monitor.write(code)
 
 while true do
     local event, modemSide, senderChannel, 
   replyChannel, message, senderDistance = os.pullEvent("modem_message")
 
-    if command(message) == ("CODE_START ") then
-        if args[1] == code then
+    if PeboxCore.command(message) == ("CODE_START ") then
+        if PeboxCore.args(message)[1] == code then
             print("Code is correct! Welcome player " .. #clients)
-            PeboxCommands.acceptCode(command[1], #clients)
-            modem.transmit( 6, 5, "CODE_ACCEPTED " .. #clients)
-            clients[#clients] = command[1]
+            PeboxCommands.acceptCode(PeboxCore.id(message), #clients)
+            clients[#clients] = PeboxCore.id(message)
         else
             print("Code is incorrect!")
             modem.transmit( 6, 5, "CODE_REJECTED")
