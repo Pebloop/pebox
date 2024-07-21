@@ -36,7 +36,7 @@ monitor.write("Pebox" )
 monitor.setCursorPos(monitorW / 2 - 2,monitorH / 2)
 monitor.write(code)
 for i = 1, 8 do
-    monitor.setCursorPos(1, monitorH - 9 + i)
+    monitor.setCursorPos(1, monitorH - 8 + i)
     monitor.write(i .. ":")
 end
 
@@ -49,7 +49,7 @@ while true do
             print("Code is correct! Welcome player " .. #clients)
             PeboxCommands.acceptCode(PeboxCore.id(message), #clients)
             clientsNames[#clients] = PeboxCore.args(message)[2]
-            monitor.setCursorPos(3, monitorH - 9 + #clients)
+            monitor.setCursorPos(3, monitorH - 8 + #clients)
             monitor.write(clientsNames[#clients])
             clients[#clients] = PeboxCore.id(message)
 
