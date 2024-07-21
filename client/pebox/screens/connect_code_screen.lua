@@ -1,6 +1,6 @@
 local ConnectCodeScreen = {}
 
-function ConnectNameScreen.display()
+function ConnectCodeScreen.display()
     term.clear()
     local width, height = term.getSize()
     term.setCursorPos(width / 2 - 2, 3)
