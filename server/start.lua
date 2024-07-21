@@ -39,7 +39,7 @@ while true do
     local event, modemSide, senderChannel, 
   replyChannel, message, senderDistance = os.pullEvent("modem_message")
 
-    if PeboxCore.command(message) == ("CODE_START ") then
+    if PeboxCore.command(message) == ("CODE_START") then
         if PeboxCore.args(message)[1] == code then
             print("Code is correct! Welcome player " .. #clients)
             PeboxCommands.acceptCode(PeboxCore.id(message), #clients)
