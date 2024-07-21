@@ -28,9 +28,9 @@ while true do
     end
 end
 
-while true do
-    print("Press Enter to start the game.")
+print("Press Enter to start the game.")
     print("(player 1 only)")
+while true do
     local event os.pullEvent();
     if event == "key" then
         break
