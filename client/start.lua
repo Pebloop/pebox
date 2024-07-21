@@ -1,8 +1,8 @@
 -- Imports --
-local EventManager = require("pebox.client.event_manager")
+local EventManager = require("pebox.event_manager")
+local ClientCommands = require("pebox.client_commands")
 local ConnectNameScreen = require("pebox.screens.connect_name_screen")
 local ConnectCodeScreen = require("pebox.screens.connect_code_screen")
-local ClientCommands = require("pebox.client_commands")
 
 -- Peripherals --
 local modem = peripheral.find("modem")
