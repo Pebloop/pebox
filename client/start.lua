@@ -31,12 +31,13 @@ end
 print("Press Enter to start the game.")
     print("(player 1 only)")
 while true do
-    local event os.pullEvent();
-    if event == "key" then
+    local event, key os.pullEvent();
+    if event == "key" and  key == keys.enter then
         break
     end
 end
 PeboxCommands.gameStart()
+print("starting game")
 
 while true do
     local event, modemSide, senderChannel, 
