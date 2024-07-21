@@ -35,6 +35,7 @@ end
 HomeScreen.draw({}, code)
 
 function gameStart()
+    print("gamestart")
     while true do
         local event, modemSide, senderChannel,
         replyChannel, message, senderDistance = os.pullEvent()
@@ -67,6 +68,7 @@ function gameStart()
 end
 
 function keepAlive()
+    print("keepAlive")
     while true do
 
         -- Add players as they join
