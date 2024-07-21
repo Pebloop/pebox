@@ -79,23 +79,11 @@ function keepAlive()
                 nbPlayers = PeboxUtils.len(clients) + 1
                 clients[nbPlayers] = playerID
                 clientsNames[nbPlayers] = PeboxCore.args(message)[2]
-            end
-        end
 
-        print("alive")
-        for i = 1, nbPlayers do
-            modem.transmit(6, 5, clients[i] .. " KEEP_ALIVE")
-            local timer = os.time()
-            while os.time() - timer < 3 do
-                local event, modemSide, senderChannel,
-                replyChannel, message, senderDistance = os.pullEvent()
-                if event == "modem_message" then
-                    print(message)
-                    if PeboxCore.id(message) == clients[i] and PeboxCore.command(message) == "KEEP_ALIVE" then
-                        modem.transmit(6, 5, clients[i] .. " KEEP_ALIVE")
-                    end
-                end
             end
+        else
+            print(event)
+            os.queueEvent(event, modemSide, senderChannel, replyChannel, message, senderDistance)
         end
     end
 end
