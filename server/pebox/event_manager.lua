@@ -1,6 +1,5 @@
 local EventManager = {}
 
-local PeboxCore = require("pebox.models.pebox_core")
 local Command = require("pebox.models.command")
 local EventsCommands = require("pebox.events_commands")
 
