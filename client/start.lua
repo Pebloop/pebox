@@ -29,7 +29,7 @@ while true do
     end
 end
 
-if playerId == 0 then
+if playerId == 1 then
     print("Press Enter to start the game.")
     io.read()
     PeboxCommands.gameStart(playerId)
