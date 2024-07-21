@@ -31,7 +31,7 @@ end
 while true do
     print("Press Enter to start the game.")
     print("(player 1 only)")
-    local event io.pullEvent();
+    local event os.pullEvent();
     if event == "key" then
         break
     end
