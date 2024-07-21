@@ -45,7 +45,7 @@ while true do
 
             print("New player " .. playerName .. " with deviceID " .. deviceID)
             nbPlayers = nbPlayers + 1
-            PeboxCommands.acceptCode(PeboxCore.id(message), nbPlayers)
+            PeboxCommands.acceptCode(PeboxCore.id(message))
             clientsNames[nbPlayers] = playerName
             clients[nbPlayers] = PeboxCore.id(message)
             HomeScreen.draw(clientsNames, code)
@@ -55,13 +55,13 @@ while true do
         end
 
     elseif PeboxCore.command(message) == ("GAME_START") then
-        if PeboxCore.id(message) == "0" then
+        if PeboxCore.id(message) == clients[1] then
             monitor.clear()
             monitor.setCursorPos(monitorW / 2 - 8, monitorH / 2)
             monitor.write("Game is starting!")
             break
         else 
-            print("Only player 0 can start the game!")
+            print("Only player 1 can start the game!")
         end
     end
 
