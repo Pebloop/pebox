@@ -53,9 +53,11 @@ function PeboxCore.keepAlive(playerID, onDisconnect)
             local timer = os.time()
             while os.time() - timer < 3 do
                 local event, modemSide, senderChannel,
-                replyChannel, message, senderDistance = os.pullEvent("modem_message")
-                if PeboxCore.id(message) == playerID then
-                    print(message)
+                replyChannel, message, senderDistance = os.pullEvent()
+                if event == "modem_message" then
+                    if PeboxCore.id(message) == playerID and PeboxCore.command(message) == "KEEP_ALIVE" then
+                        timer = os.time()
+                    end
                 end
             end
             print("Player " .. playerID .. " has disconnected.")

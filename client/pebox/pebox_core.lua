@@ -44,7 +44,7 @@ function PeboxCore.keepAlive()
             local event, modemSide, senderChannel,
             replyChannel, message, senderDistance = os.pullEvent()
             if event == "modem_message" then
-                if PeboxCore.id(message) == id then
+                if PeboxCore.id(message) == id and PeboxCore.command(message) == "KEEP_ALIVE" then
                     modem.transmit( 5, 6, id .. " KEEP_ALIVE")
                 end
             end
