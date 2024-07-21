@@ -20,7 +20,7 @@ while true do
 
         if command == "CODE_ACCEPTED" then
             print("Code accepted!")
-            PeboxCore.keepAlive()
+            local routine = PeboxCore.keepAlive()
             break
         elseif command == "CODE_REJECTED" then
             print("Code rejected! Try Again.")
@@ -31,9 +31,12 @@ end
 while true do
     print("Press Enter to start the game.")
     print("(player 1 only)")
-    io.read()
-    PeboxCommands.gameStart()
+    local event io.pullEvent();
+    if event == "key" then
+        break
+    end
 end
+PeboxCommands.gameStart()
 
 while true do
     local event, modemSide, senderChannel, 
