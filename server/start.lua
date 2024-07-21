@@ -7,16 +7,30 @@
 -- [deviceID] CODE_ACCEPTED [playerID] : Accepts the code
 -- [playerID] CODE_REJECTED : Rejects the code
 
+local PeboxCommands = require(shell.dir() .. "/pebox/pebox_commands")
+
 local clients = {}
 
+print("launching server")
+
 local modem = peripheral.find( "modem" )
+if not modem then
+    print( "No modem attached, exiting" )
+    return
+end
 modem.open( 5 )
-print(code)
 
 local monitor = peripheral.find("monitor")
+if not monitor then
+    print("No monitor attached, exiting")
+    return
+end
+
+local monitorW, monitorH = monitor.getSize()
 monitor.clear()
-monitor.write("Enter the code: " )
-monitor.setCursorPos(1, 2)
+monitor.setCursorPos(monitorW / 2 - 3, 2)
+monitor.write("Pebox" )
+monitor.setCursorPos(monitorW / 2 - 3,monitorH / 2)
 monitor.write(code)
 
 while true do
@@ -26,6 +40,7 @@ while true do
     if command(message) == ("CODE_START ") then
         if args[1] == code then
             print("Code is correct! Welcome player " .. #clients)
+            PeboxCommands.acceptCode(command[1], #clients)
             modem.transmit( 6, 5, "CODE_ACCEPTED " .. #clients)
             clients[#clients] = command[1]
         else
