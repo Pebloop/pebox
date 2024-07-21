@@ -1,14 +1,12 @@
 -- Imports --
-local PeboxCommands = require("pebox.pebox_commands")
-local PeboxCore = require("pebox.pebox_core")
-local PeboxUtils = require("pebox.pebox_utils")
-local HomeScreen = require("pebox.screens.home_screen")
+local Core = require("pebox.server_core")
 local EventManager = require("pebox.event_manager")
+local HomeScreen = require("pebox.screens.home_screen")
 
 -- List of all connected clients
 local gameData = {
     -- The session code --
-    code = PeboxCore.generateaConexionCode(),
+    code = Core.generateaConexionCode(),
     -- The connected players --
     players = {}
 }
