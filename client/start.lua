@@ -32,6 +32,7 @@ print("Press Enter to start the game.")
     print("(player 1 only)")
 while true do
     local event, key os.pullEvent();
+    print(event)
     if event == "key" and  key == keys.enter then
         break
     end
