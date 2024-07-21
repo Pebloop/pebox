@@ -20,6 +20,7 @@ while true do
 
         if command == "CODE_ACCEPTED" then
             print("Code accepted!")
+            PeboxCore.keepAlive()
             break
         elseif command == "CODE_REJECTED" then
             print("Code rejected! Try Again.")
@@ -31,7 +32,7 @@ while true do
     print("Press Enter to start the game.")
     print("(player 1 only)")
     io.read()
-    PeboxCommands.gameStart(playerId)
+    PeboxCommands.gameStart()
 end
 
 while true do

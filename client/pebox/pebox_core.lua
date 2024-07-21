@@ -1,5 +1,8 @@
 local PeboxCore = {}
 
+local modem = peripheral.find( "modem" )
+local id = os.getComputerID()
+
 -- parse the message into parts
 local function parseMessage(message)
     local messageParts = {}
@@ -32,6 +35,20 @@ function PeboxCore.args(message)
         table.insert(args, messageParts[i])
     end
     return args
+end
+
+function PeboxCore.keepAlive()
+    local routine = coroutine.create(function()
+        while true do
+            local event, modemSide, senderChannel,
+            replyChannel, message, senderDistance = os.pullEvent("modem_message")
+            if PeboxCore.id(message) == id then
+                modem.transmit( 5, 6, id .. " KEEP_ALIVE")
+            end
+        end
+    end)
+    coroutine.resume(routine)
+    return routine
 end
 
 return PeboxCore

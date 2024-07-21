@@ -9,6 +9,7 @@
 
 local PeboxCommands = require("pebox.pebox_commands")
 local PeboxCore = require("pebox.pebox_core")
+local PeboxUtils = require("pebox.pebox_utils")
 local HomeScreen = require("pebox.screens.home_screen")
 
 local clients = {}
@@ -44,11 +45,17 @@ while true do
             local playerName = PeboxCore.args(message)[2]
 
             print("New player " .. playerName .. " with deviceID " .. deviceID)
-            nbPlayers = nbPlayers + 1
+            nbPlayers = PeboxUtils.len(clients) + 1
             PeboxCommands.acceptCode(PeboxCore.id(message))
             clientsNames[nbPlayers] = playerName
             clients[nbPlayers] = PeboxCore.id(message)
             HomeScreen.draw(clientsNames, code)
+            local keepAlive = PeboxCore.keepAlive(PeboxCore.id(message), function()
+                table.remove(clients, PeboxCore.id(message))
+                table.remove(clientsNames, PeboxCore.id(message))
+                nbPlayers = PeboxUtils.len(clients)
+                HomeScreen.draw(clientsNames, code)
+            end)
         else
             print("Code is incorrect!")
             PeboxCommands.rejectCode(PeboxCore.id(message))
