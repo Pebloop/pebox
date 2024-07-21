@@ -48,6 +48,7 @@ end
 function PeboxCore.keepAlive(playerID, onDisconnect)
     local routine = coroutine.create(function()
         while true do
+            print("Sending keep alive to player " .. playerID)
             modem.transmit( 6, 5, playerID .. " KEEP_ALIVE")
             local timer = os.time()
             while os.time() - timer < 3 do
