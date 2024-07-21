@@ -37,7 +37,7 @@ while true do
     local event, modemSide, senderChannel, 
   replyChannel, message, senderDistance = os.pullEvent("modem_message")
 
-    print(message)
+    --print(message)
     if PeboxCore.command(message) == ("CODE_START") then
         if PeboxCore.args(message)[1] == code then
             local deviceID = PeboxCore.id(message)
@@ -48,7 +48,7 @@ while true do
             PeboxCommands.acceptCode(PeboxCore.id(message), nbPlayers)
             clientsNames[nbPlayers] = playerName
             clients[nbPlayers] = PeboxCore.id(message)
-            HomeScreen.draw({}, code)
+            HomeScreen.draw(clientsNames, code)
         else
             print("Code is incorrect!")
             PeboxCommands.rejectCode(PeboxCore.id(message))
