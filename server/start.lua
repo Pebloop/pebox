@@ -50,7 +50,7 @@ while true do
             print("Code is correct! Welcome player " .. #clients)
             PeboxCommands.acceptCode(PeboxCore.id(message), #clients)
             clientsNames[#clients] = PeboxCore.args(message)[2]
-            monitor.setCursorPos(3, monitorH - 8 + #clients)
+            monitor.setCursorPos(3, monitorH - 7 + #clients)
             monitor.write(clientsNames[#clients])
             clients[#clients] = PeboxCore.id(message)
 
