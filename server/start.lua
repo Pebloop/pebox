@@ -7,7 +7,7 @@
 -- [deviceID] CODE_ACCEPTED [playerID] : Accepts the code
 -- [playerID] CODE_REJECTED : Rejects the code
 
-local PeboxCommands = require(shell.dir() .. ".pebox.pebox_commands")
+local PeboxCommands = require("pebox.pebox_commands")
 
 local clients = {}
 
