@@ -30,7 +30,7 @@ end
 
 modem.open(5)
 
-HomeScreen.draw({}, code)
+HomeScreen.draw({}, gameData.code)
 
 while true do
     local event, _, _, _, message, _ = os.pullEvent()

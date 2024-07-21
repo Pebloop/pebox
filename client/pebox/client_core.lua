@@ -1,6 +1,4 @@
-local PeboxCore = {}
-
-local modem = peripheral.find( "modem" )
+local Core = {}
 
 -- parse the message into parts
 local function parseMessage(message)
@@ -14,20 +12,20 @@ end
 ----------------
 
 -- get the command from the message
-function PeboxCore.command(message)
+function Core.command(message)
     local messageParts = parseMessage(message)
     return messageParts[2]    
 end
 
 
 -- get the id from the message
-function PeboxCore.id(message)
+function Core.id(message)
     local messageParts = parseMessage(message)
     return messageParts[1]
 end
 
 -- get the args from the message
-function PeboxCore.args(message)
+function Core.args(message)
     local messageParts = parseMessage(message)
     local args = {}
     for i = 3, #messageParts do
@@ -36,13 +34,5 @@ function PeboxCore.args(message)
     return args
 end
 
--- generate a random code to join the game
-function PeboxCore.generateaConexionCode()
-    local code = ""
-    for i = 1, 5 do
-        code = code .. math.random(0, 9)
-    end
-    return code
-end
 
-return PeboxCore
+return Core
