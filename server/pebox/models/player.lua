@@ -8,6 +8,7 @@ function Player:new(o, id, name)
     self.__index = self
     self.id = id or -1
     self.name = name or ""
+    self.keepAlive = os.time()
     return o
 end
 

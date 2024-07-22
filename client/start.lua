@@ -8,8 +8,6 @@ local ConnectCodeScreen = require("pebox.screens.connect_code_screen")
 local modem = peripheral.find("modem")
 
 -- Local variables --
--- The id of the computer
-local id = os.getComputerID()
 -- game data --
 local gameData = {
     name = "",
@@ -26,7 +24,7 @@ ConnectNameScreen.display()
 gameData.name  = io.read()
 ConnectCodeScreen.display()
 local code = io.read()
-ClientCommands.startCode(id, code, gameData.name)
+ClientCommands.startCode(code, gameData.name)
 
 while true do
     local event, _, _, _, message, _ = os.pullEvent()

@@ -22,4 +22,9 @@ function PeboxCommands.rejectCode(deviceID)
     send(deviceID , "CODE_REJECTED")
 end
 
+-- Ping the client to ensure that it is still connected
+function PeboxCommands.ping(deviceID)
+    send(deviceID, "PING")
+end
+
 return PeboxCommands

@@ -14,7 +14,7 @@ function HomeScreen.draw(playerList, code)
     end
     for i = 1, #playerList do
         monitor.setCursorPos(3, monitorH - 8 + i)
-        monitor.write(playerList[i])
+        monitor.write(playerList[i].name)
     end
 end
 

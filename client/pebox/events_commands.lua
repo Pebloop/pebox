@@ -11,7 +11,12 @@ local function commandRejectCode(command, gameData)
     print("rejected !")
 end
 
+local function ping(command, gameData)
+    ClientCommands.pong()
+end
+
 EventsCommands["CODE_ACCEPTED"] = commandAcceptCode
 EventsCommands["CODE_REJECTED"] = commandRejectCode
+EventsCommands["PING"] = ping
 
 return EventsCommands
