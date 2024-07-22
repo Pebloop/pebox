@@ -21,6 +21,6 @@ local function commandCodeStart(command, gameData)
     return gameData
 end
 
-EventsCommands["CODE_START"] = commandCodeStart
+EventsCommands["START_CODE"] = commandCodeStart
 
 return EventsCommands

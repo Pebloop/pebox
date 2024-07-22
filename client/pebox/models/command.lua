@@ -12,3 +12,5 @@ function Command:new(o, event)
     self.args = Core.args(event) or {}
     return o
 end
+
+return Command
