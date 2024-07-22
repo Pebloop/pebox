@@ -17,11 +17,11 @@ end
 -- Commands
 -- Send connection attempt to the server
 function Commands.startCode(code, playerName)
-    send(id, "START_CODE " .. code .. " " .. playerName)
+    send("START_CODE " .. code .. " " .. playerName)
 end
 
 function Commands.pong()
-    send(id, "PONG")
+    send("PONG")
 end
 
 return Commands
