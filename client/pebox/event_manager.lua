@@ -3,9 +3,14 @@ local EventManager = {}
 local Command = require("pebox.models.command")
 local EventsCommands = require("pebox.events_commands")
 
+local id = os.getComputerID()
+
 local function manage_commands(message, gameData)
     local command = Command:new({}, message)
-    EventsCommands[command.command](command, gameData)
+    if command.id ~= id then
+        return gameData
+    end
+    return EventsCommands[command.command](command, gameData)
 end
 
 function EventManager.execute(event, message, gameData)

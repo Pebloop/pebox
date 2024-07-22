@@ -35,11 +35,11 @@ HomeScreen.draw({}, gameData.code)
 
 while true do
     local event, _, _, _, message, _ = os.pullEvent()
-
+è
     for _, player in pairs(gameData.players) do
         ServerCommands.ping(player.id)
 
-        if os.time() - player.keepAlive > 0.5 then
+        if os.time() - player.keepAlive > 0.2 then
             print("Player " .. player.name .. " has disconnected")
             table.remove(gameData.players, _)
             HomeScreen.draw(gameData.players, gameData.code)
