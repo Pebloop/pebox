@@ -40,7 +40,7 @@ while true do
         ServerCommands.ping(player.id)
 
         print("Player " .. player.name .. " keepAlive: " .. player.keepAlive)
-        if os.time() - player.keepAlive > 5 then
+        if os.time() - player.keepAlive > 0.5 then
             print("Player " .. player.name .. " has disconnected")
             table.remove(gameData.players, _)
             HomeScreen.draw(gameData.players, gameData.code)
