@@ -10,3 +10,5 @@ function Player:new(o, id, name)
     self.name = name or ""
     return o
 end
+
+return Player
