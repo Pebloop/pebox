@@ -2,6 +2,7 @@ local EventsCommands = {}
 
 local Player = require("pebox.models.player")
 local ServerCommands = require("pebox.server_commands")
+local HomeScreen = require("pebox.home_screen")
 
 local modem = peripheral.find( "modem" )
 
@@ -18,6 +19,7 @@ local function commandCodeStart(command, gameData)
     local newPlayer = Player:new({id = deviceID, name = playerName})
     table.insert(gameData.players, newPlayer)
     print("Player " .. playerName .. " has joined the game")
+    HomeScreen.draw(gameData.players, gameData.code)
     return gameData
 end
 
