@@ -1,7 +1,7 @@
 local BgWhite = {}
 
 function BgWhite.exec(data, size)
-    term.setBackgroundColor(colors.white)
+    data.bgColor = colors.white
     return data
 end
 

@@ -1,7 +1,7 @@
 local BgOrange = {}
 
 function BgOrange.exec(data, size)
-    term.setBackgroundColor(colors.orange)
+    data.bgColor = colors.orange
     return data
 end
 

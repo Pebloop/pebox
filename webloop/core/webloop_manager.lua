@@ -48,6 +48,8 @@ function WebloopManager.execute(head, body)
         local data = {
             cursorX = 1,
             cursorY = 1,
+            bgColor = colors.black,
+            textColor = colors.white
         }
         
         ElementList[body.type](data, body.style, body.children)
