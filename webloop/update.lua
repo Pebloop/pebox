@@ -21,3 +21,4 @@ loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/text.lua", "elements/text.lua")
 
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/right.lua", "style/right.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/center.lua", "style/center.lua")

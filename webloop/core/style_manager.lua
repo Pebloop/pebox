@@ -13,7 +13,7 @@ function StyleManager.execute(data, style, size)
         data = StyleList[modifier](data, size)
     end
 
-
+    return data
 end
 
 return StyleManager

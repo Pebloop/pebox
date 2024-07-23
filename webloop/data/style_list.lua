@@ -1,5 +1,6 @@
 local StyleList = {
-    body = require("style.right").exec,
+    right = require("style.right").exec,
+    center = require("style.center").exec
 }
 
 return StyleList
