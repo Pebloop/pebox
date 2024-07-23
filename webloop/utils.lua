@@ -11,9 +11,9 @@ function Utils.deepcopy(o, seen)
       seen[o] = no
   
       for k, v in next, o, nil do
-        no[deepcopy(k, seen)] = deepcopy(v, seen)
+        no[Utils.deepcopy(k, seen)] = Utils.deepcopy(v, seen)
       end
-      setmetatable(no, deepcopy(getmetatable(o), seen))
+      setmetatable(no, Utils.deepcopy(getmetatable(o), seen))
     else -- number, string, boolean, etc
       no = o
     end
