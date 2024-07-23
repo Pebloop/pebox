@@ -32,9 +32,8 @@ end
 function WebloopManager.execute(head, body)
     -- TODO : implement head
     
-    local bodyElements = body
-    --WebloopManager.dumpAST(bodyElements, 1)
-    ElementList[bodyElements.type](bodyElements.style, bodyElements.children)
+    --WebloopManager.dumpAST(body, 1)
+    ElementList[body.type](body.style, body.children)
 
 end
 
