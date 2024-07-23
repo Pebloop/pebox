@@ -40,6 +40,7 @@ function WebloopManager.execute(head, body)
         cursorY = 1,
     }
     while true do
+        term.clear()
         ElementList[body.type](data, body.style, body.children)
     end
 
