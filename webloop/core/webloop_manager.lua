@@ -29,6 +29,10 @@ function WebloopManager.dumpAST(ast, depth)
     end
 end
 
+local function awaitChange()
+    return true  
+end
+
 function WebloopManager.execute(head, body)
     -- TODO : implement head
     
@@ -39,9 +43,16 @@ function WebloopManager.execute(head, body)
         cursorX = 1,
         cursorY = 1,
     }
+    local change = true
     while true do
         term.clear()
+        term.setCursorPos(1, 1)
+        
         ElementList[body.type](data, body.style, body.children)
+
+        while change do
+            change = awaitChange()
+        end
     end
 
 end
