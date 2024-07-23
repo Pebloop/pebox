@@ -41,6 +41,8 @@ function WebloopManager.execute(head, body)
     
     --WebloopManager.dumpAST(body, 1)
     while true do
+        term.setBackgroundColor(colors.black)
+        term.setTextColor(colors.white)
         term.clear()
         term.setCursorPos(1, 1)
         local data = {
