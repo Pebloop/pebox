@@ -12,7 +12,7 @@ end
 
 function Text.exec(data, style, value)
 
-    data = StyleManager.execute(data, style)
+    data = StyleManager.execute(data, style, #value)
     term.write(value)
 end
 

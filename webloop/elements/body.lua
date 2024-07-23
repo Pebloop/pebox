@@ -13,7 +13,7 @@ end
 function Body.exec(data, style, children)
     local ElementList = require("data.elements_list")
 
-    data = StyleManager.execute(data, style)
+    data = StyleManager.execute(data, style, {width=0,height=0})
     
     for i, child in ipairs(children) do
         ElementList[child.type](data, child.style, child.value)
