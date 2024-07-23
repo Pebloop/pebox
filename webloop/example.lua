@@ -1,6 +1,6 @@
 webloop(nil, body("", {
     text("", "Left"),
-    text("center bg_magenta", "Center"),
-    text("ending bg_orange", "Right"),
+    text("middle bg-magenta", "Center"),
+    text("end bg-orange", "Right"),
     })
 )
