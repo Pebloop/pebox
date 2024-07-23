@@ -19,7 +19,6 @@ local StyleList = {
     ["bg-lime"] = require("style.bg_color").exec(colors.lime),
     ["bg-pink"] = require("style.bg_color").exec(colors.pink),
     ["bg-light-blue"] = require("style.bg_color").exec(colors.lightBlue),
-    ["bg-gray"] = require("style.bg_gray").exec,
     -- text colors
     ["text-white"] = require("style.text_color").exec(colors.white),
     ["text-black"] = require("style.text_color").exec(colors.black),
