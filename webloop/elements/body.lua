@@ -1,3 +1,5 @@
+local ElementList = require("pebox/webloop/data/elements_list")
+
 local Body = {}
 
 function Body.body(style, children)
@@ -6,6 +8,12 @@ function Body.body(style, children)
         style = style,
         children = children
     }
+end
+
+function Body.exec(style, children)
+    for i, child in ipairs(children) do
+        ElementList[child.type](child.style, child.value)
+    end
 end
 
 return Body

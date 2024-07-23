@@ -8,4 +8,8 @@ function Text.text(style, value)
     }
 end
 
+function Text.exec(style, value)
+    print(value)
+end
+
 return Text
