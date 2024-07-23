@@ -30,26 +30,27 @@ function WebloopManager.dumpAST(ast, depth)
 end
 
 local function awaitChange()
-    return true  
+    if os.pullEvent() == "key" then
+        return false
+    end
+    return true
 end
 
 function WebloopManager.execute(head, body)
     -- TODO : implement head
     
     --WebloopManager.dumpAST(body, 1)
-    term.clear()
-    term.setCursorPos(1, 1)
-    local data = {
-        cursorX = 1,
-        cursorY = 1,
-    }
-    local change = true
     while true do
         term.clear()
         term.setCursorPos(1, 1)
+        local data = {
+            cursorX = 1,
+            cursorY = 1,
+        }
         
         ElementList[body.type](data, body.style, body.children)
 
+        local change = true
         while change do
             change = awaitChange()
         end
