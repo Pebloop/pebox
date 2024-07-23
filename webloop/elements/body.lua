@@ -1,4 +1,4 @@
-local ElementList = require("pebox/webloop/data/elements_list")
+local ElementList = require("data.elements_list")
 
 local Body = {}
 

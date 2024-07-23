@@ -1,3 +1,5 @@
+local ElementList = require("data.elements_list")
+
 local WebloopManager = {}
 
 local function dumpElement(element, depth)
@@ -32,7 +34,8 @@ function WebloopManager.execute(head, body)
     
     local bodyElements = body
     --WebloopManager.dumpAST(bodyElements, 1)
-    
+    ElementList[bodyElements.type](bodyElements.style, bodyElements.children)
+
 end
 
 return WebloopManager
