@@ -1,6 +1,6 @@
 webloop(nil, body("", {
-    text("", "Hello World!"),
-    text("center", "This is a test."),
-    text("right", "This is another test."),
+    text("", "Left"),
+    text("center", "Center"),
+    text("right bg_white", "Right"),
     })
 )

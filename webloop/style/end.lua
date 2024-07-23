@@ -1,6 +1,6 @@
-local Right = {}
+local End = {}
 
-function Right.exec(data, size)
+function End.exec(data, size)
     local w, h = term.getSize()
     w = w - size.width
     data.cursorX = w
@@ -8,4 +8,4 @@ function Right.exec(data, size)
     return data
 end
 
-return Right
+return End
