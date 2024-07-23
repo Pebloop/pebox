@@ -33,7 +33,15 @@ function WebloopManager.execute(head, body)
     -- TODO : implement head
     
     --WebloopManager.dumpAST(body, 1)
-    ElementList[body.type](body.style, body.children)
+    term.clear()
+    term.setCursorPos(1, 1)
+    local data = {
+        cursorX = 1,
+        cursorY = 1,
+    }
+    while true do
+        ElementList[body.type](data, body.style, body.children)
+    end
 
 end
 

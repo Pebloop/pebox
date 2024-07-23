@@ -1,3 +1,5 @@
+local StyleManager = require("core.style_manager")
+
 local Text = {}
 
 function Text.text(style, value)
@@ -8,7 +10,10 @@ function Text.text(style, value)
     }
 end
 
-function Text.exec(style, value)
+function Text.exec(data, style, value)
+
+    data = StyleManager.execute(data, style)
+
     print(value)
 end
 

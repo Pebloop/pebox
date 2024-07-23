@@ -1,7 +1,7 @@
 local StyleManager = {}
 
-function StyleManager.execute(style) 
-    
+function StyleManager.execute(data, style) 
+
 end
 
 return StyleManager

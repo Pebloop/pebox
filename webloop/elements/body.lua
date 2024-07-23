@@ -1,4 +1,4 @@
-
+local StyleManager = require("core.style_manager")
 
 local Body = {}
 
@@ -10,12 +10,13 @@ function Body.body(style, children)
     }
 end
 
-function Body.exec(style, children)
-    print("exec body")
+function Body.exec(data, style, children)
     local ElementList = require("data.elements_list")
+
+    data = StyleManager.execute(data, style)
     
     for i, child in ipairs(children) do
-        ElementList[child.type](child.style, child.value)
+        ElementList[child.type](data, child.style, child.value)
     end
 end
 
