@@ -17,6 +17,8 @@ function Body.exec(data, style, children)
     
     for i, child in ipairs(children) do
         ElementList[child.type](data, child.style, child.value)
+        data.cursorY = data.cursorY + 1
+        term.setCursorPos(data.cursorX, data.cursorY)
     end
 end
 

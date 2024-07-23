@@ -13,8 +13,9 @@ end
 function Text.exec(data, style, value)
 
     data = StyleManager.execute(data, style)
-
-    print(value)
+    term.write(value)
+    data.cursorY = data.cursorY + 1
+    term.setCursorPos(data.cursorX, data.cursorY)
 end
 
 return Text

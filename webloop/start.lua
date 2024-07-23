@@ -13,4 +13,6 @@ local code = loadstring(file.readAll())
 file.close()
 
 setfenv(code, env)
+term.clear()
+term.setCursorPos(1, 1)
 pcall(code)
