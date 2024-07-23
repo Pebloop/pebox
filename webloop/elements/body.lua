@@ -1,4 +1,5 @@
 local StyleManager = require("core.style_manager")
+local Utils = require("utils")
 
 local Body = {}
 
@@ -16,9 +17,10 @@ function Body.exec(data, style, children)
     data = StyleManager.execute(data, style, {width=0,height=0})
     
     for i, child in ipairs(children) do
-        ElementList[child.type](data, child.style, child.value)
-        data.cursorY = data.cursorY + 1
-        term.setCursorPos(data.cursorX, data.cursorY)
+        local localData = Utils.deepcopy(data)
+        ElementList[child.type](localData, child.style, child.value)
+        localData.cursorY = localData.cursorY + 1
+        term.setCursorPos(localData.cursorX, localData.cursorY)
     end
 end
 
