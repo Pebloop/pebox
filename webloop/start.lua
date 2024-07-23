@@ -15,4 +15,8 @@ file.close()
 setfenv(code, env)
 term.clear()
 term.setCursorPos(1, 1)
-pcall(code)
+local success, result = pcall(code)
+term.clear()
+if not success then
+    print(result)
+end
