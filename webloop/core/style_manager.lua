@@ -10,7 +10,11 @@ function StyleManager.execute(data, style, size)
     end
 
     for i, modifier in ipairs(modifiers) do
-        data = StyleList[modifier](data, size)
+        local execStyle = pcall(function() data = StyleList[modifier](data, size) end)
+        if not execStyle then
+            print("Style " .. modifier .. " not found")
+        end
+        
     end
 
     return data
