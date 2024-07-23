@@ -1,7 +1,7 @@
 local BgMAgenta = {}
 
 function BgMAgenta.exec(data, size)
-    term.setBackgroundColor(colors.magenta)
+    data.bgColor = colors.magenta
     return data
 end
 
