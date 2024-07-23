@@ -1,1 +1,4 @@
-print("test")
+webloop(nil, body("", {
+    text("", "Hello World!")
+    })
+)

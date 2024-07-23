@@ -1,7 +1,11 @@
+local WebloopManager = require("core.webloop_manager")
+
 local args = {...}
 local filePath = args[1]
 local  env = {
-    print = print
+    webloop = WebloopManager.execute,
+    body = require("elements/body").body,
+    text = require("elements/text").text,
 }
 
 local file = fs.open(shell.dir() .. "/" .. filePath, "r")

@@ -10,3 +10,9 @@ end
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/start.lua", "start.lua")
 
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/example.lua", "example.lua")
+
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/core/style_manager.lua", "core/style_manager.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/core/webloop_manager.lua", "core/webloop_manager.lua")
+
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/body.lua", "elements/body.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/text.lua", "elements/text.lua")
