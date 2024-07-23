@@ -1,4 +1,4 @@
 local ElementList = {
-    body = require("pebox/webloop/elements/body").exec,
-    text = require("pebox/webloop/elements/text").exec
+    body = require("elements.body").exec,
+    text = require("elements.text").exec
 }
