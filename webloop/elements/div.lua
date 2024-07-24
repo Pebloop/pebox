@@ -31,11 +31,16 @@ function Div.exec(data, style, children)
     data.height = size.height
 
     for i, child in ipairs(children) do
+
+        if type(child) == "string" then
+            child = {type = "text", style = "", value = child}
+        end
+
         local wrappedSize = ElementSize[child.type](Utils.deepcopy(data), child.style, child.value)
 
         for y = 1, wrappedSize.height - 1 do
             for x = 1, wrappedSize.width do
-                term.setCursorPos(data.cursorX + x - 1, data.cursorY + y - 1)
+                term.setCursorPos(data.cursorX + x, data.cursorY + y - 1)
                 term.setBackgroundColor(data.bgColor)
                 term.write(" ")
             end

@@ -36,8 +36,7 @@ function Body.exec(data, style, children)
             data = Utils.deepcopy(data)
         }
         if type(child) == "string" then
-            local newData = ElementList.text(localData, "", child)
-            data.cursorY = newData.cursorY
+            child = {type = "text", style = "", value = child}
         else
             local newData = ElementList[child.type](localData, child.style, child.value)
             data.cursorY = newData.cursorY
