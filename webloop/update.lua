@@ -25,3 +25,4 @@ loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/cen
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/end.lua", "style/end.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/bg_color.lua", "style/bg_color.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/text_color.lua", "style/text_color.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/width.lua", "style/width.lua")
