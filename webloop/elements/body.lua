@@ -3,12 +3,22 @@ local Utils = require("utils")
 
 local Body = {}
 
-function Body.body(style, children)
-    return {
-        type = "body",
-        style = style,
-        children = children
-    }
+function Body.body(style)
+    if type(style) == "string" then
+        return function (children)
+            return {
+                type = "body",
+                style = style,
+                children = children
+            }
+        end
+    else
+        return {
+            type = "body",
+            style = "",
+            children = style
+        }
+    end
 end
 
 function Body.exec(data, style, children)
