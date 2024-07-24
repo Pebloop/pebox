@@ -22,7 +22,7 @@ end
 
 function Text.exec(data, style, value)
     -- compute style
-    data = StyleManager.execute(data, style, value)
+    data = StyleManager.execute(data, style, {#value, 1})
 
     -- setup style
     term.setBackgroundColor(data.bgColor)
