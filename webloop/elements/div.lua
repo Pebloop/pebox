@@ -17,8 +17,8 @@ function Div.exec(data, style, children)
     local ElementSize = require("data.elements_size")
 
     data, size = StyleManager.execute(data, style, {width=0,height=0})
-    print("w: " .. size.width)
-    print("h: " ..size.height)
+    data.width = size.width
+    data.height = size.height
 
     for i, child in ipairs(children) do
         local wrappedSize = ElementSize[child.type](Utils.deepcopy(data), child.style, child.value)

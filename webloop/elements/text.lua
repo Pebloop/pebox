@@ -87,21 +87,9 @@ function Text.size(data, style, value)
 
     if data.width > -1 then
 
-        -- if no width/height, no content to display, so just return
-        if data.width == 0 or data.height == 0 then
-            data.height = 0
-            data.width = 0
-            return data
-        end
-        
         local val = 1
         if #value > data.width then
             while val < #value do
-                if data.height ~= -1 and height > data.height then
-                    data.height = height
-                    data.width = width
-                    return data
-                end
                 local str = string.sub(value, val, val + data.width)
                 -- if str cut in the middle of a word then cut it to the last space
                 if str[#str] ~= " " and value[val + data.width + 1] ~= " " then
@@ -125,8 +113,6 @@ function Text.size(data, style, value)
 
     data.width = math.max(data.width, width)
     data.height = math.max(data.height, height)
-    print("height : " .. data.height)
-    os.pullEvent("key")
     return data
 end
 
