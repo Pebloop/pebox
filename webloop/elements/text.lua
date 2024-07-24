@@ -84,11 +84,16 @@ end
 function Text.size(data, style, value)
     local width = 1
     local height = 1
+
     if data.width > -1 then
+
+        -- if no width/height, no content to display, so just return
         if data.width == 0 or data.height == 0 then
             data.height = 0
+            data.width = 0
             return data
         end
+        
         local val = 1
         if #value > data.width then
             while val < #value do
