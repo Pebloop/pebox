@@ -19,7 +19,6 @@ function Body.exec(data, style, children)
     for i, child in ipairs(children) do
         local localData = Utils.deepcopy(data)
         local newData = ElementList[child.type](localData, child.style, child.value)
-        data.cursorX = newData.cursorX
         data.cursorY = newData.cursorY
     end
     return data
