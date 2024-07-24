@@ -35,7 +35,18 @@ local StyleList = {
     ["text-brown"] = require("style.text_color").exec(colors.brown),
     ["text-lime"] = require("style.text_color").exec(colors.lime),
     ["text-pink"] = require("style.text_color").exec(colors.pink),
-    ["text-light-blue"] = require("style.text_color").exec(colors.lightBlue)
+    ["text-light-blue"] = require("style.text_color").exec(colors.lightBlue),
+    -- width
+    ["w-1"] = require("style.width").exec(1),
+    ["w-2"] = require("style.width").exec(2),
+    ["w-3"] = require("style.width").exec(3),
+    ["w-4"] = require("style.width").exec(4),
+    ["w-5"] = require("style.width").exec(5),
+    ["w-6"] = require("style.width").exec(6),
+    ["w-7"] = require("style.width").exec(7),
+    ["w-8"] = require("style.width").exec(8),
+    ["w-9"] = require("style.width").exec(9),
+    ["w-10"] = require("style.width").exec(10)
 }
 
 return StyleList
