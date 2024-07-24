@@ -35,7 +35,7 @@ HomeScreen.draw({}, gameData.code)
 
 while true do
     local event, _, _, _, message, _ = os.pullEvent()
-è
+    
     for _, player in pairs(gameData.players) do
         ServerCommands.ping(player.id)
 

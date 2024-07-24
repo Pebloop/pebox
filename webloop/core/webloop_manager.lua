@@ -51,7 +51,8 @@ function WebloopManager.execute(head, body)
             bgColor = colors.black,
             textColor = colors.white,
             width = -1,
-            height = -1
+            height = -1,
+            parent = nil
         }
         
         ElementList[body.type](data, body.style, body.children)

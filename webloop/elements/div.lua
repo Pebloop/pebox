@@ -28,8 +28,10 @@ function Div.exec(data, style, children)
             end
         end
         term.setBackgroundColor(colors.black)
+        local dataCopy = Utils.deepcopy(data)
+        dataCopy.parent = 'div'
 
-        local newData = ElementList[child.type](Utils.deepcopy(data), style .. " " ..  child.style, child.value)
+        local newData = ElementList[child.type](dataCopy, style .. " " ..  child.style, child.value)
         data.cursorY = newData.cursorY
     end
     return data
