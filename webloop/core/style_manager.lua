@@ -13,7 +13,8 @@ function StyleManager.execute(data, style, size)
     for i, modifier in ipairs(modifiers) do
         local execStyle, response = pcall(function() data, newSize = StyleList[modifier](data, size) end)
         if not execStyle then
-            print("Style " .. modifier .. " not found")
+            print("Error with " .. modifier .. " modifier")
+            print(response)
         else
             if newSize then
                 size.width = newSize.width

@@ -1,10 +1,10 @@
 local Center = {}
 
 function Center.exec(data, size)
-    print("Centering")
     local w, h = term.getSize() -- if not parent, use screen size as reference
 
     if data.parent then
+        print(textutils.serialise(data.parent))
         w = data.parent.data.width
         h = data.parent.data.height
     end
