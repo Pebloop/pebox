@@ -39,7 +39,26 @@ function Text.exec(data, style, value)
         parentHeight = data.parent.data.height
     end
 
-    Utils.displayBox(data.cursorX, data.cursorY, data.width, data.height)
+    if data.width > #value then
+        term.write(value)
+    else
+        while #value > 0 do
+            local str = string.sub(value, 1, data.width)
+            -- if str cut in the middle of a word then cut it to the last space
+            if str[#str] ~= " " and value[data.width + 1] ~= " " then
+                local lastSpace = string.find(str, " [^ ]*$")
+                if lastSpace then
+                    str = string.sub(str, 1, lastSpace - 1)
+                end
+            end
+            -- trim spaces
+            str = string.match(str, "^%s*(.-)%s*$")
+            term.write(str)
+            value = string.sub(value, #str + 1)
+            data.cursorY = data.cursorY + 1
+            term.setCursorPos(data.cursorX, data.cursorY)
+        end
+    end
 
     -- reset style
     term.setBackgroundColor(colors.black)
