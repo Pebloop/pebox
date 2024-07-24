@@ -52,7 +52,7 @@ function Div.exec(data, style, children)
         dataCopy.height = wrappedSize.height
         dataCopy.parent = {
             type = 'div',
-            data = Utils.deepcopy(data)
+            data = Utils.deepcopy(dataCopy)
         }
         local newData = ElementList[child.type](dataCopy, child.style, child.value)
         data.cursorY = newData.cursorY

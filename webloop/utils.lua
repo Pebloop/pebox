@@ -21,8 +21,8 @@ function Utils.deepcopy(o, seen)
   end
   
 
-function Utiles.displayBox(x, y, width, height)
-    term.setBackgroundColor(colors.red)
+function Utils.displayBox(x, y, width, height)
+    term.setBackgroundColor(math.random(1, 256))
     for i = 1, height do
         term.setCursorPos(x, y + i - 1)
         term.write(string.rep(" ", width))
