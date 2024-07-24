@@ -23,8 +23,9 @@ function Body.exec(data, style, children)
         local localData = Utils.deepcopy(data)
         localData.parent = {
             type = 'body',
-            data = Utils.deepcopy(localData)
+            data = Utils.deepcopy(data)
         }
+
         local newData = ElementList[child.type](localData, child.style, child.value)
         data.cursorY = newData.cursorY
     end

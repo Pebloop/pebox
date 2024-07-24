@@ -3,7 +3,8 @@ local Width = {}
 function Width.exec(width)
     return function (data, size)
         data.width = width
-    return data
+        size.width = width
+    return data, size
     end
 end
 

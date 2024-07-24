@@ -3,7 +3,8 @@ local Height = {}
 function Height.exec(height)
     return function (data, size)
         data.height = height
-    return data
+        size.height = height
+    return data, size
     end
 end
 

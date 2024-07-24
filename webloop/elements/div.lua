@@ -16,8 +16,7 @@ function Div.exec(data, style, children)
     local ElementSize = require("data.elements_size")
 
     data = StyleManager.execute(data, style, {width=0,height=0})
-    
-    data.parent = Div.div(style, children)
+
     for i, child in ipairs(children) do
         local wrappedSize = ElementSize[child.type](Utils.deepcopy(data), child.style, child.value)
 
@@ -32,10 +31,9 @@ function Div.exec(data, style, children)
 
         local dataCopy = Utils.deepcopy(data)
         dataCopy.parent = {
-            type= 'div',
-            parent= Utils.deepcopy(dataCopy)
+            type = 'div',
+            data = Utils.deepcopy(data)
         }
-
         local newData = ElementList[child.type](dataCopy, child.style, child.value)
         data.cursorY = newData.cursorY
     end

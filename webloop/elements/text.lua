@@ -16,15 +16,15 @@ local function clean()
 end
 
 function Text.exec(data, style, value)
-    local newY = data.cursorY
+    local size = {}
 
     local width = #value
-    print(data.parent)
     if data.parent.data.width < width then
         width = data.parent.data.width
     end
 
-    data = StyleManager.execute(data, style, {width=width, height=1})
+    data, size = StyleManager.execute(data, style, {width=width, height=1})
+    width = size.width
     term.setBackgroundColor(data.bgColor)
     term.setTextColor(data.textColor)
     term.setCursorPos(data.cursorX, data.cursorY)

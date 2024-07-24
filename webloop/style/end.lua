@@ -16,10 +16,6 @@ function End.exec(data, size)
     if data.width == 0 then
         return data
     else
-        print("w : " .. w)
-        print("cursor : " .. data.cursorX)
-        print("width : " .. size.width)
-        os.pullEvent("key")
         w = data.cursorX + w - size.width
         if w < data.cursorX then
             w = data.cursorX
