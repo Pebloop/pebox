@@ -38,7 +38,9 @@ function Text.exec(data, style, value)
         parentWidth = data.parent.data.width
         parentHeight = data.parent.data.height
     end
-    
+
+    Utils.displayBox(data.cursorX, data.cursorY, data.width, data.height)
+
     -- reset style
     term.setBackgroundColor(colors.black)
     term.setTextColor(colors.white)
