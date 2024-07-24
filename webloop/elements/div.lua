@@ -17,6 +17,7 @@ function Div.exec(data, style, children)
 
     data = StyleManager.execute(data, style, {width=0,height=0})
     
+    data.parent = Div.div(style, children)
     for i, child in ipairs(children) do
         local wrappedSize = ElementSize[child.type](Utils.deepcopy(data), child.style, child.value)
 
@@ -28,10 +29,14 @@ function Div.exec(data, style, children)
             end
         end
         term.setBackgroundColor(colors.black)
-        local dataCopy = Utils.deepcopy(data)
-        dataCopy.parent = 'div'
 
-        local newData = ElementList[child.type](dataCopy, style .. " " ..  child.style, child.value)
+        local dataCopy = Utils.deepcopy(data)
+        dataCopy.parent = {
+            type= 'div',
+            parent= Utils.deepcopy(dataCopy)
+        }
+
+        local newData = ElementList[child.type](dataCopy, child.style, child.value)
         data.cursorY = newData.cursorY
     end
     return data

@@ -13,16 +13,19 @@ end
 
 function Body.exec(data, style, children)
     local ElementList = require("data.elements_list")
-    local screenSize = term.getSize()
+    local width, height = term.getSize()
 
 
-    style = "w-screen h-screen " .. style
-    data = StyleManager.execute(data, style, {width=screenSize.width,height=screenSize.height})
-    
+    style = "w-screen h-screen start " .. style
+    data = StyleManager.execute(data, style, {width=width,height=height})
+
     for i, child in ipairs(children) do
         local localData = Utils.deepcopy(data)
-        localData.parent = 'body'
-        local newData = ElementList[child.type](localData, style .. " " ..  child.style, child.value)
+        localData.parent = {
+            type = 'body',
+            data = Utils.deepcopy(localData)
+        }
+        local newData = ElementList[child.type](localData, child.style, child.value)
         data.cursorY = newData.cursorY
     end
     return data

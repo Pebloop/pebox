@@ -18,21 +18,25 @@ end
 function Text.exec(data, style, value)
     local newY = data.cursorY
 
-    local width = data.width
-    if width == -1 then
-        width = #value
+    local width = #value
+    print(data.parent)
+    if data.parent.data.width < width then
+        width = data.parent.data.width
     end
+
     data = StyleManager.execute(data, style, {width=width, height=1})
     term.setBackgroundColor(data.bgColor)
     term.setTextColor(data.textColor)
     term.setCursorPos(data.cursorX, data.cursorY)
 
+    -- if width restriction
     if data.width > -1 then
-        if data.width == 0 then
+        if data.width == 0 then -- no width = no text
             clean()
             return data
         end
-        local val = 1
+        local val = 1 -- used to calculate text width each line
+        -- if text is longer than the width restriction
         if #value > data.width then
             local height = 1
             if data.height == 0 then
@@ -61,10 +65,12 @@ function Text.exec(data, style, value)
                 height = height + 1
                 newY = height
             end
+        -- if text fit in width restriction just write the text
         else
             term.write(value)
             data.cursorY = data.cursorY + 1
         end
+    -- If there is no width restriction, just write text
     else 
         term.write(value)
         data.cursorY = data.cursorY + 1
