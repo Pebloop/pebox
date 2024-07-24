@@ -117,8 +117,11 @@ function Text.size(data, style, value)
     else
         width = #value
     end
+
     data.width = math.max(data.width, width)
     data.height = math.max(data.height, height)
+    print("height : " .. data.height)
+    os.pullEvent("key")
     return data
 end
 
