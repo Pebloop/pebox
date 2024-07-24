@@ -1,5 +1,5 @@
-webloop(nil, body("", {
-    text("text-green", "Left"),
+webloop(nil, body("bg-cyan", {
+    text("middle", "Welcome to Webloop!"),
     text("middle bg-magenta", "Center"),
     text("end bg-orange", "Right"),
     div ("w-10 bg-magenta", {
