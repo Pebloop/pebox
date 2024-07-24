@@ -33,6 +33,8 @@ function Div.exec(data, style, children)
         term.setBackgroundColor(colors.black)
 
         local dataCopy = Utils.deepcopy(data)
+        dataCopy.width = wrappedSize.width
+        dataCopy.height = wrappedSize.height
         dataCopy.parent = {
             type = 'div',
             data = Utils.deepcopy(data)
