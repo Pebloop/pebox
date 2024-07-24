@@ -73,10 +73,11 @@ function Text.exec(data, style, value)
 end
 
 function Text.size(data, style, value)
-    local width = #value
+    local width = 1
     local height = 1
     if data.width > -1 then
         if data.width == 0 then
+            data.height = 0
             return data
         end
         local val = 1
@@ -102,11 +103,15 @@ function Text.size(data, style, value)
                 height = height + 1
             end
         end
+    elseif data.width == 0 then
+        data.height = 0
+        return data
+    else
+        width = #value
     end
     data.width = math.max(data.width, width)
     data.height = math.max(data.height, height)
     return data
-    
 end
 
 return Text
