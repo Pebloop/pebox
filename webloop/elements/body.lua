@@ -19,8 +19,9 @@ function Body.exec(data, style, children)
     for i, child in ipairs(children) do
         local localData = Utils.deepcopy(data)
         localData.cursorY = i
-        ElementList[child.type](localData, child.style, child.value)
+        data = ElementList[child.type](localData, child.style, child.value)
     end
+    return data
 end
 
 return Body
