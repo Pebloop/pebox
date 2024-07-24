@@ -42,7 +42,6 @@ function Body.exec(data, style, children)
             local newData = ElementList[child.type](localData, child.style, child.value)
             data.cursorY = newData.cursorY
         end
-        
     end
     return data
 end
