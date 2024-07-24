@@ -21,11 +21,26 @@ function Text.exec(data, style, value)
         if data.width == 0 then
             return
         end
-        while #value < data.width do
-            value = value .. " "
+        local val = 1
+        if #value > data.width then
+            while val < #value do
+                local str = string.sub(value, val, val + data.width)
+                -- if str cut in the middle of a word then cut it to the last space
+                if str[#str] ~= " " and value[val + data.width + 1] ~= " " then
+                    local lastSpace = string.find(str, " [^ ]*$")
+                    if lastSpace then
+                        str = string.sub(str, 1, lastSpace - 1)
+                    end
+                end
+                -- trim spaces
+                str = string.match(str, "^%s*(.-)%s*$")
+                term.write(str)
+                val = val + #str + 1
+                data.cursorY = data.cursorY + 1
+                term.setCursorPos(data.cursorX, data.cursorY)
+            end
+        else
             term.write(value)
-            data.cursorY = data.cursorY + 1
-            term.setCursorPos(data.cursorX, data.cursorY)
         end
     else 
         term.write(value)
