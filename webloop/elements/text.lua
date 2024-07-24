@@ -72,4 +72,41 @@ function Text.exec(data, style, value)
     return data
 end
 
+function Text.size(data, style, value)
+    local width = #value
+    local height = 1
+    if data.width > -1 then
+        if data.width == 0 then
+            return data
+        end
+        local val = 1
+        if #value > data.width then
+            if data.height == 0 then
+                return data
+            end
+            while val < #value do
+                if data.height ~= -1 and height > data.height then
+                    return data
+                end
+                local str = string.sub(value, val, val + data.width)
+                -- if str cut in the middle of a word then cut it to the last space
+                if str[#str] ~= " " and value[val + data.width + 1] ~= " " then
+                    local lastSpace = string.find(str, " [^ ]*$")
+                    if lastSpace then
+                        str = string.sub(str, 1, lastSpace - 1)
+                    end
+                end
+                -- trim spaces
+                str = string.match(str, "^%s*(.-)%s*$")
+                val = val + #str + 1
+                height = height + 1
+            end
+        end
+    end
+    data.width = math.max(data.width, width)
+    data.height = math.max(data.height, height)
+    return data
+    
+end
+
 return Text
