@@ -1,7 +1,9 @@
 local StyleManager = require("core.style_manager")
+local Utils = require("utils")
 
 local Text = {}
 
+-- Text element
 function Text.text(style)
     if type(style) == "string" then
         return function (value)
@@ -20,6 +22,7 @@ function Text.text(style)
     end
 end
 
+-- Execute text element
 function Text.exec(data, style, value)
     -- compute style
     data = StyleManager.execute(data, style, {width= #value, height=1})
@@ -29,6 +32,14 @@ function Text.exec(data, style, value)
     term.setTextColor(data.textColor)
     term.setCursorPos(data.cursorX, data.cursorY)
     
+    -- render text
+    local parentWidth, parentHeight = term.getSize()
+    if data.parent then
+        parentWidth = data.parent.data.width
+        parentHeight = data.parent.data.height
+    end
+    utils.displayBox(data.cursorX, data.cursorY, parentWidth, parentHeight)
+
     term.write(value) -- write text
 
     -- reset style
