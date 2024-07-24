@@ -4,10 +4,7 @@ function End.exec(data, size)
     
     local w, h = term.getSize() -- if not parent, use screen size as reference
 
-    if data.width > 0 then
-        w = data.width
-        h = data.height
-    elseif data.parent then
+    if data.parent then
         w = data.parent.data.width
         h = data.parent.data.height
     end
@@ -25,7 +22,7 @@ function End.exec(data, size)
         end
     end
     data.cursorX = w
-    return data
+    return data, size
 end
 
 return End
