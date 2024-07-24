@@ -24,8 +24,11 @@ function Text.exec(data, style, value)
         while #value < data.width do
             value = value .. " "
             term.write(value)
-            term.setCursorPos(data.cursorX, data.cursorY + 1)
+            data.cursorY = data.cursorY + 1
+            term.setCursorPos(data.cursorX, data.cursorY)
         end
+    else 
+        term.write(value)
     end
 
     -- restore original colors
