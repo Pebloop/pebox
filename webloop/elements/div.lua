@@ -20,13 +20,13 @@ function Div.exec(data, style, children)
     for i, child in ipairs(children) do
         local wrappedSize = ElementSize[child.type](Utils.deepcopy(data), child.style, child.value)
 
-        for y = 1, wrappedSize.height - 1 do
-            for x = 1, wrappedSize.width do
-                term.setCursorPos(data.cursorX + x - 1, data.cursorY + y - 1)
-                term.setBackgroundColor(data.bgColor)
-                term.write(" ")
-            end
-        end
+        --for y = 1, wrappedSize.height - 1 do
+        --    for x = 1, wrappedSize.width do
+        --        term.setCursorPos(data.cursorX + x - 1, data.cursorY + y - 1)
+        --        term.setBackgroundColor(data.bgColor)
+        --        term.write(" ")
+        --    end
+        --end
         term.setBackgroundColor(colors.black)
 
         local dataCopy = Utils.deepcopy(data)
