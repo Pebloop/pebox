@@ -18,8 +18,6 @@ end
 function Text.exec(data, style, value)
     local newY = data.cursorY
 
-    print(width)
-    ps.pullEvent("key")
     local width = data.width
     if width == -1 then
         width = #value
