@@ -63,7 +63,6 @@ function Text.exec(data, style, value)
                 data.cursorY = data.cursorY + 1
                 term.setCursorPos(data.cursorX, data.cursorY)
                 height = height + 1
-                newY = height
             end
         -- if text fit in width restriction just write the text
         else
@@ -86,17 +85,16 @@ function Text.size(data, style, value)
     local width = 1
     local height = 1
     if data.width > -1 then
-        if data.width == 0 then
+        if data.width == 0 or data.height == 0 then
             data.height = 0
             return data
         end
         local val = 1
         if #value > data.width then
-            if data.height == 0 then
-                return data
-            end
             while val < #value do
                 if data.height ~= -1 and height > data.height then
+                    data.height = height
+                    data.width = width
                     return data
                 end
                 local str = string.sub(value, val, val + data.width)
