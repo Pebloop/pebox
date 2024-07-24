@@ -18,7 +18,11 @@ end
 function Text.exec(data, style, value)
     local newY = data.cursorY
 
-    data = StyleManager.execute(data, style, {width=#value, height=1})
+    local width = data.width
+    if width == -1 then
+        width = #value
+    end
+    data = StyleManager.execute(data, style, {width=width, height=1})
     term.setBackgroundColor(data.bgColor)
     term.setTextColor(data.textColor)
     term.setCursorPos(data.cursorX, data.cursorY)

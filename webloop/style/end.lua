@@ -8,6 +8,8 @@ function End.exec(data, size)
         return data
     else
         w = data.cursorX + data.width - size.width
+        print(w)
+        os.pullEvent("key")
         if w < data.cursorX then
             w = data.cursorX
         end
