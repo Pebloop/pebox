@@ -19,6 +19,7 @@ loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/data/styl
 
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/body.lua", "elements/body.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/text.lua", "elements/text.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/div.lua", "elements/div.lua")
 
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/begin.lua", "style/begin.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/center.lua", "style/center.lua")

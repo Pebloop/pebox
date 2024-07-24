@@ -37,7 +37,6 @@ function Text.exec(data, style, value)
             end
             while val < #value do
                 if data.height ~= -1 and height > data.height then
-                    data.cursorY = newY
                     clean()
                     return data
                 end
@@ -60,17 +59,16 @@ function Text.exec(data, style, value)
             end
         else
             term.write(value)
-            newY = newY + 1
+            data.cursorY = data.cursorY + 1
         end
     else 
         term.write(value)
-        newY = newY + 1
+        data.cursorY = data.cursorY + 1
     end
 
     -- restore original colors
     term.setBackgroundColor(colors.black)
     term.setTextColor(colors.white)
-    data.cursorY = newY
     return data
 end
 

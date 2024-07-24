@@ -6,6 +6,7 @@ local  env = {
     webloop = WebloopManager.execute,
     body = require("elements/body").body,
     text = require("elements/text").text,
+    div = require("elements/div").div,
 }
 
 local file = fs.open(shell.dir() .. "/" .. filePath, "r")

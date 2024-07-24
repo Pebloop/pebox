@@ -1,17 +1,17 @@
 local StyleManager = require("core.style_manager")
 local Utils = require("utils")
 
-local Body = {}
+local Div = {}
 
-function Body.body(style, children)
+function Div.div(style, children)
     return {
-        type = "body",
+        type = "div",
         style = style,
         children = children
     }
 end
 
-function Body.exec(data, style, children)
+function Div.exec(data, style, children)
     local ElementList = require("data.elements_list")
 
     data = StyleManager.execute(data, style, {width=0,height=0})
@@ -24,4 +24,4 @@ function Body.exec(data, style, children)
     return data
 end
 
-return Body
+return Div
