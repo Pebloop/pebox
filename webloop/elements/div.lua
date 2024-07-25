@@ -22,16 +22,22 @@ function Div.div(style)
 end
 
 function Div.exec(data, style, children)
-    local size = {}
     local ElementList = require("data.elements_list")
     local ElementSize = require("data.elements_size")
 
-    data, size = StyleManager.execute(data, style, {width=0,height=0})
-    data.width = size.width
-    data.height = size.height
+    local divData = Utils.deepcopy(data)
+    divData.width = 0
+    divData.height = 0
+    divData.parent = {
+        type = 'div',
+        data = Utils.deepcopy(data)
+    }
+
+    divData = StyleManager.execute(divData, style, {width=0,height=0})
 
     for i, child in ipairs(children) do
 
+        -- if child is a string, convert it to a text element
         if type(child) == "string" then
             child = {type = "text", style = "", value = child}
         end

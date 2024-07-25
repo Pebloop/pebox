@@ -1,5 +1,5 @@
 local modem = peripheral.find("modem")
-local configsPath = shell.dir().."/configs/"
+local configsPath = "pixie/configs/"
 
 local configs = {}
 

@@ -22,7 +22,7 @@ function End.exec(data, size)
         end
     end
     data.cursorX = w
-    return data, size
+    return data
 end
 
 return End

@@ -1,4 +1,5 @@
 local ElementList = require("data.elements_list")
+local Data = require("models.data")
 
 local WebloopManager = {}
 
@@ -41,22 +42,20 @@ function WebloopManager.execute(head, body)
     
     --WebloopManager.dumpAST(body, 1)
     while true do
+        -- setup terminal
         term.setBackgroundColor(colors.black)
         term.setTextColor(colors.white)
         term.clear()
         term.setCursorPos(1, 1)
-        local data = {
-            cursorX = 1,
-            cursorY = 1,
-            bgColor = colors.black,
-            textColor = colors.white,
-            width = -1,
-            height = -1,
-            parent = nil
-        }
-        
-        ElementList[body.type](data, body.style, body.children)
 
+        -- setup data
+        local data = Data:new("webloop")
+        local childData = data:child()
+        
+        -- execute body
+        ElementList[body.type](childData, body.style, body.children)
+
+        -- events
         local change = true
         while change do
             change = awaitChange()

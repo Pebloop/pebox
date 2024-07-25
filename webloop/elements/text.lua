@@ -1,5 +1,6 @@
 local StyleManager = require("core.style_manager")
 local Utils = require("utils")
+local Strings = require("cc.strings")
 
 local Text = {}
 
@@ -39,26 +40,15 @@ function Text.exec(data, style, value)
         parentHeight = data.parent.data.height
     end
 
-    if data.width > #value then
-        term.write(value)
-    else
-        while #value > 0 do
-            local str = string.sub(value, 1, data.width)
-            -- if str cut in the middle of a word then cut it to the last space
-            if str[#str] ~= " " and value[data.width + 1] ~= " " then
-                local lastSpace = string.find(str, " [^ ]*$")
-                if lastSpace then
-                    str = string.sub(str, 1, lastSpace - 1)
-                end
-            end
-            -- trim spaces
-            str = string.match(str, "^%s*(.-)%s*$")
-            term.write(str)
-            value = string.sub(value, #str + 1)
-            data.cursorY = data.cursorY + 1
-            term.setCursorPos(data.cursorX, data.cursorY)
-        end
+    -- if text is bigger than parent width then cut it
+    local text = Strings.wrap(value, parentWidth)
+    local h = data.cursorY
+    for i, line in ipairs(text) do
+        data.cursorY = h + i - 1
+        term.setCursorPos(data.cursorX, data.cursorY)
+        term.write(line)
     end
+    data.cursorY = h + #text
 
     -- reset style
     term.setBackgroundColor(colors.black)
@@ -71,38 +61,18 @@ function Text.exec(data, style, value)
 end
 
 function Text.size(data, style, value)
-    local width = 1
-    local height = 1
-
-    if data.width > -1 then
-
-        local val = 1
-        if #value > data.width then
-            while val < #value do
-                local str = string.sub(value, val, val + data.width)
-                -- if str cut in the middle of a word then cut it to the last space
-                if str[#str] ~= " " and value[val + data.width + 1] ~= " " then
-                    local lastSpace = string.find(str, " [^ ]*$")
-                    if lastSpace then
-                        str = string.sub(str, 1, lastSpace - 1)
-                    end
-                end
-                -- trim spaces
-                str = string.match(str, "^%s*(.-)%s*$")
-                val = val + #str + 1
-                height = height + 1
-            end
-        end
-    elseif data.width == 0 then
-        data.height = 0
-        return data
-    else
-        width = #value
+    local parentWidth, parentHeight = term.getSize()
+    if data.parent then
+        parentWidth = data.parent.data.width
+        parentHeight = data.parent.data.height
     end
 
-    data.width = math.max(data.width, width)
-    data.height = math.max(data.height, height)
-    return data
+    if #value < parentWidth then
+        return {width = #value, height = 1}
+    else
+        local formatedText = Strings.wrap(value, parentWidth)
+        return {width = parentWidth, height = #formatedText}
+    end
 end
 
 return Text
