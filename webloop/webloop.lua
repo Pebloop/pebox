@@ -20,9 +20,9 @@ local function navigateFile(env, filePath)
         return
     end
 
-    local code = loadstring(file.readAll())
+    local content = file.readAll()
+    local code = loadstring(content.."(getWindow())")
     file.close()
-    code = code.."(getWindow())"
 
     setfenv(code, env)
     local success, result = pcall(code)
