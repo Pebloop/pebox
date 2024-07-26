@@ -61,6 +61,9 @@ function Data:child(childPosition, width, height)
     child.y = childPosition and childPosition.y or 1
     child.height = height or -1
     child.width = width or -1
+    child.bg_color = self.bg_color
+    child.text_color = self.text_color
+    child.text_align = self.text_align
     return child
 end
 

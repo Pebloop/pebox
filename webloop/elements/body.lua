@@ -36,11 +36,8 @@ local function computeWrappedSize(data, children)
 end
 
 function Body.size(data, style, children)
-    local childData = data:child()
+    local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
     childData.parent = data
-    if type(child) == "string" then
-        child = {type = "text", style = "", value = child}
-    end
     return computeWrappedSize(childData, children)
 end
 
@@ -48,8 +45,15 @@ function Body.exec(data, style, children)
     local ElementList = require("data.elements_list")
     data = StyleManager.execute(data, style, {width=-1,height=-1})
 
-    local childWrappedData = data:child()
+    for i, child in ipairs(children) do
+        if type(child) == "string" then
+            children[i] = {type = "text", style = "", value = child}
+        end
+    end
+
+    local childWrappedData = data:child({x = data.x, y = data.y}, data.width, data.height)
     childWrappedData.type = "div"
+
     local wrappedSize = computeWrappedSize(childWrappedData, children)
     if data.width == -1 then
         data.width = wrappedSize.width
@@ -72,8 +76,8 @@ function Body.exec(data, style, children)
         local cwd = data:child()
         cwd.type = "div"
         local childWrappedSize = computeWrappedSize(cwd, {child})
-        
-        local childData = data:child()
+
+        local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
         if type(child) == "string" then
             child = {type = "text", style = "", value = child}
         end
