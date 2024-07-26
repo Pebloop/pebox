@@ -21,21 +21,21 @@ function Body.body(style)
     end
 end
 
-local function computeWrappedSize(data, children)
+local function computeWrappedSize(window, data, children)
     local ElementSize = require("data.elements_size")
     local wrappedSize = {width = 0, height = 0}
     for i, child in ipairs(children) do
 
         local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
 
-        local childSize = ElementSize[child.type](childData, child.style, child.value)
+        local childSize = ElementSize[child.type](window, childData, child.style, child.value)
         wrappedSize.width = math.max(wrappedSize.width, childSize.width)
         wrappedSize.height = wrappedSize.height + childSize.height
     end
     return wrappedSize
 end
 
-function Body.size(data, style, children)
+function Body.size(window, data, style, children)
     for i, child in ipairs(children) do
         if type(child) == "string" then
             children[i] = {type = "text", style = "", value = child}
@@ -44,7 +44,7 @@ function Body.size(data, style, children)
     data = StyleManager.execute(data, style, {width=-1,height=-1})
     local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
     childData.parent = data
-    return computeWrappedSize(childData, children)
+    return computeWrappedSize(window, childData, children)
 end
 
 function Body.exec(window, data, style, children)
@@ -60,7 +60,7 @@ function Body.exec(window, data, style, children)
     local childWrappedData = data:child({x = data.x, y = data.y}, data.width, data.height)
     childWrappedData.type = "div"
 
-    local wrappedSize = computeWrappedSize(childWrappedData, children)
+    local wrappedSize = computeWrappedSize(window, childWrappedData, children)
     if data.width == -1 then
         data.width = wrappedSize.width
     end
@@ -81,7 +81,7 @@ function Body.exec(window, data, style, children)
 
         local cwd = data:child()
         cwd.type = "div"
-        local childWrappedSize = computeWrappedSize(cwd, {child})
+        local childWrappedSize = computeWrappedSize(window, cwd, {child})
 
         local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
         ElementList[child.type](window, childData, child.style, child.value)

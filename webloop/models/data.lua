@@ -67,7 +67,7 @@ function Data:child(childPosition, width, height)
     return child
 end
 
-function Data:parentalSize()
+function Data:parentalSize(window)
     local w = -1
     local h = -1
     local parentData = self.parent
@@ -83,11 +83,11 @@ function Data:parentalSize()
     end
 
     if w == -1 then
-        w = term.getSize()
+        w = window.getSize()
     end
 
     if h == -1 then
-        _, h = term.getSize()
+        _, h = window.getSize()
     end
 
     return w, h

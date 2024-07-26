@@ -67,8 +67,8 @@ function Text.exec(window, data, style, value)
     return data
 end
 
-function Text.size(data, style, value)
-    local parentWidth, _ = data:parentalSize()
+function Text.size(window, data, style, value)
+    local parentWidth, _ = data:parentalSize(window)
     local formatedText = Strings.wrap(value, parentWidth)
 
     return {width = parentWidth, height = #formatedText}

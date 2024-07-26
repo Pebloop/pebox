@@ -33,8 +33,8 @@ function WebloopManager.dumpAST(ast, depth)
     end
 end
 
-local function awaitChange(globalWindow)
-    local termWidth, termHeight = term.getSize()
+local function awaitChange(globalWindow, webWindow)
+    local termWidth, termHeight = webWindow.getSize()
     local windowWidth, windowHeight = globalWindow.getSize()
     local event, data, x, y = os.pullEvent()
 
@@ -82,7 +82,7 @@ function WebloopManager.display(head, body, webWindow)
     local data = Data:new("webloop")
     local childData = data:child()
     childData.parent = data
-    local pageSize = ElementSize[body.type](childData, body.style, body.children)
+    local pageSize = ElementSize[body.type](webWindow, childData, body.style, body.children)
     local screenSizeX, screenSizeY = webWindow.getSize()
     
     if screenSizeX > pageSize.width then
@@ -98,7 +98,7 @@ function WebloopManager.display(head, body, webWindow)
     local childData = data:child()
     childData.parent = data
     
-    local globalWindow = window.create(webWindow.current(), 1, 1, pageSize.width, pageSize.height)
+    local globalWindow = window.create(webWindow, 1, 1, pageSize.width, pageSize.height)
 
     -- setup terminal
     globalWindow.setBackgroundColor(colors.black)
@@ -110,7 +110,7 @@ function WebloopManager.display(head, body, webWindow)
     ElementList[body.type](globalWindow, childData, body.style, body.children)
 
     while true do
-        awaitChange(globalWindow)
+        awaitChange(globalWindow, webWindow)
     end
 
 end
