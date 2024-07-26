@@ -24,7 +24,7 @@ function Data:new(type, width, height)
     self.parent = nil
     self.bg_color = colors.black
     self.text_color = colors.white
-    self.text_align = "begin"
+    self.text_align = "start"
 
     return o
 end

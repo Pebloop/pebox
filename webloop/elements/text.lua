@@ -44,8 +44,6 @@ function Text.exec(data, style, value)
     local text = Strings.wrap(value, parentWidth)
     local h = data.y
     for i, line in ipairs(text) do
-        -- trim spaces
-        line = line:gsub("^%s*(.-)%s*$", "%1")
         data.y = h + i - 1
 
         if data.align == "start" then
