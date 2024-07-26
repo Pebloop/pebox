@@ -47,7 +47,14 @@ function Text.exec(data, style, value)
         -- trim spaces
         line = line:gsub("^%s*(.-)%s*$", "%1")
         data.y = h + i - 1
-        term.setCursorPos(data.x, data.y)
+
+        if data.align == "start" then
+            term.setCursorPos(data.x, data.y)
+        elseif data.align == "middle" then
+            term.setCursorPos(data.x + math.floor((parentWidth - #line) / 2), data.y)
+        elseif data.align == "end" then
+            term.setCursorPos(data.x + parentWidth - #line, data.y)
+        end
         term.write(line)
     end
     data.y = h + #text
@@ -63,15 +70,10 @@ function Text.exec(data, style, value)
 end
 
 function Text.size(data, style, value)
-    local parentWidth, parentHeight = data:parentalSize()
-    
-    if #value < parentWidth then
-        return {width = #value, height = 1}
-    else
-        local formatedText = Strings.wrap(value, parentWidth)
+    local parentWidth, _ = data:parentalSize()
+    local formatedText = Strings.wrap(value, parentWidth)
 
-        return {width = parentWidth, height = #formatedText}
-    end
+    return {width = parentWidth, height = #formatedText}
 end
 
 return Text
