@@ -46,7 +46,6 @@ function Text.exec(window, data, style, value)
     for i, line in ipairs(text) do
         data.y = h + i - 1
 
-        os.pullEvent("key")
         if data.text_align == "start" then
             window.setCursorPos(data.x, data.y)
         elseif data.text_align == "middle" then

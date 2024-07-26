@@ -84,7 +84,7 @@ function Body.exec(window, data, style, children)
         local childWrappedSize = computeWrappedSize(cwd, {child})
 
         local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
-        ElementList[child.type](childData, child.style, child.value)
+        ElementList[child.type](window, childData, child.style, child.value)
         data.y = data.y + childWrappedSize.height
     end
     return data

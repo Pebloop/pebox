@@ -1,9 +1,8 @@
 local ElementList = require("data.elements_list")
+local ElementSize = require("data.elements_size")
 local Data = require("models.data")
 
 local WebloopManager = {}
-
-local globalWindow = window.create(term.current(), 1, 1, term.getSize())
 
 local function dumpElement(element, depth)
     local indent = string.rep("  ", depth)
@@ -32,8 +31,9 @@ function WebloopManager.dumpAST(ast, depth)
     end
 end
 
-local function awaitChange()
-    if os.pullEvent() == "key" then
+local function awaitChange(globalWindow)
+    if os.pullEvent() == "scroll" then
+        globalWindow.scroll(1)
         return false
     end
     return true
@@ -42,26 +42,31 @@ end
 function WebloopManager.execute(head, body)
     -- TODO : implement head
     
-    --WebloopManager.dumpAST(body, 1)
+    -- setup terminal
+    globalWindow.setBackgroundColor(colors.black)
+    globalWindow.setTextColor(colors.white)
+    globalWindow.clear()
+    globalWindow.setCursorPos(1, 1)
+
+    local data = Data:new("webloop")
+    local childData = data:child()
+    childData.parent = data
+    local pageSize = ElementSize[body.type](childData, body.style, body.children)
+
+    -- setup data
+    local data = Data:new("webloop")
+    local childData = data:child()
+    childData.parent = data
+    
+    -- execute body
+    local globalWindow = window.create(term.current(), 1, 1, pageSize)
+    ElementList[body.type](globalWindow, childData, body.style, body.children)
+
     while true do
-        -- setup terminal
-        globalWindow.setBackgroundColor(colors.black)
-        globalWindow.setTextColor(colors.white)
-        globalWindow.clear()
-        globalWindow.setCursorPos(1, 1)
-
-        -- setup data
-        local data = Data:new("webloop")
-        local childData = data:child()
-        childData.parent = data
-        
-        -- execute body
-        ElementList[body.type](globalWindow, childData, body.style, body.children)
-
         -- events
         local change = true
         while change do
-            change = awaitChange()
+            change = awaitChange(globalWindow)
         end
     end
 
