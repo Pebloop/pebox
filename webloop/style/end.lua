@@ -1,7 +1,7 @@
 local End = {}
 
 function End.exec(data, size)
-    data.align = "end"
+    data.text_align = "end"
     return data
 end
 

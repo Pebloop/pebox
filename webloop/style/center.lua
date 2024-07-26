@@ -1,7 +1,7 @@
 local Center = {}
 
 function Center.exec(data, size)
-    data.align = "middle"
+    data.text_align = "middle"
     return data
 end
 
