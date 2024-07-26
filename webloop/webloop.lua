@@ -24,10 +24,10 @@ local function navigateFile(env, filePath)
     file.close()
 
     setfenv(code, env)
-    env.window.clear()
-    env.window.setCursorPos(1, 1)
+    env.webWindow.clear()
+    env.webWindow.setCursorPos(1, 1)
     local success, result = pcall(code)
-    env.window.clear()
+    env.webWindow.clear()
     if not success then
         print(result)
     end
@@ -62,7 +62,7 @@ function Webloop:navigate(url)
         body = require("elements/body").body,
         text = require("elements/text").text,
         div = require("elements/div").div,
-        window = self.window
+        webWindow = self.window
     }
 
     if string.match(url, "wb:") then

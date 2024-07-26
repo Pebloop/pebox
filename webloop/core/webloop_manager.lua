@@ -75,7 +75,7 @@ function WebloopManager.execute(head, body)
     local childData = data:child()
     childData.parent = data
     local pageSize = ElementSize[body.type](childData, body.style, body.children)
-    local screenSizeX, screenSizeY = window.getSize()
+    local screenSizeX, screenSizeY = windowWeb.getSize()
     
     if screenSizeX > pageSize.width then
         pageSize.width = screenSizeX
@@ -90,7 +90,7 @@ function WebloopManager.execute(head, body)
     local childData = data:child()
     childData.parent = data
     
-    local globalWindow = window.create(window, 1, 1, pageSize.width, pageSize.height)
+    local globalWindow = window.create(windowWeb.current(), 1, 1, pageSize.width, pageSize.height)
 
     -- setup terminal
     globalWindow.setBackgroundColor(colors.black)
