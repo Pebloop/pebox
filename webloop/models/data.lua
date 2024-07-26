@@ -16,15 +16,15 @@ function Data:new(type, width, height)
     self.__index = self
 
     -- setup data
-    self.type = type or "unkown"
-    self.x = 1
-    self.y = 1
-    self.width = width or -1
-    self.height = height or -1
-    self.parent = nil
-    self.bg_color = colors.black
-    self.text_color = colors.white
-    self.text_align = "start"
+    o.type = type or "unkown"
+    o.x = 1
+    o.y = 1
+    o.width = width or -1
+    o.height = height or -1
+    o.parent = nil
+    o.bg_color = colors.black
+    o.text_color = colors.white
+    o.text_align = "begin"
 
     return o
 end
