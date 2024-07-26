@@ -58,6 +58,15 @@ function Body.exec(data, style, children)
         data.height = wrappedSize.height
     end
 
+    term.setBackgroundColor(data.bg_color)
+    for x = 1, data.width do
+        for y = 1, data.height do
+            term.setCursorPos(data.x + x - 1, data.y + y - 1)
+            term.write(" ")
+        end
+    end
+    term.setBackgroundColor(colors.black)
+
     for i, child in ipairs(children) do
 
         local childData = data:child()

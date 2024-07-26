@@ -2,7 +2,7 @@ local textColor = {}
 
 function textColor.exec(color)
     return function (data, size)
-        data.textColor = color
+        data.text_color = color
         return data
     end    
 end

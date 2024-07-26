@@ -29,8 +29,8 @@ function Text.exec(data, style, value)
     data = StyleManager.execute(data, style, {width= #value, height=1})
 
     -- setup style
-    term.setBackgroundColor(data.bgColor)
-    term.setTextColor(data.textColor)
+    term.setBackgroundColor(data.bg_color)
+    term.setTextColor(data.text_color)
     term.setCursorPos(data.x, data.y)
     
     -- render text
