@@ -64,4 +64,21 @@ function Data:child(childPosition, width, height)
     return child
 end
 
+function Data:parentalSize()
+    local w, h = term.getSize() -- if not parent, use screen size as reference
+    local parentData = self.parent
+
+    while self.parent then
+        if w == -1 and parentData.width ~= -1 then
+            w = parentData.width
+        end
+        if h == -1 and parentData.height ~= -1 then
+            h = parentData.height
+        end
+        parentData = parentData.parent
+    end
+
+    return w, h
+end
+
 return Data
