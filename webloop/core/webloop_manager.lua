@@ -41,12 +41,6 @@ end
 
 function WebloopManager.execute(head, body)
     -- TODO : implement head
-    
-    -- setup terminal
-    globalWindow.setBackgroundColor(colors.black)
-    globalWindow.setTextColor(colors.white)
-    globalWindow.clear()
-    globalWindow.setCursorPos(1, 1)
 
     local data = Data:new("webloop")
     local childData = data:child()
@@ -58,8 +52,15 @@ function WebloopManager.execute(head, body)
     local childData = data:child()
     childData.parent = data
     
-    -- execute body
     local globalWindow = window.create(term.current(), 1, 1, pageSize)
+
+    -- setup terminal
+    globalWindow.setBackgroundColor(colors.black)
+    globalWindow.setTextColor(colors.white)
+    globalWindow.clear()
+    globalWindow.setCursorPos(1, 1)
+
+    -- execute body
     ElementList[body.type](globalWindow, childData, body.style, body.children)
 
     while true do
