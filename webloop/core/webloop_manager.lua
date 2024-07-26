@@ -3,6 +3,8 @@ local Data = require("models.data")
 
 local WebloopManager = {}
 
+local globalWindow = window.create(term.current(), 1, 1, term.getSize())
+
 local function dumpElement(element, depth)
     local indent = string.rep("  ", depth)
     local type = element.type
@@ -43,10 +45,10 @@ function WebloopManager.execute(head, body)
     --WebloopManager.dumpAST(body, 1)
     while true do
         -- setup terminal
-        term.setBackgroundColor(colors.black)
-        term.setTextColor(colors.white)
-        term.clear()
-        term.setCursorPos(1, 1)
+        globalWindow.setBackgroundColor(colors.black)
+        globalWindow.setTextColor(colors.white)
+        globalWindow.clear()
+        globalWindow.setCursorPos(1, 1)
 
         -- setup data
         local data = Data:new("webloop")
@@ -54,7 +56,7 @@ function WebloopManager.execute(head, body)
         childData.parent = data
         
         -- execute body
-        ElementList[body.type](childData, body.style, body.children)
+        ElementList[body.type](globalWindow, childData, body.style, body.children)
 
         -- events
         local change = true

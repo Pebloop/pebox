@@ -47,7 +47,7 @@ function Body.size(data, style, children)
     return computeWrappedSize(childData, children)
 end
 
-function Body.exec(data, style, children)
+function Body.exec(window, data, style, children)
     local ElementList = require("data.elements_list")
 
     for i, child in ipairs(children) do
@@ -68,14 +68,14 @@ function Body.exec(data, style, children)
         data.height = wrappedSize.height
     end
 
-    term.setBackgroundColor(data.bg_color)
+    window.setBackgroundColor(data.bg_color)
     for x = 1, data.width do
         for y = 1, data.height - 1 do
-            term.setCursorPos(data.x + x - 1, data.y + y - 1)
-            term.write(" ")
+            window.setCursorPos(data.x + x - 1, data.y + y - 1)
+            window.write(" ")
         end
     end
-    term.setBackgroundColor(colors.black)
+    window.setBackgroundColor(colors.black)
 
     for i, child in ipairs(children) do
 

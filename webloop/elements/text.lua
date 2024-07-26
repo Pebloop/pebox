@@ -24,14 +24,14 @@ function Text.text(style)
 end
 
 -- Execute text element
-function Text.exec(data, style, value)
+function Text.exec(window, data, style, value)
     -- compute style
     data = StyleManager.execute(data, style, {width= #value, height=1})
 
     -- setup style
-    term.setBackgroundColor(data.bg_color)
-    term.setTextColor(data.text_color)
-    term.setCursorPos(data.x, data.y)
+    window.setBackgroundColor(data.bg_color)
+    window.setTextColor(data.text_color)
+    window.setCursorPos(data.x, data.y)
     
     -- render text
     local parentWidth, parentHeight = term.getSize()
@@ -47,19 +47,19 @@ function Text.exec(data, style, value)
         data.y = h + i - 1
 
         if data.text_align == "start" then
-            term.setCursorPos(data.x, data.y)
+            window.setCursorPos(data.x, data.y)
         elseif data.text_align == "middle" then
-            term.setCursorPos(data.x + math.floor((parentWidth - #line) / 2), data.y)
+            window.setCursorPos(data.x + math.floor((parentWidth - #line) / 2), data.y)
         elseif data.text_align == "end" then
-            term.setCursorPos(data.x + parentWidth - #line, data.y)
+            window.setCursorPos(data.x + parentWidth - #line, data.y)
         end
-        term.write(line)
+        window.write(line)
     end
     data.y = h + #text
 
     -- reset style
-    term.setBackgroundColor(colors.black)
-    term.setTextColor(colors.white)
+    window.setBackgroundColor(colors.black)
+    window.setTextColor(colors.white)
 
     -- go one time down
     data.y = data.y + 1
