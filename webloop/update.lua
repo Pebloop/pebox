@@ -11,6 +11,8 @@ loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/start.lua
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/example.lua", "example.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/utils.lua", "utils.lua")
 
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/models/data.lua", "models/data.lua")
+
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/core/style_manager.lua", "core/style_manager.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/core/webloop_manager.lua", "core/webloop_manager.lua")
 

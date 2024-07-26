@@ -31,46 +31,44 @@ function Text.exec(data, style, value)
     -- setup style
     term.setBackgroundColor(data.bgColor)
     term.setTextColor(data.textColor)
-    term.setCursorPos(data.cursorX, data.cursorY)
+    term.setCursorPos(data.x, data.y)
     
     -- render text
     local parentWidth, parentHeight = term.getSize()
     if data.parent then
-        parentWidth = data.parent.data.width
-        parentHeight = data.parent.data.height
+        parentWidth = data.parent.width
+        parentHeight = data.parent.height
     end
 
     -- if text is bigger than parent width then cut it
     local text = Strings.wrap(value, parentWidth)
-    local h = data.cursorY
+    local h = data.y
     for i, line in ipairs(text) do
-        data.cursorY = h + i - 1
-        term.setCursorPos(data.cursorX, data.cursorY)
+        data.y = h + i - 1
+        term.setCursorPos(data.x, data.y)
         term.write(line)
     end
-    data.cursorY = h + #text
+    data.y = h + #text
 
     -- reset style
     term.setBackgroundColor(colors.black)
     term.setTextColor(colors.white)
 
     -- go one time down
-    data.cursorY = data.cursorY + 1
+    data.y = data.y + 1
 
     return data
 end
 
 function Text.size(data, style, value)
-    local parentWidth, parentHeight = term.getSize()
-    if data.parent then
-        parentWidth = data.parent.data.width
-        parentHeight = data.parent.data.height
-    end
+    local parentWidth = data.parent.width
+    local parentHeight = data.parent.height
 
     if #value < parentWidth then
         return {width = #value, height = 1}
     else
         local formatedText = Strings.wrap(value, parentWidth)
+
         return {width = parentWidth, height = #formatedText}
     end
 end

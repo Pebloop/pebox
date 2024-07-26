@@ -9,7 +9,7 @@ function Center.exec(data, size)
 
     end
     w = math.floor((w - size.width) / 2)
-    data.cursorX = w
+    data.x = w
     return data
 end
 

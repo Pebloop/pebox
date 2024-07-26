@@ -13,15 +13,15 @@ function End.exec(data, size)
     if data.width == 0 then
         return data
     else
-        w = data.cursorX + w - size.width
-        if w < data.cursorX then
-            w = data.cursorX
+        w = data.x + w - size.width
+        if w < data.x then
+            w = data.x
         end
         if w < 1 then
             w = 1
         end
     end
-    data.cursorX = w
+    data.x = w
     return data
 end
 

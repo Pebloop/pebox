@@ -10,21 +10,21 @@ local Data = {
     text_align = "begin"
 }
 
-function Data:new(o, type, width, height)
+function Data:new(type, width, height)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
 
     -- setup data
-    o.type = type or "unkown"
-    o.x = 1
-    o.y = 1
-    o.width = width or 0
-    o.height = height or 0
-    o.parent = nil
-    o.bg_color = colors.black
-    o.text_color = colors.white
-    o.text_align = "begin"
+    self.type = type or "unkown"
+    self.x = 1
+    self.y = 1
+    self.width = width or 0
+    self.height = height or 0
+    self.parent = nil
+    self.bg_color = colors.black
+    self.text_color = colors.white
+    self.text_align = "begin"
 
     return o
 end
@@ -57,8 +57,8 @@ end
 function Data:child(childPosition, width, height)
     local child = Data:new()
     child.parent = self
-    child.x = childPosition.x
-    child.y = childPosition.y
+    child.x = childPosition and childPosition.x or 1
+    child.y = childPosition and childPosition.y or 1
     child.height = height or 0
     child.width = width or 0
     return child

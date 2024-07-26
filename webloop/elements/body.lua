@@ -21,13 +21,14 @@ function Body.body(style)
     end
 end
 
-local function computeWrappedSize(children)
+local function computeWrappedSize(data, children)
+    local ElementSize = require("data.elements_size")
     local wrappedSize = {width = 0, height = 0}
     for i, child in ipairs(children) do
         if type(child) == "string" then
             child = {type = "text", style = "", value = child}
         end
-        local childSize = ElementSize[child.type](Utils.deepcopy(data), child.style, child.value)
+        local childSize = ElementSize[child.type](data, child.style, child.value)
         wrappedSize.width = math.max(wrappedSize.width, childSize.width)
         wrappedSize.height = wrappedSize.height + childSize.height
     end
@@ -35,17 +36,28 @@ local function computeWrappedSize(children)
 end
 
 function Body.size(data, style, children)
-    return computeWrappedSize(children)
+    local childData = data:child()
+    childData.parent = data
+    if type(child) == "string" then
+        child = {type = "text", style = "", value = child}
+    end
+    return computeWrappedSize(childData, children)
 end
 
 function Body.exec(data, style, children)
     local ElementList = require("data.elements_list")
+    data = StyleManager.execute(data, style, {width=-1,height=-1})
+    os.pullEvent("key")
 
-    data = StyleManager.execute(data, style, {width=0,height=0})
-
-    local wrappedSize = computeWrappedSize(children)
-    data.width = wrappedSize.width
-    data.height = wrappedSize.height
+    local childWrappedData = data:child()
+    childWrappedData.parent = data
+    local wrappedSize = computeWrappedSize(childWrappedData, children)
+    if data.width == -1 then
+        data.width = wrappedSize.width
+    end
+    if data.height == -1 then
+        data.height = wrappedSize.height
+    end
 
     for i, child in ipairs(children) do
 
@@ -56,7 +68,7 @@ function Body.exec(data, style, children)
         end
         ElementList[child.type](childData, child.style, child.value)
     end
-    data.cursorY = data.cursorY + wrappedSize.height
+    data.y = data.y + wrappedSize.height
     return data
 end
 

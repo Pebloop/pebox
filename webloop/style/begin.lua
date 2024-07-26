@@ -1,7 +1,7 @@
 local Begin = {}
 
 function Begin.exec(data, size)
-    data.cursorX = 1
+    data.x = 1
     return data
 end
 
