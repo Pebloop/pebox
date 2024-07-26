@@ -1,7 +1,7 @@
 local Begin = {}
 
 function Begin.exec(data, size)
-    data.x = 1
+    data.align = "start"
     return data
 end
 
