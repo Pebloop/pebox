@@ -11,7 +11,7 @@ local Data = {
 }
 
 function Data:new(type, width, height)
-    o = o or {}
+    local o = {}
     setmetatable(o, self)
     self.__index = self
 
@@ -57,7 +57,6 @@ end
 function Data:child(childPosition, width, height)
     local child = Data:new()
     child.parent = self
-    print(child.parent.type)
     child.x = childPosition and childPosition.x or 1
     child.y = childPosition and childPosition.y or 1
     child.height = height or -1

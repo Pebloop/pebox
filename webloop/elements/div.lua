@@ -21,4 +21,7 @@ function Div.div(style)
     end
 end
 
+function Div.exec(data, style, children)
+end
+
 return Div
