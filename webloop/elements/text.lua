@@ -44,6 +44,9 @@ function Text.exec(data, style, value)
     local text = Strings.wrap(value, parentWidth)
     local h = data.y
     for i, line in ipairs(text) do
+        if i > parentHeight then
+            break
+        end
         data.y = h + i - 1
         term.setCursorPos(data.x, data.y)
         term.write(line)
