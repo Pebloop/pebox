@@ -22,12 +22,10 @@ local function navigateFile(env, filePath)
 
     local code = loadstring(file.readAll())
     file.close()
+    code = code.."(getWindow())"
 
     setfenv(code, env)
-    env.webWindow.clear()
-    env.webWindow.setCursorPos(1, 1)
     local success, result = pcall(code)
-    env.webWindow.clear()
     if not success then
         print(result)
     end
@@ -45,10 +43,7 @@ local function navigateWeb(env, url)
     local code = http.get(url).readAll()
     local code = loadstring(code)
     setfenv(code, env)
-    env.window.clear()
-    env.window.setCursorPos(1, 1)
     local success, result = pcall(code)
-    env.window.clear()
     if not success then
         print(result)
     end
@@ -57,12 +52,16 @@ local function navigateWeb(env, url)
 end
 
 function Webloop:navigate(url)
+    local function getWindow()
+        return self.window
+    end
+
     local  env = {
         webloop = WebloopManager.execute,
         body = require("elements/body").body,
         text = require("elements/text").text,
         div = require("elements/div").div,
-        webWindow = self.window
+        getWindow = getWindow
     }
 
     if string.match(url, "wb:") then

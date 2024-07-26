@@ -70,12 +70,20 @@ local function awaitChange(globalWindow)
 end
 
 function WebloopManager.execute(head, body)
+    return function (window)
+        local webWindow = window
+        WebloopManager.display(head, body, webWindow)
+    end
+end
+
+function WebloopManager.display(head, body, webWindow)
     -- TODO : implement head
+
     local data = Data:new("webloop")
     local childData = data:child()
     childData.parent = data
     local pageSize = ElementSize[body.type](childData, body.style, body.children)
-    local screenSizeX, screenSizeY = windowWeb.getSize()
+    local screenSizeX, screenSizeY = webWindow.getSize()
     
     if screenSizeX > pageSize.width then
         pageSize.width = screenSizeX
@@ -90,7 +98,7 @@ function WebloopManager.execute(head, body)
     local childData = data:child()
     childData.parent = data
     
-    local globalWindow = window.create(windowWeb.current(), 1, 1, pageSize.width, pageSize.height)
+    local globalWindow = window.create(webWindow.current(), 1, 1, pageSize.width, pageSize.height)
 
     -- setup terminal
     globalWindow.setBackgroundColor(colors.black)
