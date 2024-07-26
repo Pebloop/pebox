@@ -62,7 +62,9 @@ end
 
 function Text.size(data, style, value)
     local parentWidth, parentHeight = data:parentalSize()
-
+    print("parentWidth : " .. parentWidth)
+    print("parentHeight : " .. parentHeight)
+    os.pullEvent("key")
     
     if #value < parentWidth then
         return {width = #value, height = 1}

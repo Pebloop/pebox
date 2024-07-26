@@ -69,14 +69,17 @@ function Body.exec(data, style, children)
 
     for i, child in ipairs(children) do
 
+        local cwd = data:child()
+        cwd.type = "div"
+        local childWrappedSize = computeWrappedSize(cwd, {child})
+        
         local childData = data:child()
-        childData.parent = data
         if type(child) == "string" then
             child = {type = "text", style = "", value = child}
         end
         ElementList[child.type](childData, child.style, child.value)
+        data.y = data.y + childWrappedSize.height
     end
-    data.y = data.y + wrappedSize.height
     return data
 end
 
