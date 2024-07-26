@@ -4,6 +4,8 @@ local Data = require("models.data")
 
 local WebloopManager = {}
 
+local scroll = 0
+
 local function dumpElement(element, depth)
     local indent = string.rep("  ", depth)
     local type = element.type
@@ -32,9 +34,37 @@ function WebloopManager.dumpAST(ast, depth)
 end
 
 local function awaitChange(globalWindow)
-    if os.pullEvent() == "scroll" then
-        globalWindow.scroll(1)
+    local termWidth, termHeight = term.getSize()
+    local windowWidth, windowHeight = globalWindow.getSize()
+    local event, data, x, y = os.pullEvent()
+
+    if event == "mouse_scroll" then
+        if scroll < windowHeight - termHeight - 1 and data < 0 then
+            scroll = scroll + 1
+            globalWindow.reposition(1, scroll)
+            globalWindow.redraw()
+        elseif scroll >= 0 and data > 0 then
+            scroll = scroll - 1
+            globalWindow.reposition(1, scroll)
+            globalWindow.redraw()
+        end
         return false
+    elseif event == "key" then
+        if data == keys.up then
+            if scroll > windowHeight - termHeight then
+                scroll = scroll - 1
+                globalWindow.reposition(1, scroll)
+                globalWindow.redraw()
+            end
+            return false
+        elseif data == keys.down then
+            if scroll > 0 then
+                scroll = scroll - 1
+                globalWindow.reposition(1, scroll)
+                globalWindow.redraw()
+            end
+            return false
+        end
     end
     return true
 end
@@ -46,13 +76,22 @@ function WebloopManager.execute(head, body)
     local childData = data:child()
     childData.parent = data
     local pageSize = ElementSize[body.type](childData, body.style, body.children)
+    local screenSizeX, screenSizeY = term.getSize()
+    
+    if screenSizeX > pageSize.width then
+        pageSize.width = screenSizeX
+    end
+
+    if screenSizeY > pageSize.height then
+        pageSize.height = screenSizeY
+    end
 
     -- setup data
     local data = Data:new("webloop")
     local childData = data:child()
     childData.parent = data
     
-    local globalWindow = window.create(term.current(), 1, 1, pageSize)
+    local globalWindow = window.create(term.current(), 1, 1, pageSize.width, pageSize.height)
 
     -- setup terminal
     globalWindow.setBackgroundColor(colors.black)
@@ -64,11 +103,7 @@ function WebloopManager.execute(head, body)
     ElementList[body.type](globalWindow, childData, body.style, body.children)
 
     while true do
-        -- events
-        local change = true
-        while change do
-            change = awaitChange(globalWindow)
-        end
+        awaitChange(globalWindow)
     end
 
 end

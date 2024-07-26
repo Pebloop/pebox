@@ -8,6 +8,7 @@ local function loadFile(url, fileName)
 end
 
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/start.lua", "start.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/webloop.lua", "webloop.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/example.lua", "example.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/utils.lua", "utils.lua")
 
