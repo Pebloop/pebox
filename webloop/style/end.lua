@@ -1,27 +1,11 @@
 local End = {}
 
 function End.exec(data, size)
-    
-    local w, h = term.getSize() -- if not parent, use screen size as reference
+    local w = data.parent.width
+    local h = data.parent.height
+    data.align = "end"
 
-    if data.parent then
-        w = data.parent.data.width
-        h = data.parent.data.height
-    end
-
-    -- if no width, no content to display, so just return
-    if data.width == 0 then
-        return data
-    else
-        w = data.x + w - size.width
-        if w < data.x then
-            w = data.x
-        end
-        if w < 1 then
-            w = 1
-        end
-    end
-    data.x = w
+    data.x = w - size.width + 1
     return data
 end
 

@@ -1,15 +1,11 @@
 local Center = {}
 
 function Center.exec(data, size)
-    local w, h = term.getSize() -- if not parent, use screen size as reference
+    local w = data.parent.width
+    local h = data.parent.height
+    data.align = "middle"
 
-    if data.parent then
-        w = data.parent.width
-        h = data.parent.height
-
-    end
-    w = math.floor((w - size.width) / 2)
-    data.x = w
+    data.x = math.floor((w - size.width) / 2) + 1
     return data
 end
 
