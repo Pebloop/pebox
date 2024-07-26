@@ -61,13 +61,12 @@ function Text.exec(data, style, value)
 end
 
 function Text.size(data, style, value)
-    local parentWidthn, parentHeight = data:parentalSize()
+    local parentWidth, parentHeight = data:parentalSize()
 
     
     if #value < parentWidth then
         return {width = #value, height = 1}
     else
-        print(parentWidth)
         local formatedText = Strings.wrap(value, parentWidth)
 
         return {width = parentWidth, height = #formatedText}

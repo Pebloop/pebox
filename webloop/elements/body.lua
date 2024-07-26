@@ -49,7 +49,7 @@ function Body.exec(data, style, children)
     data = StyleManager.execute(data, style, {width=-1,height=-1})
 
     local childWrappedData = data:child()
-    childWrappedData.parent = data
+    childWrappedData.type = "div"
     local wrappedSize = computeWrappedSize(childWrappedData, children)
     if data.width == -1 then
         data.width = wrappedSize.width

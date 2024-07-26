@@ -51,6 +51,7 @@ function WebloopManager.execute(head, body)
         -- setup data
         local data = Data:new("webloop")
         local childData = data:child()
+        childData.parent = data
         
         -- execute body
         ElementList[body.type](childData, body.style, body.children)

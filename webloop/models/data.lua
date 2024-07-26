@@ -57,6 +57,7 @@ end
 function Data:child(childPosition, width, height)
     local child = Data:new()
     child.parent = self
+    print(child.parent.type)
     child.x = childPosition and childPosition.x or 1
     child.y = childPosition and childPosition.y or 1
     child.height = height or -1
@@ -68,7 +69,7 @@ function Data:parentalSize()
     local w, h = term.getSize() -- if not parent, use screen size as reference
     local parentData = self.parent
 
-    while self.parent then
+    while parentData do
         if w == -1 and parentData.width ~= -1 then
             w = parentData.width
         end
