@@ -46,11 +46,11 @@ function Text.exec(data, style, value)
     for i, line in ipairs(text) do
         data.y = h + i - 1
 
-        if data.align == "start" then
+        if data.text_align == "start" then
             term.setCursorPos(data.x, data.y)
-        elseif data.align == "middle" then
+        elseif data.text_align == "middle" then
             term.setCursorPos(data.x + math.floor((parentWidth - #line) / 2), data.y)
-        elseif data.align == "end" then
+        elseif data.text_align == "end" then
             term.setCursorPos(data.x + parentWidth - #line, data.y)
         end
         term.write(line)
