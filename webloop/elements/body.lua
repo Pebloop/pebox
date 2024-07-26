@@ -47,7 +47,6 @@ end
 function Body.exec(data, style, children)
     local ElementList = require("data.elements_list")
     data = StyleManager.execute(data, style, {width=-1,height=-1})
-    os.pullEvent("key")
 
     local childWrappedData = data:child()
     childWrappedData.parent = data

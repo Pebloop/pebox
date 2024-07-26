@@ -19,8 +19,8 @@ function Data:new(type, width, height)
     self.type = type or "unkown"
     self.x = 1
     self.y = 1
-    self.width = width or 0
-    self.height = height or 0
+    self.width = width or -1
+    self.height = height or -1
     self.parent = nil
     self.bg_color = colors.black
     self.text_color = colors.white
@@ -59,8 +59,8 @@ function Data:child(childPosition, width, height)
     child.parent = self
     child.x = childPosition and childPosition.x or 1
     child.y = childPosition and childPosition.y or 1
-    child.height = height or 0
-    child.width = width or 0
+    child.height = height or -1
+    child.width = width or -1
     return child
 end
 

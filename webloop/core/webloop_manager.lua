@@ -47,6 +47,7 @@ function WebloopManager.execute(head, body)
         term.setTextColor(colors.white)
         term.clear()
         term.setCursorPos(1, 1)
+        print("test")
 
         -- setup data
         local data = Data:new("webloop")
