@@ -53,25 +53,21 @@ function Text.exec(type)
         local text = Strings.wrap(value, parentWidth)
         local h = data.y
         for i, line in ipairs(text) do
-            data.y = h + i - 1
+            local l = h + i - 1
 
             if data.text_align == "start" then
-                window.setCursorPos(data.x, data.y)
+                window.setCursorPos(data.x, l)
             elseif data.text_align == "middle" then
-                window.setCursorPos(data.x + math.floor((parentWidth - #line) / 2), data.y)
+                window.setCursorPos(data.x + math.floor((parentWidth - #line) / 2),l)
             elseif data.text_align == "end" then
-                window.setCursorPos(data.x + parentWidth - #line - 1, data.y)
+                window.setCursorPos(data.x + parentWidth - #line - 1, l)
             end
             window.write(line)
         end
-        data.y = h + #text
 
         -- reset style
         window.setBackgroundColor(colors.black)
         window.setTextColor(colors.white)
-
-        -- go one time down
-        data.y = data.y + 1
 
         return data
     end
