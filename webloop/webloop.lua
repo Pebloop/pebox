@@ -45,6 +45,8 @@ local function navigateWeb(env, url)
     setfenv(code, env)
     local success, result = pcall(code)
     if not success then
+        term.clear()
+        term.setCursorPos(1, 1)
         print(result)
     end
 
