@@ -61,12 +61,8 @@ function Body.exec(window, data, style, children)
     childWrappedData.type = "div"
 
     local wrappedSize = computeWrappedSize(window, childWrappedData, children)
-    if data.width == -1 then
-        data.width = wrappedSize.width
-    end
-    if data.height == -1 then
-        data.height = wrappedSize.height
-    end
+    data.width = wrappedSize.width
+    data.height = wrappedSize.height
 
     window.setBackgroundColor(data.bg_color)
     for x = 1, data.width do
