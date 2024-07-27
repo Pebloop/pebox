@@ -29,6 +29,8 @@ end
 
 -- Execute text element
 function Text.exec(window, data, style, value)
+    data.type = "text"
+
     -- compute style
     data = StyleManager.execute(data, style, {width= #value, height=1})
 

@@ -52,8 +52,7 @@ function Body.size(window, data, style, children)
 end
 
 function Body.exec(window, data, style, children)
-
-
+    data.type = "div"
     local ElementList = require("data.elements_list")
 
     for i, child in ipairs(children) do
@@ -64,7 +63,6 @@ function Body.exec(window, data, style, children)
 
     data = StyleManager.execute(data, style, {width=-1,height=-1})
     local childWrappedData = data:child({x = data.x, y = data.y}, -1, -1)
-    childWrappedData.type = "div"
 
     local wrappedSize = computeWrappedSize(window, childWrappedData, children)
     data.width = wrappedSize.width
@@ -89,7 +87,6 @@ function Body.exec(window, data, style, children)
     for i, child in ipairs(children) do
 
         local cwd = data:child()
-        cwd.type = "div"
         local childWrappedSize = computeWrappedSize(window, cwd, {child})
 
         local childData = data:child({x = data.x, y = data.y}, data.width, data.height)

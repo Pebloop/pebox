@@ -34,18 +34,24 @@ function WebloopManager.dumpAST(ast, depth)
 end
 
 local function clicked(x, y, data)
-    for i, child in ipairs(data.children) do
-       if type(child) == "table" then
-           return clicked(x, y, child)
-       else
-            if x >= data.x and x <= data.x + data.width and y >= data.y and y <= data.y + data.height then
-                return data
+    if type(data) == "table" then
+        for i, child in ipairs(data) do
+            print(child.type)
+            local result = clicked(x, y, child)
+            if result then
+                return result
             end
-       end
+        end
+    else
+        if x >= data.x and x <= data.x + data.width and y >= data.y and y <= data.y + data.height then
+            return data
+        end
+        return nil
     end
+    return nil
 end
 
-local function awaitChange(globalWindow, webWindow, data)
+local function awaitChange(globalWindow, webWindow, datas)
     local termWidth, termHeight = webWindow.getSize()
     local windowWidth, windowHeight = globalWindow.getSize()
     local event, data, x, y = os.pullEvent()
@@ -78,10 +84,15 @@ local function awaitChange(globalWindow, webWindow, data)
             return false
         end
     elseif event == "mouse_click" then
-        local obj = clicked(x, y, data)
+        globalWindow.clear()
         term.clear()
         term.setCursorPos(1, 1)
-        print("Clicked on " .. obj.type)
+        local obj = clicked(x, y, datas)
+        if not obj then
+           print("Clicked on nothing")
+        else
+            print("Clicked on " .. obj.type)
+        end
         os.pullEvent("key")
     end
     return true
