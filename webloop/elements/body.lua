@@ -52,7 +52,7 @@ function Body.size(window, data, style, children)
 end
 
 function Body.exec(window, data, style, children)
-    
+
 
     local ElementList = require("data.elements_list")
 
@@ -96,6 +96,9 @@ function Body.exec(window, data, style, children)
         data.y = data.y + childWrappedSize.height
     end
     return data
+end
+
+function Body.onclick(posX, posY, data)
 end
 
 return Body

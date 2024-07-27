@@ -65,12 +65,14 @@ local function awaitChange(globalWindow, webWindow)
             end
             return false
         end
+    elseif event == "mouse_click" then
+
     end
     return true
 end
 
 function WebloopManager.execute(head, body)
-    return function (window)
+    return function(window)
         local webWindow = window
         WebloopManager.display(head, body, webWindow)
     end
@@ -84,7 +86,7 @@ function WebloopManager.display(head, body, webWindow)
     childData.parent = data
     local pageSize = ElementSize[body.type](webWindow, childData, body.style, body.value)
     local screenSizeX, screenSizeY = webWindow.getSize()
-    
+
     if screenSizeX > pageSize.width then
         pageSize.width = screenSizeX
     end
@@ -97,7 +99,7 @@ function WebloopManager.display(head, body, webWindow)
     local data = Data:new("webloop")
     local childData = data:child()
     childData.parent = data
-    
+
     local globalWindow = window.create(webWindow, 1, 1, pageSize.width, pageSize.height)
 
     -- setup terminal
@@ -107,12 +109,14 @@ function WebloopManager.display(head, body, webWindow)
     globalWindow.setCursorPos(1, 1)
 
     -- execute body
-    ElementList[body.type](globalWindow, childData, body.style, body.value)
+    local data = ElementList[body.type](globalWindow, childData, body.style, body.value)
+    webWindow.clear()
+    print(textutils.serialize(data))
+    os.pullEvent("key")
 
     while true do
         awaitChange(globalWindow, webWindow)
     end
-
 end
 
 return WebloopManager
