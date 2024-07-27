@@ -42,10 +42,17 @@ local function clicked(x, y, data)
             end
         end
     else
-        print(data.type)
         if x >= data.x and x <= data.x + data.width and y >= data.y and y <= data.y + data.height then
-            term.setCursorPos(1, 1)
+            term.setCursorPos(x, y)
             term.write("X")
+            term.setCursorPos(1, 1)
+            term.write(data.x)
+            term.write(" ")
+            term.write(data.y)
+            term.write(" ")
+            term.write(data.width)
+            term.write(" ")
+            term.write(data.height)
             return data
         end
         return nil

@@ -5,12 +5,13 @@ local Body = {}
 
 function Body.body(style)
     if type(style) == "string" then
-        return function (_)
+        return function (props)
             return function (value)
                 return {
                     type = "body",
                     style = style,
-                    value = value
+                    value = value,
+                    id = props.id
                 }
             end
         end
@@ -19,7 +20,8 @@ function Body.body(style)
             return {
                 type = "body",
                 style = "",
-                value = value
+                value = value,
+                id = style.id
             } 
         end
     end

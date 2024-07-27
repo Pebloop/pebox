@@ -7,12 +7,13 @@ local Text = {}
 -- Text element
 function Text.text(style)
     if type(style) == "string" then
-        return function(_)
+        return function(props)
             return function(value)
                 return {
                     type = "text",
                     style = style,
-                    value = value[1]
+                    value = value[1],
+                    id = props.id
                 }
             end
         end
@@ -21,7 +22,8 @@ function Text.text(style)
             return {
                 type = "text",
                 style = "",
-                value = value[1]
+                value = value[1],
+                id = style.id
             }
         end
     end

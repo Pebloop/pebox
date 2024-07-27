@@ -5,12 +5,13 @@ local Div = {}
 
 function Div.div(style)
     if type(style) == "string" then
-        return function (_)
+        return function (props)
             return function (value)
                 return {
                     type = "div",
                     style = style,
-                    value = value
+                    value = value,
+                    id = props.id
                 } 
             end
         end
@@ -19,7 +20,8 @@ function Div.div(style)
             return {
                 type = "div",
                 style = "",
-                value = value
+                value = value,
+                id = style.id
             } 
         end
     end
