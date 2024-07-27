@@ -42,6 +42,7 @@ local function clicked(x, y, data)
             end
         end
     else
+        print(child.type)
         if x >= data.x and x <= data.x + data.width and y >= data.y and y <= data.y + data.height then
             return data
         end
