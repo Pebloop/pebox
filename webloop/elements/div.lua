@@ -10,7 +10,7 @@ function Div.div(style)
                 return {
                     type = "div",
                     style = style,
-                    value = value[1]
+                    value = value
                 } 
             end
         end
@@ -19,7 +19,7 @@ function Div.div(style)
             return {
                 type = "div",
                 style = "",
-                value = value[1]
+                value = value
             } 
         end
     end
