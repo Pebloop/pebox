@@ -10,7 +10,7 @@ function Body.body(style)
                 return {
                     type = "body",
                     style = style,
-                    value = value[1]
+                    value = value
                 } 
             end
         end
@@ -19,7 +19,7 @@ function Body.body(style)
             return {
                 type = "body",
                 style = "",
-                value = value[1]
+                value = value
             } 
         end
     end
