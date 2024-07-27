@@ -18,7 +18,7 @@ function Div.div(style)
         return function (value)
             return {
                 type = "div",
-                style = style,
+                style = "",
                 value = value[1]
             } 
         end

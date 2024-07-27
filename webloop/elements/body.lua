@@ -18,7 +18,7 @@ function Body.body(style)
         return function (value)
             return {
                 type = "body",
-                style = style,
+                style = "",
                 value = value[1]
             } 
         end

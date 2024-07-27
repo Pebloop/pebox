@@ -20,7 +20,7 @@ function Text.text(style)
         return function (value)
             return {
                 type = "text",
-                style = style,
+                style = "",
                 value = value[1]
             } 
         end

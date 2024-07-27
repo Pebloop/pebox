@@ -82,7 +82,7 @@ function WebloopManager.display(head, body, webWindow)
     local data = Data:new("webloop")
     local childData = data:child()
     childData.parent = data
-    local pageSize = ElementSize[body.type](webWindow, childData, body.style, body.children)
+    local pageSize = ElementSize[body.type](webWindow, childData, body.style, body.value)
     local screenSizeX, screenSizeY = webWindow.getSize()
     
     if screenSizeX > pageSize.width then
@@ -107,7 +107,7 @@ function WebloopManager.display(head, body, webWindow)
     globalWindow.setCursorPos(1, 1)
 
     -- execute body
-    ElementList[body.type](globalWindow, childData, body.style, body.children)
+    ElementList[body.type](globalWindow, childData, body.style, body.value)
 
     while true do
         awaitChange(globalWindow, webWindow)
