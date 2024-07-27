@@ -7,7 +7,7 @@ local Data = {
     parent = nil,
     bg_color = colors.black,
     text_color = colors.white,
-    text_align = "begin"
+    text_align = "start"
 }
 
 function Data:new(type, width, height)
@@ -24,7 +24,7 @@ function Data:new(type, width, height)
     o.parent = nil
     o.bg_color = colors.black
     o.text_color = colors.white
-    o.text_align = "begin"
+    o.text_align = "start"
 
     return o
 end
