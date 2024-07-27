@@ -30,8 +30,10 @@ end
 
 -- Execute text element
 
-function Link.onClick(posX, posY, data)
-    print("link")
+function Link.onClick(window, data, events)
+    return {
+        url = data.link
+    }
 end
 
 return Link

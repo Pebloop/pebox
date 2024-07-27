@@ -1,5 +1,6 @@
 local ElementList = require("data.elements_list")
 local ElementSize = require("data.elements_size")
+local ElementClick = require("data.elements_click")
 local Data = require("models.data")
 
 local WebloopManager = {}
@@ -43,24 +44,13 @@ local function clicked(x, y, data)
         end
     else
         if x >= data.x and x <= data.x + data.width and y >= data.y and y <= data.y + data.height then
-            term.setCursorPos(x, y)
-            term.write("X")
-            term.setCursorPos(1, 1)
-            term.write(data.id)
-            term.write(" ")
-            term.write(data.x)
-            term.write(" ")
-            term.write(data.y)
-            term.write(" ")
-            term.write(data.width)
-            term.write(" ")
-            term.write(data.height)
             return data
         end
         return nil
     end
     return nil
 end
+
 
 local function awaitChange(globalWindow, webWindow, datas)
     local termWidth, termHeight = webWindow.getSize()
@@ -77,7 +67,7 @@ local function awaitChange(globalWindow, webWindow, datas)
             globalWindow.reposition(1, scroll)
             globalWindow.redraw()
         end
-        return false
+        return nil
     elseif event == "key" then
         if data == keys.up then
             if scroll <= windowHeight - termHeight then
@@ -85,28 +75,24 @@ local function awaitChange(globalWindow, webWindow, datas)
                 globalWindow.reposition(1, scroll)
                 globalWindow.redraw()
             end
-            return false
+            return nil
         elseif data == keys.down then
             if scroll >= 0 then
                 scroll = scroll - 1
                 globalWindow.reposition(1, scroll)
                 globalWindow.redraw()
             end
-            return false
+            return nil
         end
     elseif event == "mouse_click" then
         globalWindow.clear()
         term.clear()
         term.setCursorPos(1, 1)
         local obj = clicked(x, y, datas)
-        if not obj then
-           print("Clicked on nothing")
-        else
-            print("Clicked on " .. obj.type)
-        end
-        os.pullEvent("key")
+        return ElementClick[obj.type](globalWindow, obj)
+
     end
-    return true
+    return nil
 end
 
 function WebloopManager.execute(head, body)
@@ -138,6 +124,7 @@ function WebloopManager.display(head, body, webWindow)
     local childData = data:child()
     childData.parent = data
     childData.id = body.id
+    childData.link = body.link
 
     local globalWindow = window.create(webWindow, 1, 1, pageSize.width, pageSize.height)
 
@@ -150,9 +137,15 @@ function WebloopManager.display(head, body, webWindow)
     -- execute body
     local datas = ElementList[body.type](globalWindow, childData, body.style, body.value)
 
+    local response = {}
     while true do
-        awaitChange(globalWindow, webWindow, datas)
+        local exit = awaitChange(globalWindow, webWindow, datas)
+        if exit then
+            response.url = exit.url
+            break
+        end
     end
+    return response
 end
 
 return WebloopManager

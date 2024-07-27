@@ -52,15 +52,20 @@ function Text.exec(type)
         -- if text is bigger than parent width then cut it
         local text = Strings.wrap(value, parentWidth)
         local h = data.y
+        data.width = parentWidth
+        data.height = #text
+
         for i, line in ipairs(text) do
             local l = h + i - 1
 
             if data.text_align == "start" then
                 window.setCursorPos(data.x, l)
             elseif data.text_align == "middle" then
-                window.setCursorPos(data.x + math.floor((parentWidth - #line) / 2),l)
+                data.x = data.x + math.floor((parentWidth - #line) / 2)
+                window.setCursorPos(data.x, l)
             elseif data.text_align == "end" then
-                window.setCursorPos(data.x + parentWidth - #line - 1, l)
+                data.x = data.x + parentWidth - #line - 1
+                window.setCursorPos(data.x, l)
             end
             window.write(line)
         end

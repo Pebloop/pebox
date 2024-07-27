@@ -21,7 +21,7 @@ local function navigateFile(env, filePath)
     end
 
     local content = file.readAll()
-    local code = loadstring(content.."(getWindow())")
+    local code = loadstring(content .. "(getWindow())")
     file.close()
 
     setfenv(code, env)
@@ -34,7 +34,7 @@ end
 local function navigateWeb(env, url)
     local modem = peripheral.find("modem")
     local urlChannel = string.find(url, "/") and string.sub(url, 1, string.find(url, "/") - 1)
-    
+
     local responseChannel = math.random(1, 65535)
     modem.open(responseChannel)
 
@@ -48,9 +48,10 @@ local function navigateWeb(env, url)
         term.clear()
         term.setCursorPos(1, 1)
         print(result)
+    else 
+        return result
     end
-
-    
+    return nil
 end
 
 function Webloop:navigate(url)
@@ -58,19 +59,29 @@ function Webloop:navigate(url)
         return self.window
     end
 
-    local  env = {
-        webloop = WebloopManager.execute,
-        body = require("elements/body").body,
-        text = require("elements/text").text,
-        div = require("elements/div").div,
-        link = require("elements/link").link,
-        getWindow = getWindow
-    }
+    local response = nil
+    while true do
+        if response then
+            if response.url then
+                url = response.url
+            end
+        end
 
-    if string.match(url, "wb:") then
-        navigateWeb(env, string.sub(url, 4))
-    elseif string.match(url, "file:") then
-        navigateFile(env, string.sub(url, 6))
+        local env = {
+            webloop = WebloopManager.execute,
+            body = require("elements/body").body,
+            text = require("elements/text").text,
+            div = require("elements/div").div,
+            link = require("elements/link").link,
+            getWindow = getWindow
+        }
+
+        
+        if string.match(url, "wb:") then
+            response = navigateWeb(env, string.sub(url, 4))
+        elseif string.match(url, "file:") then
+            response = navigateFile(env, string.sub(url, 6))
+        end
     end
 end
 
