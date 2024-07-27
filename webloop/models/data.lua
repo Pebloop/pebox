@@ -70,7 +70,7 @@ end
 function Data:parentalSize(window)
     local w = -1
     local h = -1
-    local parentData = self.parent
+    local parentData = self
 
     while parentData do
         if w == -1 then
