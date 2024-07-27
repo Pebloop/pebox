@@ -98,6 +98,8 @@ function WebloopManager.display(head, body, webWindow)
     local childData = data:child()
     childData.parent = data
     
+    print("pageSize.width : " .. tostring(pageSize.width))
+    print("pageSize.height : " .. tostring(pageSize.height))
     local globalWindow = window.create(webWindow, 1, 1, pageSize.width, pageSize.height)
 
     -- setup terminal
