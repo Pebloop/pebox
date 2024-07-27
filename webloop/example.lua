@@ -10,7 +10,7 @@ webloop(nil, body("bg-cyan w-full") {
         "this is another div element",
          "This is a paragraph element"
     },
-    div("bg-yellow w-20") {
+    div("bg-yellow end w-20") {
         "This is a long div element to test wrapping and stuff",
     },
 })
