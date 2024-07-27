@@ -5,19 +5,23 @@ local Body = {}
 
 function Body.body(style)
     if type(style) == "string" then
-        return function (children)
+        return function (_)
+            return function (value)
+                return {
+                    type = "body",
+                    style = style,
+                    value = value[1]
+                } 
+            end
+        end
+    else
+        return function (value)
             return {
                 type = "body",
                 style = style,
-                children = children
-            }
+                value = value[1]
+            } 
         end
-    else
-        return {
-            type = "body",
-            style = "",
-            children = style
-        }
     end
 end
 

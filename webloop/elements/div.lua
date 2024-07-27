@@ -5,19 +5,23 @@ local Div = {}
 
 function Div.div(style)
     if type(style) == "string" then
-        return function (children)
+        return function (_)
+            return function (value)
+                return {
+                    type = "div",
+                    style = style,
+                    value = value[1]
+                } 
+            end
+        end
+    else
+        return function (value)
             return {
                 type = "div",
                 style = style,
-                value = children
-            }
+                value = value[1]
+            } 
         end
-    else
-        return {
-            type = "div",
-            style = "",
-            value = style
-        }
     end
 end
 

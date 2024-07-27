@@ -2,33 +2,29 @@ local StyleManager = require("core.style_manager")
 local Utils = require("utils")
 local Strings = require("cc.strings")
 
-local Text = {}
+local A = {}
 
 -- Text element
-function Text.text(style)
+function A.text(style)
     if type(style) == "string" then
-        return function (_)
-            return function (value)
-                return {
-                    type = "text",
-                    style = style,
-                    value = value[1]
-                } 
-            end
-        end
-    else
         return function (value)
             return {
                 type = "text",
                 style = style,
                 value = value[1]
-            } 
+            }
         end
+    else
+        return {
+            type = "text",
+            style = "",
+            value = style[1]
+        }
     end
 end
 
 -- Execute text element
-function Text.exec(window, data, style, value)
+function A.exec(window, data, style, value)
     -- compute style
     data = StyleManager.execute(data, style, {width= #value, height=1})
 
@@ -71,7 +67,7 @@ function Text.exec(window, data, style, value)
     return data
 end
 
-function Text.size(window, data, style, value)
+function A.size(window, data, style, value)
     local parentWidth, _ = data:parentalSize(window)
     local formatedText = Strings.wrap(value, parentWidth)
 
