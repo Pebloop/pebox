@@ -92,6 +92,8 @@ function Body.exec(window, data, style, children)
         local childWrappedSize = computeWrappedSize(window, cwd, {child})
 
         local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
+        childData.parent = data
+        childData.id = child.id
         datas[i] = ElementList[child.type](window, childData, child.style, child.value)
         data.y = data.y + childWrappedSize.height
     end

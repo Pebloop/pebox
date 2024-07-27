@@ -137,6 +137,7 @@ function WebloopManager.display(head, body, webWindow)
     local data = Data:new("webloop")
     local childData = data:child()
     childData.parent = data
+    childData.id = body.id
 
     local globalWindow = window.create(webWindow, 1, 1, pageSize.width, pageSize.height)
 

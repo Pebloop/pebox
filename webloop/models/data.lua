@@ -7,7 +7,8 @@ local Data = {
     parent = nil,
     bg_color = colors.black,
     text_color = colors.white,
-    text_align = "start"
+    text_align = "start",
+    id = nil
 }
 
 function Data:new(type, width, height)
@@ -40,6 +41,7 @@ function Data:copy(data)
     copy.bg_color = data.bg_color
     copy.text_color = data.text_color
     copy.text_align = data.text_align
+    copy.id = data.id
     return copy
 end
 
@@ -52,6 +54,7 @@ function Data:dump()
     print("  bg_color : " .. self.bg_color)
     print("  text_color : " .. self.text_color)
     print("  text_align : " .. self.text_align)
+    print("  id : " .. self.id)
 end
 
 function Data:child(childPosition, width, height)
