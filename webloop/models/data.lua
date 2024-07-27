@@ -16,7 +16,7 @@ function Data:new(type, width, height)
     self.__index = self
 
     -- setup data
-    o.type = type or "unkown"
+    o.type = type or "unknown"
     o.x = 1
     o.y = 1
     o.width = width or -1
