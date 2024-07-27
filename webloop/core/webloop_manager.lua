@@ -39,7 +39,7 @@ local function awaitChange(globalWindow, webWindow)
     local event, data, x, y = os.pullEvent()
 
     if event == "mouse_scroll" then
-        if scroll < windowHeight - termHeight - 1 and data < 0 then
+        if scroll <= windowHeight - termHeight and data < 0 then
             scroll = scroll + 1
             globalWindow.reposition(1, scroll)
             globalWindow.redraw()
@@ -51,14 +51,14 @@ local function awaitChange(globalWindow, webWindow)
         return false
     elseif event == "key" then
         if data == keys.up then
-            if scroll > windowHeight - termHeight then
+            if scroll <= windowHeight - termHeight then
                 scroll = scroll - 1
                 globalWindow.reposition(1, scroll)
                 globalWindow.redraw()
             end
             return false
         elseif data == keys.down then
-            if scroll > 0 then
+            if scroll >= 0 then
                 scroll = scroll - 1
                 globalWindow.reposition(1, scroll)
                 globalWindow.redraw()
