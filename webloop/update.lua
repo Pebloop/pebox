@@ -20,10 +20,12 @@ loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/core/webl
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/data/elements_list.lua", "data/elements_list.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/data/style_list.lua", "data/style_list.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/data/elements_size.lua", "data/elements_size.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/data/elements_click.lua", "data/elements_click.lua")
 
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/body.lua", "elements/body.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/text.lua", "elements/text.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/div.lua", "elements/div.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/elements/link.lua", "elements/link.lua")
 
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/begin.lua", "style/begin.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/center.lua", "style/center.lua")
