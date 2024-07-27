@@ -1,5 +1,6 @@
 webloop(nil, body("bg-cyan w-full") {} {
     text("middle") {} {"Welcome to Webloop!"},
+    text("middle") {} {"Welcome to Webloop2!"},
     div("w-10 bg-purple") {} {
         "This is a div element",
         text("text-pink") {} {"this is another div element"},

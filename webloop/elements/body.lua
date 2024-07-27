@@ -11,7 +11,7 @@ function Body.body(style)
                     type = "body",
                     style = style,
                     value = value
-                } 
+                }
             end
         end
     else
@@ -52,6 +52,8 @@ function Body.size(window, data, style, children)
 end
 
 function Body.exec(window, data, style, children)
+    
+
     local ElementList = require("data.elements_list")
 
     for i, child in ipairs(children) do
