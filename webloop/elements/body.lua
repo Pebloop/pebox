@@ -42,7 +42,7 @@ function Body.size(window, data, style, children)
         end
     end
     data = StyleManager.execute(data, style, {width=-1,height=-1})
-    local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
+    local childData = data:child({x = data.x, y = data.y}, -1, -1)
     childData.parent = data
     return computeWrappedSize(window, childData, children)
 end
