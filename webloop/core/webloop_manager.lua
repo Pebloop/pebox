@@ -110,9 +110,9 @@ function WebloopManager.display(head, body, webWindow)
 
     -- execute body
     local data = ElementList[body.type](globalWindow, childData, body.style, body.value)
-    webWindow.clear()
-    print(textutils.serialize(data))
-    os.pullEvent("key")
+    --webWindow.clear()
+    --print(textutils.serialize(data))
+    --os.pullEvent("key")
 
     while true do
         awaitChange(globalWindow, webWindow)

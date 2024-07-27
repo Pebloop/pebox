@@ -85,6 +85,7 @@ function Body.exec(window, data, style, children)
     end
     window.setBackgroundColor(colors.black)
 
+    local datas = {}
     for i, child in ipairs(children) do
 
         local cwd = data:child()
@@ -92,10 +93,10 @@ function Body.exec(window, data, style, children)
         local childWrappedSize = computeWrappedSize(window, cwd, {child})
 
         local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
-        ElementList[child.type](window, childData, child.style, child.value)
+        datas[i] = ElementList[child.type](window, childData, child.style, child.value)
         data.y = data.y + childWrappedSize.height
     end
-    return data
+    return datas
 end
 
 function Body.onclick(posX, posY, data)
