@@ -26,7 +26,7 @@ local function computeWrappedSize(window, data, children)
     local wrappedSize = {width = 0, height = 0}
     for i, child in ipairs(children) do
 
-        local childData = data:child({x = data.x, y = data.y}, data.width, data.height)
+        local childData = data:child({x = data.x, y = data.y}, -1, -1)
 
         local childSize = ElementSize[child.type](window, childData, child.style, child.value)
         wrappedSize.width = math.max(wrappedSize.width, childSize.width)
@@ -57,7 +57,7 @@ function Body.exec(window, data, style, children)
     end
 
     data = StyleManager.execute(data, style, {width=-1,height=-1})
-    local childWrappedData = data:child({x = data.x, y = data.y}, data.width, data.height)
+    local childWrappedData = data:child({x = data.x, y = data.y}, -1, -1)
     childWrappedData.type = "div"
 
     local wrappedSize = computeWrappedSize(window, childWrappedData, children)

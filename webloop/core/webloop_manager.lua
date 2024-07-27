@@ -52,7 +52,7 @@ local function awaitChange(globalWindow, webWindow)
     elseif event == "key" then
         if data == keys.up then
             if scroll <= windowHeight - termHeight then
-                scroll = scroll - 1
+                scroll = scroll + 1
                 globalWindow.reposition(1, scroll)
                 globalWindow.redraw()
             end
