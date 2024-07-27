@@ -65,9 +65,9 @@ function Body.exec(window, data, style, children)
     data.height = wrappedSize.height
 
     if data.text_align == "middle" then
-        data.x = data.parent.width / 2 - data.width / 2
+        data.x = math.ceil(data.parent.width / 2 - data.width / 2)
     elseif data.text_align == "end" then
-        data.x = data.parent.width - data.width
+        data.x = data.parent.width - data.width + 2
     end
 
     window.setBackgroundColor(data.bg_color)
