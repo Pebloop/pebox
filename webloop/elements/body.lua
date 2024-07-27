@@ -64,9 +64,15 @@ function Body.exec(window, data, style, children)
     data.width = wrappedSize.width
     data.height = wrappedSize.height
 
+    if data.text_align == "middle" then
+        data.x = data.parent.width / 2 - data.width / 2
+    elseif data.text_align == "end" then
+        data.x = data.parent.width - data.width
+    end
+
     window.setBackgroundColor(data.bg_color)
     for x = 1, data.width do
-        for y = 1, data.height - 1 do
+        for y = 1, data.height do
             window.setCursorPos(data.x + x - 1, data.y + y - 1)
             window.write(" ")
         end
