@@ -63,6 +63,7 @@ function Webloop:navigate(url)
         body = require("elements/body").body,
         text = require("elements/text").text,
         div = require("elements/div").div,
+        link = require("elements/link").link,
         getWindow = getWindow
     }
 

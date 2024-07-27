@@ -36,7 +36,6 @@ end
 local function clicked(x, y, data)
     if type(data) == "table" then
         for i, child in ipairs(data) do
-            print(child.type)
             local result = clicked(x, y, child)
             if result then
                 return result
