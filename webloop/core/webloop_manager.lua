@@ -34,7 +34,7 @@ function WebloopManager.dumpAST(ast, depth)
 end
 
 local function clicked(x, y, data)
-    if type(data) == "table" then
+    if type(data) == "table" and data.type == nil then
         for i, child in ipairs(data) do
             local result = clicked(x, y, child)
             if result then
@@ -42,8 +42,10 @@ local function clicked(x, y, data)
             end
         end
     else
-        print(child.type)
+        print(data.type)
         if x >= data.x and x <= data.x + data.width and y >= data.y and y <= data.y + data.height then
+            term.setCursorPos(1, 1)
+            term.write("X")
             return data
         end
         return nil
