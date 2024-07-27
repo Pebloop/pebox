@@ -1,4 +1,4 @@
-webloop(nil, body("bg-cyan w-screen") {
+webloop(nil, body("bg-cyan w-full") {
     text("middle") {"Welcome to Webloop!"},
     div("w-10 bg-purple") {
         "This is a div element",

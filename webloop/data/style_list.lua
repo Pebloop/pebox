@@ -65,7 +65,7 @@ local StyleList = {
     ["w-90"] = require("style.width").exec(90),
     ["w-95"] = require("style.width").exec(95),
     ["w-100"] = require("style.width").exec(100),
-    ["w-screen"] = require("style.width").exec(term.getSize()),
+    ["w-full"] = require("style.width_full").exec,
     -- height
     ["h-1"] = require("style.height").exec(1),
     ["h-2"] = require("style.height").exec(2),
@@ -95,7 +95,7 @@ local StyleList = {
     ["h-90"] = require("style.height").exec(90),
     ["h-95"] = require("style.height").exec(95),
     ["h-100"] = require("style.height").exec(100),
-    ["h-screen"] = require("style.height").exec(term.getSize()),
+    ["h-full"] = require("style.height_full").exec,
 }
 
 return StyleList

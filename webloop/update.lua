@@ -32,3 +32,5 @@ loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/bg_
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/text_color.lua", "style/text_color.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/width.lua", "style/width.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/height.lua", "style/height.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/width_full.lua", "style/width_full.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/webloop/style/height_full.lua", "style/height_full.lua")

@@ -21,13 +21,13 @@ function Utils.deepcopy(o, seen)
   end
   
 
-function Utils.displayBox(x, y, width, height)
-    term.setBackgroundColor(math.random(1, 256))
+function Utils.displayBox(window, x, y, width, height)
+  window.setBackgroundColor(math.random(1, 256))
     for i = 1, height do
-        term.setCursorPos(x, y + i - 1)
-        term.write(string.rep(" ", width))
+      window.setCursorPos(x, y + i - 1)
+      window.write(string.rep(" ", width))
     end
-    term.setBackgroundColor(colors.black)
+    window.setBackgroundColor(colors.black)
 end
 
 return Utils
