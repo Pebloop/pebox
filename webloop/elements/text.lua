@@ -55,7 +55,7 @@ function Text.exec(window, data, style, value)
         elseif data.text_align == "middle" then
             window.setCursorPos(data.x + math.floor((parentWidth - #line) / 2), data.y)
         elseif data.text_align == "end" then
-            window.setCursorPos(data.x + parentWidth - #line, data.y)
+            window.setCursorPos(data.x + parentWidth - #line - 1, data.y)
         end
         window.write(line)
     end
