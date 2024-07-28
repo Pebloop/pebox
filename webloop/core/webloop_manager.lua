@@ -141,10 +141,15 @@ function WebloopManager.display(head, body, webWindow)
     while true do
         local exit = awaitChange(globalWindow, webWindow, datas)
         if exit then
+            webWindow.clear()
+            webWindow.setCursorPos(1, 1)
+            webWindow.write(exit.url)
+            os.pullEvent("key")
             response.url = exit.url
             break
         end
     end
+
     return response
 end
 

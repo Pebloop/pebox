@@ -12,6 +12,6 @@ webloop(nil, body("bg-cyan w-full") {} {
     },
     div("bg-yellow end w-20") {id="div-3"} {
         text {id="text-9"} {"This is a long div element to test wrapping and stuff"},
-        link("text-blue") {"file:".. shell.dir() .. "/example2.lua", id="link"} {"Click here to go to example2"}
+        link("text-blue") {"file:".. dir() .. "/example2.lua", id="link"} {"Click here to go to example2"}
     },
 })

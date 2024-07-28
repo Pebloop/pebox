@@ -48,7 +48,8 @@ local function navigateWeb(env, url)
         term.clear()
         term.setCursorPos(1, 1)
         print(result)
-    else 
+    else
+        print(result)
         return result
     end
     return nil
@@ -73,7 +74,8 @@ function Webloop:navigate(url)
             text = require("elements/text").text,
             div = require("elements/div").div,
             link = require("elements/link").link,
-            getWindow = getWindow
+            getWindow = getWindow,
+            dir = shell.dir
         }
 
         
@@ -82,6 +84,11 @@ function Webloop:navigate(url)
         elseif string.match(url, "file:") then
             response = navigateFile(env, string.sub(url, 6))
         end
+
+        if not response then
+            break
+        end
+
     end
 end
 
