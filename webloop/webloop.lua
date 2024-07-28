@@ -28,7 +28,11 @@ local function navigateFile(env, filePath)
     local success, result = pcall(code)
     if not success then
         print(result)
+    else
+        print(result)
+        return result
     end
+    return nil
 end
 
 local function navigateWeb(env, url)
@@ -60,6 +64,16 @@ function Webloop:navigate(url)
         return self.window
     end
 
+    local env = {
+        webloop = WebloopManager.execute,
+        body = require("elements/body").body,
+        text = require("elements/text").text,
+        div = require("elements/div").div,
+        link = require("elements/link").link,
+        getWindow = getWindow,
+        dir = shell.dir
+    }
+
     local response = nil
     while true do
         if response then
@@ -67,17 +81,6 @@ function Webloop:navigate(url)
                 url = response.url
             end
         end
-
-        local env = {
-            webloop = WebloopManager.execute,
-            body = require("elements/body").body,
-            text = require("elements/text").text,
-            div = require("elements/div").div,
-            link = require("elements/link").link,
-            getWindow = getWindow,
-            dir = shell.dir
-        }
-
         
         if string.match(url, "wb:") then
             response = navigateWeb(env, string.sub(url, 4))
