@@ -85,11 +85,10 @@ local function awaitChange(globalWindow, webWindow, datas)
             return nil
         end
     elseif event == "mouse_click" then
-        globalWindow.clear()
-        term.clear()
-        term.setCursorPos(1, 1)
         local obj = clicked(x, y, datas)
-        return ElementClick[obj.type](globalWindow, obj)
+        if obj then
+            return ElementClick[obj.type](globalWindow, obj)
+        end
 
     end
     return nil
@@ -98,7 +97,7 @@ end
 function WebloopManager.execute(head, body)
     return function(window)
         local webWindow = window
-        WebloopManager.display(head, body, webWindow)
+        return WebloopManager.display(head, body, webWindow)
     end
 end
 
@@ -141,10 +140,6 @@ function WebloopManager.display(head, body, webWindow)
     while true do
         local exit = awaitChange(globalWindow, webWindow, datas)
         if exit then
-            webWindow.clear()
-            webWindow.setCursorPos(1, 1)
-            webWindow.write(exit.url)
-            os.pullEvent("key")
             response.url = exit.url
             break
         end

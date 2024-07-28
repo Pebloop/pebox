@@ -25,10 +25,11 @@ local function navigateFile(env, filePath)
     file.close()
 
     setfenv(code, env)
-    local success, result = pcall(code)
+    local success, result, t = pcall(code)
     if not success then
         print(result)
     else
+        print(success)
         print(result)
         return result
     end

@@ -7,13 +7,14 @@ local Link = {}
 -- Text element
 function Link.link(style)
     if type(style) == "string" then
-        return function (link)
+        return function (args)
             return function (value)
                 return {
                     type = "link",
                     style = style,
                     value = value[1],
-                    link = link
+                    link = args[1] or args.link or "",
+                    id = args.id or ""
                 } 
             end
         end
@@ -22,7 +23,9 @@ function Link.link(style)
             return {
                 type = "link",
                 style = "",
-                value = value[1]
+                value = value[1],
+                link = style[1] or style.link or "",
+                    id = style.id or ""
             } 
         end
     end
