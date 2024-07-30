@@ -3,12 +3,12 @@ local Data = require('src.models.data')
 local ManageEvents = require('src.manage_events')
 local Colors = require('src.data.colors')
 
+term.setPaletteColor(Colors.background, 0x292929) -- background color
+term.setPaletteColor(Colors.text, 0xFFFFFF) -- basic text color
+term.setPaletteColor(Colors.firstElevation, 0x4f4f4f) -- 1st elevation color
 local wx, wy = term.getSize()
 local mainWindow = window.create(term.current(), 1, 1, wx, wy)
 local codeWindow = window.create(mainWindow, 1, 2, wx, wy - 1)
-mainWindow.setPaletteColor(Colors.background, 0x292929) -- background color
-mainWindow.setPaletteColor(Colors.text, 0xFFFFFF) -- basic text color
-mainWindow.setPaletteColor(Colors.firstElevation, 0x4f4f4f) -- 1st elevation color
 
 -- set the window background color
 mainWindow.setBackgroundColor(1)
@@ -36,3 +36,6 @@ mainWindow.setPaletteColor(colors.magenta, 0xE57FD8)
 mainWindow.setBackgroundColor(colors.black)
 mainWindow.setTextColor(colors.white)
 mainWindow.clear()
+mainWindow.setCursorPos(1, 1)
+term.clear()
+term.setCursorPos(1, 1)
