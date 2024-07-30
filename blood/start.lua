@@ -1,12 +1,13 @@
 local Redraw = require('src.redraw')
 local Data = require('src.models.data')
 local ManageEvents = require('src.manage_events')
+local Colors = require('src.data.colors')
 
 local wx, wy = term.getSize()
 local window = window.create(term.current(), 1, 1, wx, wy)
-window.setPaletteColor(1, 0x292929) -- background color
-window.setPaletteColor(2, 0xFFFFFF) -- basic text color
-window.setPaletteColor(3, 0x4f4f4f) -- 1st elevation color
+window.setPaletteColor(Colors.background, 0x292929) -- background color
+window.setPaletteColor(Colors.text, 0xFFFFFF) -- basic text color
+window.setPaletteColor(Colors.firstElevation, 0x4f4f4f) -- 1st elevation color
 
 -- set the window background color
 window.setBackgroundColor(1)
@@ -28,9 +29,9 @@ while true do
 end
 
 -- cleanup
-window.setPaletteColor(1, 0xF0F0F0)
-window.setPaletteColor(2, 0xF2B233)
-window.setPaletteColor(3, 0xE57FD8)
+window.setPaletteColor(colors.white, 0xF0F0F0)
+window.setPaletteColor(colors.orange, 0xF2B233)
+window.setPaletteColor(colors.magenta, 0xE57FD8)
 window.setBackgroundColor(colors.black)
 window.setTextColor(colors.white)
 window.clear()
