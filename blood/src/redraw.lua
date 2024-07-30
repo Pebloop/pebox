@@ -35,6 +35,9 @@ local function drawHeader(window)
 end
 
 local function drawCode(data)
+    if data.currentFile == nil then
+        return
+    end
     local wx, wy = data.codeWindow.getSize()
     data.codeWindow.setBackgroundColor(Colors.background)
     data.codeWindow.setTextColor(Colors.text)
