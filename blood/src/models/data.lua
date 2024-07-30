@@ -6,7 +6,8 @@ local Data = {
     currentFolder = nil,
     codeWindow = nil,
     codeCursor = {x = 1, y = 1},
-    popup = nil
+    state = nil,
+    stateData = {}
 }
 
 function Data:new(window)
@@ -22,6 +23,8 @@ function Data:new(window)
     o.currentFolder = nil
     o.codeWindow = window
     o.codeCursor = {x = 1, y = 1}
+    o.state = nil
+    o.stateData = {}
     return o
 end
 
