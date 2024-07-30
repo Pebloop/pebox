@@ -99,13 +99,7 @@ function ManageEvents.exec(event, window, data)
             data.currentFile = File:new("new_file")
         end
         local newChar = event[2]
-        local position = data.codeCursor.x
-        for i, line in string.gmatch(data.currentFile.content, "[^\n]+") do
-            if data.codeCursor.y == i then
-                position = position + string.len(line)
-                break
-            end
-        end
+        local position = computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
         data.currentFile.content = string.sub(data.currentFile.content, 1, position - 1) .. newChar .. string.sub(data.currentFile.content, position)
         data.codeCursor.x = data.codeCursor.x + 1
         if event[2] == '\n' then
