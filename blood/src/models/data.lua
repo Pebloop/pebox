@@ -1,6 +1,7 @@
 local Data = {
     isDirty = true,
     isLetMenuOpen = false,
+    exit = false
 }
 
 function Data:new()
@@ -11,6 +12,7 @@ function Data:new()
     -- setup data
     o.isDirty = true
     o.isLetMenuOpen = false
+    o.exit = false
     return o
 end
 

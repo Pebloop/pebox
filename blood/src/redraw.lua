@@ -23,6 +23,8 @@ local function drawHeader(window)
     end
     window.setCursorPos(1, 1)
     window.write('Blood')
+    window.setCursorPos(wx - 1, 1)
+    window.write('X')
     window.setBackgroundColor(1)
 end
 

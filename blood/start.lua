@@ -21,6 +21,10 @@ while true do
 
     local event = {os.pullEvent()}
     ManageEvents.exec(event, window, data)
+
+    if data.exit then
+        break
+    end
 end
 
 window.setPaletteColor(1, 0xF0F0F0)
