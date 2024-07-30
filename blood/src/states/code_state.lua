@@ -1,10 +1,9 @@
-local MainState = {}
+local CodeState = {}
 local Utils = require('src.utils')
 
-function MainState.events(event, window, data)
+function CodeState.events(event, window, data)
     local wx, wy = window.getSize()
 
-    
     -- if keyboard
     if event[1] == 'key' then
         if event[2] == keys.leftCtrl then
@@ -73,3 +72,5 @@ function MainState.events(event, window, data)
         data.isDirty = true
     end
 end
+
+return CodeState

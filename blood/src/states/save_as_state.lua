@@ -13,3 +13,5 @@ function SaveAsState.events(event, window, data)
         data.isDirty = true
     end
 end
+
+return SaveAsState
