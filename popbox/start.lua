@@ -1,0 +1,1 @@
+local modem = peripheral.find('modem')
