@@ -32,7 +32,7 @@ function  Redraw.exec(window, data)
     window.setBackgroundColor(1)
     window.setTextColor(2)
     window.clear()
-    window.setCursorPos(1, 1)
+    window.setCursorPos(20, 20)
     window.write('Hello, world!')
     
     if data.isLetMenuOpen then
