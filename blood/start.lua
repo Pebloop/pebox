@@ -4,25 +4,25 @@ local ManageEvents = require('src.manage_events')
 local Colors = require('src.data.colors')
 
 local wx, wy = term.getSize()
-local window = window.create(term.current(), 1, 1, wx, wy)
-local codeWindow = window.create(window, 1, 2, wx, wy - 1)
-window.setPaletteColor(Colors.background, 0x292929) -- background color
-window.setPaletteColor(Colors.text, 0xFFFFFF) -- basic text color
-window.setPaletteColor(Colors.firstElevation, 0x4f4f4f) -- 1st elevation color
+local mainWindow = window.create(term.current(), 1, 1, wx, wy)
+local codeWindow = window.create(mainWindow, 1, 2, wx, wy - 1)
+mainWindow.setPaletteColor(Colors.background, 0x292929) -- background color
+mainWindow.setPaletteColor(Colors.text, 0xFFFFFF) -- basic text color
+mainWindow.setPaletteColor(Colors.firstElevation, 0x4f4f4f) -- 1st elevation color
 
 -- set the window background color
-window.setBackgroundColor(1)
+mainWindow.setBackgroundColor(1)
 
 local data = Data:new(codeWindow)
 
 -- mai loop
 while true do
     if data.isDirty then
-        Redraw.exec(window, data)
+        Redraw.exec(mainWindow, data)
     end
 
     local event = {os.pullEvent()}
-    ManageEvents.exec(event, window, data)
+    ManageEvents.exec(event, mainWindow, data)
 
     if data.exit then
         break
@@ -30,9 +30,9 @@ while true do
 end
 
 -- cleanup
-window.setPaletteColor(colors.white, 0xF0F0F0)
-window.setPaletteColor(colors.orange, 0xF2B233)
-window.setPaletteColor(colors.magenta, 0xE57FD8)
-window.setBackgroundColor(colors.black)
-window.setTextColor(colors.white)
-window.clear()
+mainWindow.setPaletteColor(colors.white, 0xF0F0F0)
+mainWindow.setPaletteColor(colors.orange, 0xF2B233)
+mainWindow.setPaletteColor(colors.magenta, 0xE57FD8)
+mainWindow.setBackgroundColor(colors.black)
+mainWindow.setTextColor(colors.white)
+mainWindow.clear()

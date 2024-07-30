@@ -41,8 +41,7 @@ function  Redraw.exec(window, data)
     data.codeWindow.redraw()
     
     if data.isLetMenuOpen then
-        data.codeWindow.setSize(window.getSize() - 15, window.getSize() - 1)
-        data.codeWindow.reposition(15, 2)
+        data.codeWindow.reposition(15, 2, window.getSize() - 15, window.getSize() - 1)
         data.codeWindow.redraw()
         drawLeftMenu(window)
     end
