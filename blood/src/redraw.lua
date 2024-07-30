@@ -1,9 +1,9 @@
 local Redraw = {}
 
 local function drawLeftMenu(window)
+    local wx, wy = window.getSize()
     window.setBackgroundColor(3)
     window.setTextColor(2)
-    wx, wy = window.getSize()
     for i = 1, wy do
         window.setCursorPos(1, i)
         window.write('                   ')
@@ -19,7 +19,7 @@ local function drawHeader(window)
     window.setTextColor(2)
     for i = 1, wx do
         window.setCursorPos(i, 1)
-        window.write(' ')
+        window.write('O')
     end
     window.setCursorPos(1, 1)
     window.write('Blood')
