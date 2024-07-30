@@ -3,7 +3,9 @@ local Data = {
     isLetMenuOpen = false,
     exit = false,
     currentFile = nil,
-    codeWindow = nil
+    currentFolder = nil,
+    codeWindow = nil,
+    codeCursor = {x = 1, y = 1}
 }
 
 function Data:new(window)
@@ -16,7 +18,9 @@ function Data:new(window)
     o.isLetMenuOpen = false
     o.exit = false
     o.currentFile = nil
+    o.currentFolder = nil
     o.codeWindow = window
+    o.codeCursor = {x = 1, y = 1}
     return o
 end
 

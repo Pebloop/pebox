@@ -12,6 +12,7 @@ local codeWindow = window.create(mainWindow, 1, 2, wx, wy - 1)
 
 -- set the window background color
 mainWindow.setBackgroundColor(1)
+codeWindow.setCursorBlink(true)
 
 local data = Data:new(codeWindow)
 
@@ -27,6 +28,8 @@ while true do
     if data.exit then
         break
     end
+
+    codeWindow.setCursorPos(data.codeCursor.x, data.codeCursor.y)
 end
 
 -- cleanup
