@@ -6,6 +6,34 @@ local function isBox(boxX, boxY, boxWidth, boxHeight, mouseX, mouseY)
     return mouseX >= boxX and mouseX <= boxX + boxWidth and mouseY >= boxY and mouseY <= boxY + boxHeight
 end
 
+local function computeNewCursorPosition(data, x, y)
+    local content = data.currentFile.content
+    local lines = string.split(content, '\n')
+    local line = lines[y]
+    if line == nil then
+        return x, y
+    end
+    if x > string.len(line) and y < table.getn(lines) then
+        x = 1
+        y = y + 1
+    elseif x < 1 and y > 1 then
+        y = y - 1
+        x = string.len(lines[y]) + 1
+    elseif x < 1 then
+        x = 1
+    elseif x > string.len(line) + 1 then
+        x = string.len(line) + 1
+    end
+    if y < 1 then
+        y = 1
+    end
+    if y > table.getn(lines) then
+        y = table.getn(lines)
+    end
+
+    return x, y
+end
+
 function ManageEvents.exec(event, window, data)
     local wx, wy = window.getSize()
 
@@ -15,13 +43,14 @@ function ManageEvents.exec(event, window, data)
             data.isLetMenuOpen = not data.isLetMenuOpen
             data.isDirty = true
         elseif event[2] == keys.left then
-            data.codeCursor.x = data.codeCursor.x - 1
+            data.codeCursor.x, data.codeCursor.y = computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
         elseif event[2] == keys.right then
-            data.codeCursor.x = data.codeCursor.x + 1
+            data.codeCursor.x, data.codeCursor.y = computeNewCursorPosition(data, data.codeCursor.x + 1, data.codeCursor.y)
         elseif event[2] == keys.up then
-            data.codeCursor.y = data.codeCursor.y - 1
+            data.codeCursor.x, data.codeCursor.y = computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y - 1)
         elseif event[2] == keys.down then
-            data.codeCursor.y = data.codeCursor.y + 1
+            data.codeCursor.x, data.codeCursor.y = computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y + 1)
+        elseif event[2] == keys.backspace then
         end
 
     -- if mouse click
@@ -42,7 +71,8 @@ function ManageEvents.exec(event, window, data)
         if data.currentFile == nil then
             data.currentFile = File:new("new_file")
         end
-        data.currentFile.content = data.currentFile.content .. event[2]
+        local newChar = event[2]
+        data.currentFile.content = string.sub(data.currentFile.content, 1, data.codeCursor.y) .. newChar .. string.sub(data.currentFile.content, data.codeCursor.y + 1)
         data.codeCursor.x = data.codeCursor.x + 1
         if event[2] == '\n' then
             data.codeCursor.x = 1
