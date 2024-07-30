@@ -22,3 +22,7 @@ while true do
     local event = {os.pullEvent()}
     ManageEvents.exec(event, window, data)
 end
+
+window.setPaletteColor(1, 0xF0F0F0)
+window.setPaletteColor(2, 0xF2B233)
+window.setPaletteColor(3, 0xE57FD8)
