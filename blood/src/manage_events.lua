@@ -1,5 +1,9 @@
 local ManageEvents = {}
 
+local function isBox(boxX, boxY, boxWidth, boxHeight, mouseX, mouseY)
+    return mouseX >= boxX and mouseX <= boxX + boxWidth and mouseY >= boxY and mouseY <= boxY + boxHeight
+end
+
 function ManageEvents.exec(event, window, data)
     local wx, wy = window.getSize()
 
@@ -15,6 +19,9 @@ function ManageEvents.exec(event, window, data)
 
         if event[3] == wx and event[4] == 1 then
             data.exit = true
+        elseif isBox(1, 1, 8, 1, event[3], event[4]) then
+            data.isLetMenuOpen = not data.isLetMenuOpen
+            data.isDirty = true
         end
     end
     

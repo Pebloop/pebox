@@ -41,6 +41,7 @@ function  Redraw.exec(window, data)
     drawHeader(window)
 
     window.redraw()
+    data.isDirty = false
 end
 
 return Redraw
