@@ -14,6 +14,14 @@ function ManageEvents.exec(event, window, data)
         if event[2] == keys.leftCtrl then
             data.isLetMenuOpen = not data.isLetMenuOpen
             data.isDirty = true
+        elseif event[2] == keys.left then
+            data.codeCursor.x = data.codeCursor.x - 1
+        elseif event[2] == keys.right then
+            data.codeCursor.x = data.codeCursor.x + 1
+        elseif event[2] == keys.up then
+            data.codeCursor.y = data.codeCursor.y - 1
+        elseif event[2] == keys.down then
+            data.codeCursor.y = data.codeCursor.y + 1
         end
 
     -- if mouse click
@@ -35,6 +43,12 @@ function ManageEvents.exec(event, window, data)
             data.currentFile = File:new("new_file")
         end
         data.currentFile.content = data.currentFile.content .. event[2]
+        data.codeCursor.x = data.codeCursor.x + 1
+        if event[2] == '\n' then
+            data.codeCursor.x = 1
+            data.codeCursor.y = data.codeCursor.y + 1
+        end
+        data.isDirty = true
     end
     
 end
