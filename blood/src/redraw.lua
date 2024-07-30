@@ -43,7 +43,21 @@ local function drawCode(data)
     data.codeWindow.setTextColor(Colors.text)
     data.codeWindow.clear()
     data.codeWindow.setCursorPos(1, 1)
-    data.codeWindow.write(data.currentFile.content)
+
+    -- split content in lines
+    local lines = {}
+    for line in string.gmatch(data.currentFile.content, "[^\n]+") do
+        table.insert(lines, line)
+    end
+
+    -- draw lines
+    for i = 1, wy do
+        if lines[i] == nil then
+            break
+        end
+        data.codeWindow.setCursorPos(1, i)
+        data.codeWindow.write(lines[i])
+    end
 end
 
 function  Redraw.exec(window, data)
