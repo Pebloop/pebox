@@ -15,3 +15,5 @@ function File:new(name, path, content)
     o.content = content or ""
     return o
 end
+
+return File
