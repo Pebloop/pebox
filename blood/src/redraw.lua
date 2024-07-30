@@ -14,9 +14,9 @@ local function drawLeftMenu(window)
 end
 
 local function drawHeader(window)
+    local wx, wy = window.getSize()
     window.setBackgroundColor(3)
     window.setTextColor(2)
-    wx, wy = window.getSize()
     for i = 1, wx do
         window.setCursorPos(i, 1)
         window.write(' ')
@@ -29,15 +29,18 @@ local function drawHeader(window)
 end
 
 function  Redraw.exec(window, data)
+    window.setBackgroundColor(1)
+    window.setTextColor(2)
     window.clear()
     window.setCursorPos(1, 1)
     window.write('Hello, world!')
-    window.redraw()
     
     if data.isLetMenuOpen then
         drawLeftMenu(window)
     end
     drawHeader(window)
+
+    window.redraw()
 end
 
 return Redraw

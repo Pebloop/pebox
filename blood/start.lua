@@ -27,6 +27,10 @@ while true do
     end
 end
 
+-- cleanup
 window.setPaletteColor(1, 0xF0F0F0)
 window.setPaletteColor(2, 0xF2B233)
 window.setPaletteColor(3, 0xE57FD8)
+window.setBackgroundColor(colors.black)
+window.setTextColor(colors.white)
+window.clear()
