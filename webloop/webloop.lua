@@ -21,7 +21,7 @@ local function navigateFile(env, filePath)
     end
 
     local content = file.readAll()
-    local code = loadstring(content .. "(getWindow())")
+    local code = loadstring("return " .. content .. "(getWindow())")
     file.close()
 
     setfenv(code, env)
@@ -94,6 +94,8 @@ function Webloop:navigate(url)
         end
 
     end
+    self.window.clear()
+    self.window.setCursorPos(1, 1)
 end
 
 return Webloop
