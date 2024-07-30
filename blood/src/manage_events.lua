@@ -8,7 +8,7 @@ end
 
 local function computeNewCursorPosition(data, x, y)
     local content = data.currentFile.content
-    local lines = string.split(content, '\n')
+    local lines = string.gmatch(content, "[^\n]+")
     local line = lines[y]
     if line == nil then
         return x, y
