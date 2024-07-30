@@ -31,6 +31,9 @@ function ManageEvents.exec(event, window, data)
         end
 
     elseif event[1] == 'char' then
+        if data.currentFile == nil then
+            data.currentFile = File:new("new_file")
+        end
         data.currentFile.content = data.currentFile.content .. event[2]
     end
     
