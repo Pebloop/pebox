@@ -37,6 +37,20 @@ local function computeNewCursorPosition(data, x, y)
     return x, y
 end
 
+local function computeContentPosition(data, x, y)
+    local content = data.currentFile.content
+    local lines = {}
+    for line in string.gmatch(content, "[^\n]+") do
+        table.insert(lines, line)
+    end
+    local position = 1
+    for i = 1, y - 1 do
+        position = position + string.len(lines[i]) + 1
+    end
+    position = position + x - 1
+    return position
+end
+
 function ManageEvents.exec(event, window, data)
     local wx, wy = window.getSize()
 
@@ -53,7 +67,17 @@ function ManageEvents.exec(event, window, data)
             data.codeCursor.x, data.codeCursor.y = computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y - 1)
         elseif event[2] == keys.down then
             data.codeCursor.x, data.codeCursor.y = computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y + 1)
+        elseif event[2] == keys.enter then
+            local position = computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
+            data.currentFile.content = string.sub(data.currentFile.content, 1, position - 1) .. '\n' .. string.sub(data.currentFile.content, position)
+            data.codeCursor.x = 1
+            data.codeCursor.y = data.codeCursor.y + 1
+            data.isDirty = true
         elseif event[2] == keys.backspace then
+            local position = computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
+            data.currentFile.content = string.sub(data.currentFile.content, 1, position - 2) .. string.sub(data.currentFile.content, position)
+            data.codeCursor.x, data.codeCursor.y = computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
+            data.isDirty = true
         end
 
     -- if mouse click
@@ -82,7 +106,7 @@ function ManageEvents.exec(event, window, data)
                 break
             end
         end
-        data.currentFile.content = string.sub(data.currentFile.content, 1, position) .. newChar .. string.sub(data.currentFile.content, position + 1)
+        data.currentFile.content = string.sub(data.currentFile.content, 1, position - 1) .. newChar .. string.sub(data.currentFile.content, position)
         data.codeCursor.x = data.codeCursor.x + 1
         if event[2] == '\n' then
             data.codeCursor.x = 1
