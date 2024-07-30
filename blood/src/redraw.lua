@@ -8,7 +8,7 @@ local function drawLeftMenu(window)
     window.setTextColor(Colors.text)
     for i = 1, wy do
         window.setCursorPos(1, i)
-        window.write('               ')
+        window.write('              ')
     end
     window.setCursorPos(1, 1)
 
@@ -34,6 +34,15 @@ local function drawHeader(window)
     window.setBackgroundColor(Colors.background)
 end
 
+local function drawCode(data)
+    local wx, wy = data.codeWindow.getSize()
+    data.codeWindow.setBackgroundColor(Colors.background)
+    data.codeWindow.setTextColor(Colors.text)
+    data.codeWindow.clear()
+    data.codeWindow.setCursorPos(1, 1)
+    data.codeWindow.write(data.currentFile.content)
+end
+
 function  Redraw.exec(window, data)
     window.setBackgroundColor(Colors.background)
     window.setTextColor(Colors.text)
@@ -49,6 +58,7 @@ function  Redraw.exec(window, data)
         data.codeWindow.redraw()
     end
     drawHeader(window)
+    drawCode(data)
 
     window.redraw()
     data.isDirty = false

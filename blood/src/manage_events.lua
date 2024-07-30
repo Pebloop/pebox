@@ -29,6 +29,9 @@ function ManageEvents.exec(event, window, data)
             data.isDirty = true
         elseif isBox(12, 1, 4, 1, event[3], event[4]) then
         end
+
+    elseif event[1] == 'char' then
+        data.currentFile.content = data.currentFile.content .. event[2]
     end
     
 end
