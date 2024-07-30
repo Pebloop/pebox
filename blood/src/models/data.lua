@@ -5,7 +5,8 @@ local Data = {
     currentFile = nil,
     currentFolder = nil,
     codeWindow = nil,
-    codeCursor = {x = 1, y = 1}
+    codeCursor = {x = 1, y = 1},
+    popup = nil
 }
 
 function Data:new(window)

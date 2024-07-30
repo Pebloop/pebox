@@ -36,6 +36,21 @@ local function drawHeader(window)
     window.setBackgroundColor(Colors.background)
 end
 
+local function drawSaveAsPopup(window)
+    local popupWindow = window.create(1, 1, 20, 10)
+    popupWindow.setBackgroundColor(Colors.firstElevation)
+    popupWindow.setTextColor(Colors.text)
+    popupWindow.clear()
+    popupWindow.setCursorPos(1, 1)
+    popupWindow.write('Save as')
+    popupWindow.setCursorPos(1, 2)
+    popupWindow.write('path:')
+    popupWindow.setCursorPos(1, 4)
+    popupWindow.write('Cancel')
+    popupWindow.setCursorPos(1, 5)
+    popupWindow.write('Save')
+end
+
 local function drawCode(data)
     if data.currentFile == nil then
         return
@@ -78,8 +93,15 @@ function  Redraw.exec(window, data)
     end
     drawHeader(window)
     drawCode(data)
-
     window.redraw()
+
+    -- popups
+    if data.popup ~= nil then
+        if data.popup == 'save-as' then
+            drawSaveAsPopup(window)
+        end
+    end
+
     data.isDirty = false
 end
 

@@ -22,16 +22,20 @@ local function computeNewCursorPosition(data, x, y)
     elseif x < 1 and y > 1 then
         y = y - 1
         x = string.len(lines[y]) + 1
-    elseif x < 1 then
-        x = 1
-    elseif x > string.len(line) + 1 then
-        x = string.len(line) + 1
     end
+
+    -- if still out of bound
     if y < 1 then
         y = 1
     end
     if y > table.getn(lines) then
         y = table.getn(lines)
+    end
+    if x < 1 then
+        x = 1
+    end
+    if x > string.len(lines[y]) + 1 then
+        x = string.len(lines[y]) + 1
     end
 
     return x, y
@@ -90,8 +94,19 @@ function ManageEvents.exec(event, window, data)
             data.isDirty = true
         elseif isBox(7, 1, 3, 1, event[3], event[4]) then
             data.currentFile = File:new("new_file")
+            data.codeCursor.x = 1
+            data.codeCursor.y = 1
             data.isDirty = true
         elseif isBox(12, 1, 4, 1, event[3], event[4]) then
+
+        elseif isBox(17, 1, 4, 1, event[3], event[4]) then
+            if data.currentFile ~= nil then
+                if data.currentFile.path then
+                    data.currentFile:save()
+                else
+                    data.popup = "save-as"
+                end
+            end
         end
 
     elseif event[1] == 'char' then
