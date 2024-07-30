@@ -37,7 +37,8 @@ local function drawHeader(window)
 end
 
 local function drawSaveAsPopup(mainWindow)
-    local popupWindow = window.create(mainWindow, 1, 1, 20, 10)
+    local wx, wy = mainWindow.getSize()
+    local popupWindow = window.create(mainWindow, wx / 2 - 10, wy / 2 - 5, 20, 10)
     popupWindow.setBackgroundColor(Colors.firstElevation)
     popupWindow.setTextColor(Colors.text)
     popupWindow.clear()
