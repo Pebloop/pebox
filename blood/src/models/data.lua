@@ -1,7 +1,8 @@
 local Data = {
     isDirty = true,
     isLetMenuOpen = false,
-    exit = false
+    exit = false,
+    
 }
 
 function Data:new()
