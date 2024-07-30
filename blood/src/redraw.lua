@@ -8,7 +8,7 @@ local function drawLeftMenu(window)
     window.setTextColor(Colors.text)
     for i = 1, wy do
         window.setCursorPos(1, i)
-        window.write('                   ')
+        window.write('               ')
     end
     window.setCursorPos(1, 1)
 
@@ -27,7 +27,7 @@ local function drawHeader(window)
     window.write('Blood')
     window.setCursorPos(7, 1)
     window.write('New')
-    window.setCursorPos(12, 1)
+    window.setCursorPos(11, 1)
     window.write('Open')
     window.setCursorPos(wx, 1)
     window.write('X')
@@ -38,8 +38,12 @@ function  Redraw.exec(window, data)
     window.setBackgroundColor(Colors.background)
     window.setTextColor(Colors.text)
     window.clear()
+    data.codeWindow.redraw()
     
     if data.isLetMenuOpen then
+        data.codeWindow.setSize(window.getSize() - 15, window.getSize() - 1)
+        data.codeWindow.reposition(15, 2)
+        data.codeWindow.redraw()
         drawLeftMenu(window)
     end
     drawHeader(window)
