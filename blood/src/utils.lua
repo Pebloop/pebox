@@ -64,10 +64,10 @@ function Utils.computeContentPosition(data, x, y)
     end
     local position = 1
     data.codeWindow.clear()
-    data.codeWindow.window.setCursorPos(1, 1)
-    data.codeWindow.window.write('x: ' .. x .. ' y: ' .. y)
-    data.codeWindow.window.setCursorPos(1, 2)
-    data.codeWindow.window.write('scroll: ' .. data.scroll)
+    data.codeWindow.setCursorPos(1, 1)
+    data.codeWindow.write('x: ' .. x .. ' y: ' .. y)
+    data.codeWindow.setCursorPos(1, 2)
+    data.codeWindow.write('scroll: ' .. data.scroll)
     os.pullEvent('key')
     for i = 1, y - 1 + data.scroll do
         if lines[i] ~= nil then
