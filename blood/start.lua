@@ -6,11 +6,11 @@ local Colors = require('src.data.colors')
 term.setPaletteColor(Colors.background, 0x292929) -- background color
 term.setPaletteColor(Colors.text, 0xFFFFFF) -- basic text color
 term.setPaletteColor(Colors.firstElevation, 0x4f4f4f) -- 1st elevation color
-term.setPaletteColor(Colors.text2, 0x00FF00) -- 2nd text color
+term.setPaletteColor(Colors.text2, 0xb04f4f) -- 2nd text color
 term.setPaletteColor(Colors.text3, 0xFF0000) -- 3rd text color
 term.setPaletteColor(Colors.text4, 0x0000FF) -- 4th text color
 term.setPaletteColor(Colors.text5, 0xFFFF00) -- 5th text color
-term.setPaletteColor(Colors.text6, 0xFF00FF) -- 6th text color
+term.setPaletteColor(Colors.text6, 0xcf7b4e) -- 6th text color
 
 local wx, wy = term.getSize()
 local mainWindow = window.create(term.current(), 1, 1, wx, wy)

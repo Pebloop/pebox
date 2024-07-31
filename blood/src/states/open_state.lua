@@ -14,8 +14,8 @@ function OpenAsState.events(event, window, data)
     elseif event[1] == 'key' then
         if event[2] == keys.enter then
             if data.stateData.path ~= "" then
-                local file = fs.open(data.stateData.path, 'w')
-                file.write(data.currentFile.content)
+                
+                local file = fs.open(data.stateData.path, 'r')
                 file.close()
                 data.state = nil
                 data.isDirty = true

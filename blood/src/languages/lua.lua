@@ -35,6 +35,8 @@ local tokenColors = {
     ["local"] = Colors.text
 }
 
+----------------- Pretty -----------------
+
 function LuaLang.pretty(code, window, data)
     local doc = Pretty.doc()
     local buffer = ""
@@ -219,5 +221,7 @@ function LuaLang.pretty(code, window, data)
 
     Pretty.print(doc, window)
 end
+
+----------------- Completion -----------------
 
 return LuaLang
