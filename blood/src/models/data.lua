@@ -7,7 +7,9 @@ local Data = {
     codeWindow = nil,
     codeCursor = {x = 1, y = 1},
     state = nil,
-    stateData = {}
+    stateData = {},
+    snackbar = nil,
+    snackbarTimer = 0
 }
 
 function Data:new(window)
@@ -25,6 +27,8 @@ function Data:new(window)
     o.codeCursor = {x = 1, y = 1}
     o.state = nil
     o.stateData = {}
+    o.snackbar = nil
+    o.snackbarTimer = 0
     return o
 end
 

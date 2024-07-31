@@ -92,6 +92,20 @@ function  Redraw.exec(window, data)
         end
     end
 
+    -- snackbar
+    if data.snackbar ~= nil then
+        window.setBackgroundColor(Colors.firstElevation)
+        window.setTextColor(Colors.text)
+        window.setCursorPos(1, window.getSize())
+        window.write(data.snackbar)
+        window.setBackgroundColor(Colors.background)
+        data.snackbarTimer = data.snackbarTimer - 1
+
+        if data.snackbarTimer <= 0 then
+            data.snackbar = nil
+        end
+    end
+
     data.isDirty = false
 end
 
