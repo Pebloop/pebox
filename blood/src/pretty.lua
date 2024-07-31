@@ -6,7 +6,8 @@ function Pretty.print(doc, window)
         window.setTextColor(token.color)
         window.write(token.text)
         if token.text == "\n" then
-            window.setCursorPos(1, window.getCursorY() + 1)
+            local x, y = window.getCursorPos()
+            window.setCursorPos(1, y + 1)
         end
     end
     window.setTextColor(Colors.text)

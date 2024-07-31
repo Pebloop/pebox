@@ -3,47 +3,20 @@ local Colors = require "src/data/colors"
 
 local LuaLang = {}
 
-local function colorToken(token)
-    local tokenColors = {
-        ["function"] = Colors.text2,
-        ["return"] = Colors.text2,
-        ["do"] = Colors.text2,
-        ["in"] = Colors.text2,
-        ["for"] = Colors.text2,
-        ["while"] = Colors.text2,
-        ["repeat"] = Colors.text2,
-        ["until"] = Colors.text2,
-        ["if"] = Colors.text2,
-        ["then"] = Colors.text2,
-        ["else"] = Colors.text2,
-        ["elseif"] = Colors.text2,
-        ["end"] = Colors.text2,
-        ["local"] = Colors.text2,
-        ["nil"] = Colors.text3,
-        ["true"] = Colors.text3,
-        ["false"] = Colors.text3,
-        ["and"] = Colors.text3,
-        ["or"] = Colors.text3,
-        ["not"] = Colors.text3,
-        ["break"] = Colors.text3,
-        ["goto"] = Colors.text3,
-        ["continue"] = Colors.text3,
-    }
-
-    return tokenColors[token] or Colors.text
-end
-
 function LuaLang.pretty(code, window)
     local doc = Pretty.doc()
 
-    -- simple tokenization
-    for line in string.gmatch(code, "[^\n]+") do
-        for token in string.gmatch(line, "%S+") do
-            Pretty.append(doc, Pretty.token(token, colorToken(token)))
+    for c in code:gmatch(".") do
+        if c == " " then
             Pretty.append(doc, Pretty.space())
+        elseif c == "\n" then
+            Pretty.append(doc, Pretty.newline())
+        else
+            Pretty.append(doc, Pretty.token(c, Colors.text))
         end
-        Pretty.append(doc, Pretty.newline())
     end
+
+    
     Pretty.print(doc, window)
 end
 
