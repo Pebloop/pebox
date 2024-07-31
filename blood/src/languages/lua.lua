@@ -138,6 +138,7 @@ function LuaLang.pretty(code, window)
         elseif state == "variable" then
             if buffer == "function" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text2))
+                Pretty.append(doc, Pretty.token(c, Colors.text))
                 tokens[#tokens + 1] = buffer
                 buffer = ""
                 state = "init"
