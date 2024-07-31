@@ -151,19 +151,21 @@ function LuaLang.pretty(code, window, data)
                 buffer = buffer .. c
             end
         elseif state == "variable" then
-            buffer = buffer .. c
             if c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text5))
+                Pretty.append(doc, Pretty.newline())
                 variables[#variables + 1] = buffer
                 buffer = ""
                 state = "init"
             elseif buffer == "function" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text2))
+                Pretty.append(doc, Pretty.token(c, Colors.text))
                 tokens[#tokens + 1] = buffer
                 buffer = ""
                 state = "init"
             elseif c == " " then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text5))
+                Pretty.append(doc, Pretty.space())
                 variables[#variables + 1] = buffer
                 buffer = ""
                 state = "init"
