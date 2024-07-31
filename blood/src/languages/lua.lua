@@ -109,8 +109,10 @@ function LuaLang.pretty(code, window, data)
                         end
                     end
 
+                    -- if buffer is an argument
                     for j, arg in ipairs(args) do
-                        if arg == buffer then
+                        local b = string.sub(buffer, 1, string.len(buffer) - 1)
+                        if arg == b then
                             for k, sc in ipairs(isNotVar) do
                                 if c == sc then
                                     Pretty.append(doc, Pretty.token(buffer, Colors.text6))
@@ -121,6 +123,22 @@ function LuaLang.pretty(code, window, data)
                             end
                         end
                     end
+
+                    -- if buffer is a variable
+                    for j, var in ipairs(variables) do
+                        local b = string.sub(buffer, 1, string.len(buffer) - 1)
+                        if var == b then
+                            for k, sc in ipairs(isNotVar) do
+                                if c == sc then
+                                    Pretty.append(doc, Pretty.token(buffer, Colors.text5))
+                                    Pretty.append(doc, Pretty.token(c, Colors.text))
+                                    buffer = ""
+                                    break
+                                end
+                            end
+                        end
+                    end
+
                 end
             end
 
