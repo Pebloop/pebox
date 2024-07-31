@@ -42,6 +42,14 @@ function Utils.computeNewCursorPosition(data, x, y)
         x = string.len(lines[y]) + 1
     end
 
+    -- scroll window to cursor
+    local wx, wy = data.codeWrapperWindow.getSize()
+    if y < data.scroll + 1 then
+        data.scroll = y - 1
+    elseif y > data.scroll + wy - 1 then
+        data.scroll = y - wy + 1
+    end
+
     return x, y
 end
 

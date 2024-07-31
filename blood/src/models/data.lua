@@ -5,6 +5,7 @@ local Data = {
     currentFile = nil,
     currentFolder = nil,
     codeWindow = nil,
+    codeWrapperWindow = nil,
     codeCursor = {x = 1, y = 1},
     state = nil,
     stateData = {},
@@ -14,7 +15,7 @@ local Data = {
     scroll = 0
 }
 
-function Data:new(window)
+function Data:new(window, wrapperWindow)
     local o = {}
     setmetatable(o, self)
     self.__index = self
@@ -26,6 +27,7 @@ function Data:new(window)
     o.currentFile = nil
     o.currentFolder = nil
     o.codeWindow = window
+    o.codeWrapperWindow = wrapperWindow
     o.codeCursor = {x = 1, y = 1}
     o.state = nil
     o.stateData = {}
