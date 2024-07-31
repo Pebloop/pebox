@@ -213,7 +213,12 @@ function LuaLang.pretty(code, window, data)
             end
         elseif state == "variable" then
             if c == " " then
+                Pretty.append(doc, Pretty.token(buffer, Colors.text5))
                 Pretty.append(doc, Pretty.space())
+                tokens[#tokens + 1] = buffer
+                if buffer ~= "" then
+                    variables[#variables + 1] = buffer
+                end
             elseif c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text5))
                 Pretty.append(doc, Pretty.newline())
