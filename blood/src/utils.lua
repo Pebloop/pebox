@@ -63,7 +63,7 @@ function Utils.computeContentPosition(data, x, y)
         table.insert(lines, line)
     end
     local position = 1
-    for i = 1, y - 1 do
+    for i = 1, y - 1 + data.scroll do
         if lines[i] ~= nil then
             position = position + string.len(lines[i])
         end
