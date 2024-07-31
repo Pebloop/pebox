@@ -1,5 +1,5 @@
 local Colors = require('src.data.colors')
-
+local pretty = require "cc.pretty"
 local Redraw = {}
 
 local function drawLeftMenu(window)
@@ -75,7 +75,8 @@ local function drawCode(data)
             break
         end
         data.codeWindow.setCursorPos(1, i)
-        data.codeWindow.write(lines[i])
+        local p = pretty.pretty(lines[i])
+        data.codeWindow.write(pretty.render(p))
     end
 end
 
