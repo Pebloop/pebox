@@ -42,7 +42,12 @@ function LuaLang.pretty(code, window)
     local i = 1
     for c in string.gmatch(code, ".") do
         if state == "init" then
-            if c == " " then
+            if tokenColors[buffer] then
+                Pretty.append(doc, Pretty.token(buffer, tokenColors[buffer]))
+                tokens[#tokens + 1] = buffer
+                buffer = ""
+            -- if buffer is a function argument
+            elseif c == " " then
                 if tokens[#tokens] == "local" then
                     state = "variable"
                     Pretty.append(doc, Pretty.token(buffer, Colors.text))
@@ -73,11 +78,6 @@ function LuaLang.pretty(code, window)
                         Pretty.append(doc, Pretty.token(buffer, Colors.text))
                         buffer = ""
                     end
-                elseif tokenColors[buffer] then
-                    Pretty.append(doc, Pretty.token(buffer, tokenColors[buffer]))
-                    tokens[#tokens + 1] = buffer
-                    buffer = ""
-                -- if buffer is a function argument
                 else
                     for j, sc in ipairs(keyChar) do
                         if c == sc then
