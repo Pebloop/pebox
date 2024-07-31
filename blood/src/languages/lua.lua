@@ -42,19 +42,16 @@ function LuaLang.pretty(code, window)
     local i = 1
     for c in string.gmatch(code, ".") do
         if state == "init" then
-            if tokenColors[buffer] then
-                Pretty.append(doc, Pretty.token(buffer, tokenColors[buffer]))
-                tokens[#tokens + 1] = buffer
-                buffer = ""
-            -- if buffer is a function argument
-            elseif c == " " then
+            if c == " " then
                 if tokens[#tokens] == "local" then
                     state = "variable"
                     Pretty.append(doc, Pretty.token(buffer, Colors.text))
                     buffer = ""
+                    Pretty.append(doc, Pretty.space())
                 else
                     Pretty.append(doc, Pretty.token(buffer, Colors.text))
                     buffer = ""
+                    Pretty.append(doc, Pretty.space())
                 end
             elseif c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text))
@@ -76,6 +73,11 @@ function LuaLang.pretty(code, window)
                         Pretty.append(doc, Pretty.token(buffer, Colors.text))
                         buffer = ""
                     end
+                elseif tokenColors[buffer] then
+                    Pretty.append(doc, Pretty.token(buffer, tokenColors[buffer]))
+                    tokens[#tokens + 1] = buffer
+                    buffer = ""
+                -- if buffer is a function argument
                 else
                     for j, sc in ipairs(keyChar) do
                         if c == sc then
@@ -134,10 +136,17 @@ function LuaLang.pretty(code, window)
             end
         elseif state == "variable" then
             if c == " " then
-                state = "init"
-                Pretty.append(doc, Pretty.token(buffer, Colors.text6))
-                buffer = ""
-                Pretty.append(doc, Pretty.space())
+                if buffer == "function" then
+                    Pretty.append(doc, Pretty.token(buffer, Colors.text2))
+                    tokens[#tokens + 1] = buffer
+                    buffer = ""
+                    state = "init"
+                else
+                    Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                    variables[#variables + 1] = buffer
+                    buffer = ""
+                    state = "init"
+                end
             else
                 buffer = buffer .. c
             end
