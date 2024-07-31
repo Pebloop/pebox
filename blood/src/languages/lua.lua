@@ -88,13 +88,13 @@ function LuaLang.pretty(code, window)
                         if buffer == sc then
                             Pretty.append(doc, Pretty.token(buffer, Colors.text))
                             buffer = ""
-                            isSc = true
                             break
                         end
                     end
 
                     local before = code:sub(i - #buffer - 1, i - #buffer - 1)
                     local after = code:sub(i + 1, i + 1)
+                    print(before, after)
                     for j, arg in ipairs(args) do
                         if arg == buffer and  isIdentifier(buffer, before, after) then
                             Pretty.append(doc, Pretty.token(buffer, Colors.text6))
