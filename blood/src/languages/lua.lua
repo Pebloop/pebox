@@ -3,6 +3,10 @@ local Colors = require "src/data/colors"
 
 local LuaLang = {}
 
+local keyChar = {
+    " ", "(", ")", ",", "{", "}", "[", "]", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", ";", ":", ".", "'", "\"", "\n"
+ }
+
 local tokenColors = {
     ["function"] = Colors.text2,
     ["if"] = Colors.text2,
@@ -27,10 +31,6 @@ local tokenColors = {
 }
 
 local function isIdentifier(word, before, after)
-    local keyChar = {
-       " ", "(", ")", ",", "{", "}", "[", "]", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", ";", ":", ".", "'", "\"", "\n"
-    }
-
     for _, char in ipairs(keyChar) do
         if before == char then
             for _, char2 in ipairs(keyChar) do
@@ -75,6 +75,13 @@ function LuaLang.pretty(code, window)
                         buffer = ""
                         state = "function-args"
                     else
+                        for j, sc in ipairs(keyChar) do
+                            if buffer == sc then
+                                Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                                buffer = ""
+                                break
+                            end
+                        end
                         buffer = buffer .. c
                     end
                 elseif tokenColors[buffer] then
