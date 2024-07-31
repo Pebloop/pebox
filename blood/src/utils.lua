@@ -63,7 +63,13 @@ function Utils.computeContentPosition(data, x, y)
         table.insert(lines, line)
     end
     local position = 1
-    for i = 1, y - 1 - data.scroll do
+    window.clear()
+    window.setCursorPos(1, 1)
+    window.write('x: ' .. x .. ' y: ' .. y)
+    window.setCursorPos(1, 2)
+    window.write('scroll: ' .. data.scroll)
+    os.pullEvent('key')
+    for i = 1, y - 1 + data.scroll do
         if lines[i] ~= nil then
             position = position + string.len(lines[i])
         end
