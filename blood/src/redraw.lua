@@ -1,5 +1,5 @@
 local Colors = require('src.data.colors')
-local pretty = require "cc.pretty"
+local LuaLang = require('src.languages.lua')
 local Redraw = {}
 
 local function drawLeftMenu(window)
