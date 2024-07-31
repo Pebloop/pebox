@@ -15,12 +15,13 @@ term.setPaletteColor(Colors.text6, 0xf59562) -- 6th text color
 local wx, wy = term.getSize()
 local mainWindow = window.create(term.current(), 1, 1, wx, wy)
 local codeWindow = window.create(mainWindow, 1, 2, wx, wy - 1)
+local codeContentWindow = window.create(codeWindow, 1, 1, wx, wy - 1)
 
 -- set the window background color
 mainWindow.setBackgroundColor(1)
 codeWindow.setCursorBlink(true)
 
-local data = Data:new(codeWindow)
+local data = Data:new(codeContentWindow)
 
 -- mai loop
 while true do
