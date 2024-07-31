@@ -90,13 +90,20 @@ function  Redraw.exec(window, data)
     window.setTextColor(Colors.text)
     window.clear()
     data.codeWindow.redraw()
+
+    local lines = {}
+    if data.currentFile ~= nil then
+        for line in string.gmatch(data.currentFile.content, "[^\n]*\n?") do
+            table.insert(lines, line)
+        end
+    end
     
     if data.isLetMenuOpen then
-        data.codeWindow.reposition(15, 2, window.getSize() - 15, window.getSize() - 1)
+        data.codeWindow.reposition(15, data.scroll + 2, window.getSize() - 15, #lines + 1)
         data.codeWindow.redraw()
         drawLeftMenu(window)
     else
-        data.codeWindow.reposition(1, 2, window.getSize(), window.getSize() - 1)
+        data.codeWindow.reposition(1, data.scroll + 2, window.getSize(), #lines + 1)
         data.codeWindow.redraw()
     end
     drawHeader(window)

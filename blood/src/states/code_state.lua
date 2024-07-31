@@ -93,6 +93,9 @@ function CodeState.events(event, window, data)
             data.codeCursor.y = data.codeCursor.y + 1
         end
         data.isDirty = true
+    elseif event[1] == 'mouse_scroll' then
+        data.scroll = data.scroll + event[2]
+        data.isDirty = true
     end
 end
 
