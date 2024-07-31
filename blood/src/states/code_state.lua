@@ -36,17 +36,17 @@ function CodeState.events(event, window, data)
 
         if event[3] == wx and event[4] == 1 then
             data.exit = true
-        elseif isBox(1, 1, 4, 1, event[3], event[4]) then
+        elseif Utils.isBox(1, 1, 4, 1, event[3], event[4]) then
             data.isLetMenuOpen = not data.isLetMenuOpen
             data.isDirty = true
-        elseif isBox(7, 1, 3, 1, event[3], event[4]) then
+        elseif Utils.isBox(7, 1, 3, 1, event[3], event[4]) then
             data.currentFile = File:new("new_file")
             data.codeCursor.x = 1
             data.codeCursor.y = 1
             data.isDirty = true
-        elseif isBox(12, 1, 4, 1, event[3], event[4]) then
+        elseif Utils.isBox(12, 1, 4, 1, event[3], event[4]) then
 
-        elseif isBox(17, 1, 4, 1, event[3], event[4]) then
+        elseif Utils.isBox(17, 1, 4, 1, event[3], event[4]) then
             if data.currentFile ~= nil then
                 if data.currentFile.path then
                     data.currentFile:save()
