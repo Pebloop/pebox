@@ -31,13 +31,16 @@ local tokenColors = {
     ["local"] = Colors.text
 }
 
-function LuaLang.pretty(code, window)
+function LuaLang.pretty(code, window, data)
     local doc = Pretty.doc()
     local buffer = ""
     local state = "init"
     local tokens = {}
     local args = {}
     local variables = {}
+
+    data.snackbar = "test"
+    data.snackbarTimer = 100
 
     local i = 1
     for c in string.gmatch(code, ".") do
@@ -61,7 +64,7 @@ function LuaLang.pretty(code, window)
                 buffer = buffer .. c
                 if buffer == "--" then
                     state = "comment"
-                elseif buffer == "\"" then
+                elseif c == "\"" then
                     state = "string"
                 elseif c == "(" then
                     if tokens[#tokens] == "function" then
