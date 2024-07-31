@@ -85,6 +85,8 @@ function LuaLang.pretty(code, window, data)
                     state = "comment"
                 elseif c == "\"" then
                     state = "string"
+                elseif c == "'" then
+                    state = "string2"
                 elseif c == "(" then
                     if tokens[#tokens] == "function" then
                         Pretty.append(doc, Pretty.token(buffer, Colors.text))
@@ -163,6 +165,16 @@ function LuaLang.pretty(code, window, data)
             else
                 buffer = buffer .. c
             end
+        elseif state == "string2" then
+            if c == "'" then
+                buffer = buffer .. c
+                Pretty.append(doc, Pretty.token(buffer, Colors.text3))
+                Pretty.append(doc, Pretty.newline())
+                buffer = ""
+                state = "init"
+            else
+                buffer = buffer .. c
+            end
         elseif state == "function-args" then
             if c == ")" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text6))
@@ -224,7 +236,7 @@ end
 
 ----------------- Completion -----------------
 function LuaLang.complete(code, x, y)
-    
+
 end
 
 
