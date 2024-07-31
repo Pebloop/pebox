@@ -97,8 +97,8 @@ function  Redraw.exec(window, data)
     window.redraw()
 
     -- popups
-    if data.popup ~= nil then
-        if data.popup == 'save-as' then
+    if data.state ~= nil then
+        if data.state == 'save-as' then
             drawSaveAsPopup(window)
         end
     end
