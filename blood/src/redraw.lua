@@ -36,7 +36,7 @@ local function drawHeader(window)
     window.setBackgroundColor(Colors.background)
 end
 
-local function drawSaveAsPopup(mainWindow)
+local function drawSaveAsPopup(mainWindow, data)
     local wx, wy = mainWindow.getSize()
     local popupWindow = window.create(mainWindow, wx / 2 - 10, wy / 2 - 4, 20, 8)
     popupWindow.setBackgroundColor(Colors.firstElevation)
@@ -99,7 +99,7 @@ function  Redraw.exec(window, data)
     -- popups
     if data.state ~= nil then
         if data.state == 'save-as' then
-            drawSaveAsPopup(window)
+            drawSaveAsPopup(window, data)
         end
     end
 
