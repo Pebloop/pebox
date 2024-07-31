@@ -7,6 +7,10 @@ local keyChar = {
     "=", "+", "-", "*", "/", "%", "^", "#"
  }
 
+ local isNotVar = {
+    " ", "\n", "(", ")", "{", "}", "[", "]", ";", ",", ":", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", "!", "&", "|"
+ }
+
 local tokenColors = {
     ["function"] = Colors.text2,
     ["if"] = Colors.text2,
@@ -107,9 +111,14 @@ function LuaLang.pretty(code, window, data)
 
                     for j, arg in ipairs(args) do
                         if arg == buffer then
-                            Pretty.append(doc, Pretty.token(buffer, Colors.text6))
-                            buffer = ""
-                            break
+                            for k, sc in ipairs(isNotVar) do
+                                if c == sc then
+                                    Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+                                    Pretty.append(doc, Pretty.token(c, Colors.text))
+                                    buffer = ""
+                                    break
+                                end
+                            end
                         end
                     end
                 end
@@ -154,6 +163,7 @@ function LuaLang.pretty(code, window, data)
             if c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text5))
                 Pretty.append(doc, Pretty.newline())
+                tokens[#tokens + 1] = buffer
                 variables[#variables + 1] = buffer
                 buffer = ""
                 state = "init"
@@ -165,6 +175,7 @@ function LuaLang.pretty(code, window, data)
             elseif c == " " then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text5))
                 Pretty.append(doc, Pretty.space())
+                tokens[#tokens + 1] = buffer
                 variables[#variables + 1] = buffer
                 buffer = ""
                 state = "init"
