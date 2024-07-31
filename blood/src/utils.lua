@@ -5,6 +5,9 @@ function Utils.isBox(boxX, boxY, boxWidth, boxHeight, mouseX, mouseY)
 end
 
 function Utils.computeNewCursorPosition(data, x, y)
+    if data.currentFile == nil then
+        return 1, 1
+    end
     local content = data.currentFile.content
     local lines = {}
     for line in string.gmatch(content, "[^\n]+") do
@@ -40,6 +43,9 @@ function Utils.computeNewCursorPosition(data, x, y)
 end
 
 function Utils.computeContentPosition(data, x, y)
+    if data.currentFile == nil then
+        return 1
+    end
     local content = data.currentFile.content
     local lines = {}
     for line in string.gmatch(content, "[^\n]+") do

@@ -25,9 +25,12 @@ function CodeState.events(event, window, data)
             data.codeCursor.y = data.codeCursor.y + 1
             data.isDirty = true
         elseif event[2] == keys.backspace then
+            if data.codeCursor.x == 1 and data.codeCursor.y == 1 then
+                return
+            end
+            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
             local position = Utils.computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
             data.currentFile.content = string.sub(data.currentFile.content, 1, position - 2) .. string.sub(data.currentFile.content, position)
-            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
             data.isDirty = true
         end
 
