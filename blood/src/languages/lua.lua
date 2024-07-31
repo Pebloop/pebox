@@ -26,8 +26,7 @@ function LuaLang.pretty(code, window)
             end
         end
     end
-    doc[#doc + 1] = Pretty.token(buffer, Colors.text)
-
+    Pretty.append(doc, Pretty.token(buffer, Colors.text))
     
     Pretty.print(doc, window)
 end
