@@ -23,6 +23,8 @@ function Utils.computeNewCursorPosition(data, x, y)
     elseif x < 1 and y > 1 then
         y = y - 1
         x = string.len(lines[y]) + 1
+    elseif x < 1 and y == 1 then
+        x = 1
     end
 
     -- if still out of bound
