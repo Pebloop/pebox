@@ -66,6 +66,7 @@ function LuaLang.pretty(code, window)
                 elseif buffer == "(" then
                     if tokens[#tokens] == "function" then
                         Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                        Pretty.append(doc, Pretty.token("(", Colors.text))
                         args = {}
                         buffer = ""
                         state = "function-args"
