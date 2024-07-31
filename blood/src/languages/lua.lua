@@ -42,9 +42,15 @@ function LuaLang.pretty(code, window)
     for c in string.gmatch(code, ".") do
         if state == "init" then
             if c == " " then
-                Pretty.append(doc, Pretty.token(buffer, Colors.text))
-                buffer = ""
-                Pretty.append(doc, Pretty.space())
+                if tokens[#tokens] == "local" then
+                    Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+                    variables[#variables + 1] = buffer
+                    buffer = ""
+                else
+                    Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                    buffer = ""
+                    Pretty.append(doc, Pretty.space())
+                end
             elseif c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text))
                 buffer = ""
