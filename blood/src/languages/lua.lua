@@ -129,6 +129,7 @@ function LuaLang.pretty(code, window)
                 Pretty.append(doc, Pretty.token(buffer, Colors.text6))
                 Pretty.append(doc, Pretty.token(c, Colors.text))
                 args[#args + 1] = buffer
+                tokens[#tokens + 1] = args
                 buffer = ""
                 state = "init"
             elseif c == "," then
