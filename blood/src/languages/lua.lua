@@ -92,7 +92,7 @@ function LuaLang.pretty(code, window)
                         end
                     end
 
-                    local before = code:sub(i - #buffer - 1, i - #buffer - 1)
+                    local before = code:sub(i - #buffer, i - #buffer)
                     local after = code:sub(i + 1, i + 1)
                     for j, arg in ipairs(args) do
                         if arg == buffer and  isIdentifier(buffer, before, after) then
