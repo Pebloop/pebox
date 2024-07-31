@@ -131,8 +131,9 @@ function LuaLang.pretty(code, window, data)
                     -- if buffer is a function argument
                 else
                     if c == '-' then
-                        local b = string.sub(code, i + 1, i + 1)
-                        if b ~= '-' then
+                        local after = string.sub(code, i + 1, i + 1)
+                        local before = string.sub(buffer, 1, string.len(buffer) - 1)
+                        if after ~= '-' and before ~= '-' then
                             Pretty.append(doc, Pretty.token(buffer, Colors.text))
                             Pretty.append(doc, Pretty.token(c, Colors.text2))
                             buffer = ""
