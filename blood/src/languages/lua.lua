@@ -85,17 +85,15 @@ function LuaLang.pretty(code, window)
                 -- if buffer is a function argument
                 else
                     for j, sc in ipairs(keyChar) do
-                        if buffer == sc then
+                        if c == sc then
                             Pretty.append(doc, Pretty.token(buffer, Colors.text))
                             buffer = ""
                             break
                         end
                     end
 
-                    local before = code:sub(i - #buffer, i - #buffer)
-                    local after = code:sub(i + 1, i + 1)
                     for j, arg in ipairs(args) do
-                        if arg == buffer and  isIdentifier(buffer, before, after) then
+                        if arg == buffer then
                             Pretty.append(doc, Pretty.token(buffer, Colors.text6))
                             buffer = ""
                             break
