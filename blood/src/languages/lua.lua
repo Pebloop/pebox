@@ -4,7 +4,7 @@ local Colors = require "src/data/colors"
 local LuaLang = {}
 
 local keyChar = {
-    " ", "(", ")", ",", "{", "}", "[", "]", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", ";", ":", ".", "'", "\"", "\n"
+    "=", "+", "-", "*", "/", "%", "^", "#"
  }
 
 local tokenColors = {
@@ -46,11 +46,6 @@ function LuaLang.pretty(code, window)
                 if tokens[#tokens] == "local" then
                     state = "variable"
                     Pretty.append(doc, Pretty.token(buffer, Colors.text))
-                    buffer = ""
-                    Pretty.append(doc, Pretty.space())
-                elseif state == "variable" then
-                    state = "init"
-                    Pretty.append(doc, Pretty.token(buffer, Colors.text6))
                     buffer = ""
                     Pretty.append(doc, Pretty.space())
                 else
@@ -136,6 +131,15 @@ function LuaLang.pretty(code, window)
                 Pretty.append(doc, Pretty.token(c, Colors.text))
                 args[#args + 1] = buffer
                 buffer = ""
+            else
+                buffer = buffer .. c
+            end
+        elseif state == "variable" then
+            if c == " " then
+                state = "init"
+                Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+                buffer = ""
+                Pretty.append(doc, Pretty.space())
             else
                 buffer = buffer .. c
             end
