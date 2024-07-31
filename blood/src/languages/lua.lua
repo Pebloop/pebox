@@ -31,6 +31,8 @@ function LuaLang.pretty(code, window)
     local buffer = ""
     local state = "init"
     local tokens = {}
+    local args = {}
+    local variables = {}
 
     for c in code:gmatch(".") do
         if state == "init" then
@@ -60,6 +62,15 @@ function LuaLang.pretty(code, window)
                     Pretty.append(doc, Pretty.token(buffer, tokenColors[buffer]))
                     tokens[#tokens + 1] = buffer
                     buffer = ""
+                -- if buffer is a function argument
+                else
+                    for i, arg in ipairs(args) do
+                        if arg == buffer then
+                            Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+                            buffer = ""
+                            break
+                        end
+                    end
                 end
             end
 
