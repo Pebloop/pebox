@@ -20,3 +20,5 @@ loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/blood/src/data/co
 
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/blood/src/states/code_state.lua", "src/states/code_state.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/blood/src/states/save_as_state.lua", "src/states/save_as_state.lua")
+
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/blood/src/languages/lua.lua", "src/languages/lua.lua")

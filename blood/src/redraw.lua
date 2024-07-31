@@ -1,4 +1,5 @@
 local Colors = require('src.data.colors')
+local LuaLang = require('src.languages.lua')
 local Redraw = {}
 
 local function drawLeftMenu(window)
@@ -62,19 +63,9 @@ local function drawCode(data)
     data.codeWindow.clear()
     data.codeWindow.setCursorPos(1, 1)
 
-    -- split content in lines
-    local lines = {}
-    for line in string.gmatch(data.currentFile.content, "[^\n]+") do
-        table.insert(lines, line)
-    end
-
-    -- draw lines
-    for i = 1, wy do
-        if lines[i] == nil then
-            break
-        end
-        data.codeWindow.write(lines[i])
-    end
+    local code = data.currentFile.code
+    local doc = LuaLang.pretty(code)
+    data.codeWindow.write(doc)
 end
 
 function  Redraw.exec(window, data)
