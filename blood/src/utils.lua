@@ -17,7 +17,7 @@ function Utils.computeNewCursorPosition(data, x, y)
     if line == nil then
         return x, y
     end
-    if x > string.len(line) and y < table.getn(lines) then
+    if x > string.len(line) + 1 and y < table.getn(lines) then
         x = 1
         y = y + 1
     elseif x < 1 and y > 1 then
