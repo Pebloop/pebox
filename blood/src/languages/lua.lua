@@ -30,19 +30,6 @@ local tokenColors = {
     ["nil"] = Colors.text2,
 }
 
-local function isIdentifier(word, before, after)
-    for _, char in ipairs(keyChar) do
-        if before == char then
-            for _, char2 in ipairs(keyChar) do
-                if after == char2 then
-                    return true
-                end
-            end
-        end
-    end
-    return false
-end
-
 function LuaLang.pretty(code, window)
     local doc = Pretty.doc()
     local buffer = ""
@@ -87,6 +74,7 @@ function LuaLang.pretty(code, window)
                     for j, sc in ipairs(keyChar) do
                         if c == sc then
                             Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                            Pretty.append(doc, Pretty.token(c, Colors.text2))
                             buffer = ""
                             break
                         end
