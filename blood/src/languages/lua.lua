@@ -66,6 +66,7 @@ function LuaLang.pretty(code, window)
         elseif state == "comment" then
             if c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text4))
+                Pretty.append(doc, Pretty.newline())
                 buffer = ""
                 state = "init"
             else
