@@ -61,7 +61,9 @@ function CodeState.events(event, window, data)
             data.codeCursor.y = 1
             data.isDirty = true
         elseif Utils.isBox(12, 1, 4, 1, event[3], event[4]) then
-
+            data.state = "open"
+            data.stateData = {path = ""}
+            data.isDirty = true
         elseif Utils.isBox(17, 1, 4, 1, event[3], event[4]) then
             if data.currentFile ~= nil then
                 if data.currentFile.path then

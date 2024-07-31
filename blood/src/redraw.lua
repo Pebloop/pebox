@@ -53,6 +53,24 @@ local function drawSaveAsPopup(mainWindow, data)
     popupWindow.write('Cancel')
 end
 
+local function drawOpenPopup(mainWindow, data)
+    local wx, wy = mainWindow.getSize()
+    local popupWindow = window.create(mainWindow, wx / 2 - 10, wy / 2 - 4, 20, 8)
+    popupWindow.setBackgroundColor(Colors.firstElevation)
+    popupWindow.setTextColor(Colors.text)
+    popupWindow.clear()
+    popupWindow.setCursorPos(7, 2)
+    popupWindow.write('Open')
+    popupWindow.setCursorPos(3, 4)
+    popupWindow.write('path: ')
+    popupWindow.write(data.stateData.path)
+    popupWindow.setCursorPos(3, 7)
+    popupWindow.write('Open')
+    popupWindow.setCursorPos(12, 7)
+    popupWindow.write('Cancel')
+    
+end
+
 local function drawCode(data)
     if data.currentFile == nil then
         return
@@ -89,6 +107,8 @@ function  Redraw.exec(window, data)
     if data.state ~= nil then
         if data.state == 'save-as' then
             drawSaveAsPopup(window, data)
+        elseif data.state == 'open' then
+            drawOpenPopup(window, data)
         end
     end
 
