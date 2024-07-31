@@ -169,6 +169,8 @@ function LuaLang.pretty(code, window, data)
                 variables[#variables + 1] = buffer
                 buffer = ""
                 state = "init"
+            else
+                buffer = buffer .. c
             end
         end
 
