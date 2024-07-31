@@ -74,6 +74,9 @@ function LuaLang.pretty(code, window)
                         args = {}
                         buffer = ""
                         state = "function-args"
+                    else
+                        Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                        buffer = ""
                     end
                 elseif tokenColors[buffer] then
                     Pretty.append(doc, Pretty.token(buffer, tokenColors[buffer]))
