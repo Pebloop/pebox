@@ -159,7 +159,6 @@ function LuaLang.pretty(code, window, data)
             if c == "\"" then
                 buffer = buffer .. c
                 Pretty.append(doc, Pretty.token(buffer, Colors.text3))
-                Pretty.append(doc, Pretty.newline())
                 buffer = ""
                 state = "init"
             else
@@ -169,7 +168,6 @@ function LuaLang.pretty(code, window, data)
             if c == "'" then
                 buffer = buffer .. c
                 Pretty.append(doc, Pretty.token(buffer, Colors.text3))
-                Pretty.append(doc, Pretty.newline())
                 buffer = ""
                 state = "init"
             else
