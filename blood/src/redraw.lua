@@ -63,7 +63,7 @@ local function drawCode(data)
     data.codeWindow.clear()
     data.codeWindow.setCursorPos(1, 1)
 
-    local code = data.currentFile.code
+    local code = data.currentFile.content
     local doc = LuaLang.pretty(code)
     data.codeWindow.write(doc)
 end
