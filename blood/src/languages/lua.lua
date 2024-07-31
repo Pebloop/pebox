@@ -52,7 +52,7 @@ function LuaLang.pretty(code, window)
     local variables = {}
 
     local i = 1
-    for c in code:gmatch(".") do
+    for c in string.gmatch(code, ".") do
         if state == "init" then
             if c == " " then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text))
