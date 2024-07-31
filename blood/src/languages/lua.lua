@@ -163,6 +163,8 @@ function LuaLang.pretty(code, window)
         Pretty.append(doc, Pretty.token(buffer, Colors.text3))
     elseif state == "function-args" then
         Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+    elseif state == "variable" then
+        Pretty.append(doc, Pretty.token(buffer, Colors.text))
     end
 
     Pretty.print(doc, window)
