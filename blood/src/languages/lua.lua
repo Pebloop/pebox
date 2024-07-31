@@ -210,6 +210,17 @@ function LuaLang.pretty(code, window, data)
                 buffer = ""
                 state = "init"
             else
+                for j, sc in ipairs(isNotVar) do
+                    if c == sc then
+                        Pretty.append(doc, Pretty.token(buffer, Colors.text5))
+                        Pretty.append(doc, Pretty.token(c, Colors.text))
+                        tokens[#tokens + 1] = buffer
+                        variables[#variables + 1] = buffer
+                        buffer = ""
+                        state = "init"
+                        break
+                    end
+                end
                 buffer = buffer .. c
             end
         end
