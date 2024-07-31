@@ -73,7 +73,8 @@ function LuaLang.pretty(code, window)
                 else
                     for j, sc in ipairs(keyChar) do
                         if c == sc then
-                            Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                            local b = string.sub(buffer, 1, string.len(buffer) - 1)
+                            Pretty.append(doc, Pretty.token(b, Colors.text))
                             Pretty.append(doc, Pretty.token(c, Colors.text2))
                             buffer = ""
                             break
