@@ -33,6 +33,7 @@ function Utils.computeNewCursorPosition(data, x, y)
     end
     if y > table.getn(lines) then
         y = table.getn(lines)
+        x = string.len(lines[y]) + 1
     end
     if x < 1 then
         x = 1
