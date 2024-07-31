@@ -9,9 +9,9 @@ function LuaLang.pretty(code)
         for token in string.gmatch(line, "%S+") do
             doc = pretty.concat(doc, pretty.text(token, colors.cyan), pretty.space)
         end
-        doc = pretty.concat(doc, pretty.line)
+        doc = pretty.concat(doc, pretty.space_line)
+        doc = pretty.group(doc)
     end
-
     return pretty.render(doc)
 end
 
