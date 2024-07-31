@@ -74,7 +74,14 @@ function LuaLang.pretty(code, window)
             end
         end
     end
-    Pretty.append(doc, Pretty.token(buffer, Colors.text))
+
+    if state == "init" then
+        Pretty.append(doc, Pretty.token(buffer, Colors.text))
+    elseif state == "comment" then
+        Pretty.append(doc, Pretty.token(buffer, Colors.text4))
+    elseif state == "string" then
+        Pretty.append(doc, Pretty.token(buffer, Colors.text3))
+    end
 
     Pretty.print(doc, window)
 end
