@@ -35,6 +35,24 @@ local tokenColors = {
     ["local"] = Colors.text
 }
 
+local globals = {
+    "term",
+    "window",
+    "colors",
+    "fs",
+    "os",
+    "peripheral",
+    "rednet",
+    "shell",
+    "string",
+    "table",
+    "textutils",
+    "http",
+    "json",
+    "math",
+
+}
+
 ----------------- Pretty -----------------
 
 function LuaLang.pretty(code, window, data)
@@ -44,6 +62,10 @@ function LuaLang.pretty(code, window, data)
     local tokens = {}
     local args = {}
     local variables = {}
+
+    for i, global in ipairs(globals) do
+        table.insert(variables, global)
+    end
 
     local i = 1
     for c in string.gmatch(code, ".") do
