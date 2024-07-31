@@ -39,11 +39,24 @@ function LuaLang.pretty(code, window, data)
     local args = {}
     local variables = {}
 
-    data.snackbar = "test"
-    data.snackbarTimer = 100
-
     local i = 1
     for c in string.gmatch(code, ".") do
+
+        -- debug
+        local dx, dy = window.getCursorPos()
+        window.setCursorPos(20, 20)
+        window.write("         ")
+        window.setCursorPos(20, 20)
+        window.write(state)
+        window.setCursorPos(20, 21)
+        window.write("                          ")
+        window.setCursorPos(20, 21)
+        window.write(buffer)
+        window.setCursorPos(dx, dy)
+        os.pullEvent("key")
+
+
+
         if state == "init" then
             if c == " " then
                 if tokens[#tokens] == "local" then
