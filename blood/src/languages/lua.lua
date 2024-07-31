@@ -27,10 +27,17 @@ local tokenColors = {
 }
 
 local function isIdentifier(word, before, after)
-    if before == " " or before == nil or before == "(" or before == "," then
-        if after == " " or after == nil or after == ")" or after == "," then
-            return true
-        end
+    local keyChar = {
+       " ", "(", ")", ",", "{", "}", "[", "]", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", ";", ":", ".", "'", "\"", "\n"
+    }
+
+    for _, char in ipairs(keyChar) do
+        if before == char then
+            for _, char2 in ipairs(keyChar) do
+                if after == char2 then
+                    return true
+                end
+            end
     end
     return false
 end
@@ -40,7 +47,7 @@ function LuaLang.pretty(code, window)
     local buffer = ""
     local state = "init"
     local tokens = {}
-    local args = nil
+    local args = {}
     local variables = {}
 
     local i = 1
