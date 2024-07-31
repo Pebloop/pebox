@@ -50,6 +50,8 @@ function LuaLang.pretty(code, window)
                     state = "string"
                 elseif buffer == "(" then
                     if tokens[#tokens] == "function" then
+                        Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                        buffer = ""
                         state = "function-args"
                     else
                         buffer = buffer .. c
@@ -81,8 +83,8 @@ function LuaLang.pretty(code, window)
             end
         elseif state == "function-args" then
             if c == ")" then
-                buffer = buffer .. c
                 Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+                Pretty.append(doc, Pretty.token(c, Colors.text))
                 buffer = ""
                 state = "init"
             elseif c == "," then
