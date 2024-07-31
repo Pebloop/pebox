@@ -8,6 +8,8 @@ function ManageEvents.exec(event, window, data)
         CodeState.events(event, window, data)
     elseif data.state == "save-as" then
         SaveAsState.events(event, window, data)
+    elseif data.state == "open" then
+        OpenAsState.events(event, window, data)
     end
 end
 
