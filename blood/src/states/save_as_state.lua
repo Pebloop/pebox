@@ -14,9 +14,9 @@ function SaveAsState.events(event, window, data)
     elseif event[1] == 'key' then
         if event[2] == keys.enter then
             if data.stateData.path ~= "" then
-                data.currentFile = fs.open(data.stateData.path, 'w')
-                data.currentFile.write(data.currentFile.content)
-                data.currentFile.close()
+                local file = fs.open(data.stateData.path, 'w')
+                file.write(data.currentFile.content)
+                file.close()
                 data.state = nil
                 data.isDirty = true
             end
