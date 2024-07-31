@@ -105,7 +105,8 @@ function LuaLang.pretty(code, window, data)
                 buffer = buffer .. c
                 local b = string.sub(buffer, string.len(buffer), string.len(buffer)) .. c
                 if b == "--" then
-                    Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                    Pretty.append(doc, Pretty.token(buffer:sub(1, string.len(buffer) - 1), Colors.text))
+                    Pretty.append(doc, Pretty.token("--", Colors.text4))
                     buffer = ""
                     state = "comment"
                 elseif c == "\"" then
