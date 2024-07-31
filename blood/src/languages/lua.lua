@@ -39,6 +39,8 @@ function LuaLang.pretty(code, window)
                 buffer = ""
                 Pretty.append(doc, Pretty.space())
             elseif c == "\n" then
+                Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                buffer = ""
                 Pretty.append(doc, Pretty.newline())
             else
                 buffer = buffer .. c
