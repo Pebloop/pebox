@@ -41,7 +41,7 @@ function LuaLang.pretty(code, window)
             window.write(token)
             window.write(" ")
         end
-        window.write("\n")
+        window.setCursorPos(1, window.getCursorY() + 1)
     end
     
 end
