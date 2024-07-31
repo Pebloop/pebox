@@ -4,7 +4,7 @@ local Colors = require "src/data/colors"
 local LuaLang = {}
 
 local keyChar = {
-    "=", "+", "-", "*", "/", "%", "^", "#"
+    "=", "+", "*", "/", "%", "^", "#"
  }
 
  local isNotVar = {
@@ -103,7 +103,8 @@ function LuaLang.pretty(code, window, data)
                 Pretty.append(doc, Pretty.newline())
             else
                 buffer = buffer .. c
-                local b = string.sub(buffer, string.len(buffer) - 1 , string.len(buffer) + 1)
+
+                local b = string.sub(buffer, string.len(buffer) - 1 , string.len(buffer))
                 if b == "--" then
                     Pretty.append(doc, Pretty.token(buffer:sub(1, string.len(buffer) - 2), Colors.text))
                     Pretty.append(doc, Pretty.token("--", Colors.text4))
@@ -129,6 +130,16 @@ function LuaLang.pretty(code, window, data)
                     buffer = ""
                 -- if buffer is a function argument
                 else
+                    if c == '-' then
+                        local b = string.sub(code, i + 1, i + 1)
+                        if b ~= '-' then
+                            Pretty.append(doc, Pretty.token(buffer, Colors.text))
+                            Pretty.append(doc, Pretty.token(c, Colors.text2))
+                            buffer = ""
+                        end
+
+                    end
+
                     for j, sc in ipairs(keyChar) do
                         if c == sc then
                             local b = string.sub(buffer, 1, string.len(buffer) - 1)
