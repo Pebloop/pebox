@@ -22,7 +22,9 @@ function OpenAsState.events(event, window, data)
                     data.directory = data.stateData.path
                 else
                     local file = fs.open(data.stateData.path, 'r')
-                    data.currentFile = File:new(data.stateData.path, file.readAll())
+                    -- get filename from path
+                    local filename = data.stateData.path:match("^.+/(.+)$")
+                    data.currentFile = File:new(filename, data.stateData.path, file.readAll())
                     file.close()
                     data.state = nil
                     data.isDirty = true
