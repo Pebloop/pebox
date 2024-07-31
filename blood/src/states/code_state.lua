@@ -33,6 +33,10 @@ function CodeState.events(event, window, data)
             local position = Utils.computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
             local lines = {}
             for line in string.gmatch(data.currentFile.content, "[^\n]+") do
+                window.clear()
+                window.setCursorPos(1, 1)
+                window.write(line)
+                os.pullEvent("key")
                 table.insert(lines, line)
             end
             local newCursorX = 0
