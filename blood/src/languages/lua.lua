@@ -12,7 +12,7 @@ function LuaLang.pretty(code)
         doc = pretty.concat(doc, pretty.space_line)
         doc = pretty.group(doc)
     end
-    return pretty.render(doc)
+    return doc
 end
 
 return LuaLang
