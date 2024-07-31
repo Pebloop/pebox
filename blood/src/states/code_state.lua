@@ -31,6 +31,7 @@ function CodeState.events(event, window, data)
             local position = Utils.computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
             data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
             data.currentFile.content = string.sub(data.currentFile.content, 1, position - 2) .. string.sub(data.currentFile.content, position)
+            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
             data.isDirty = true
         end
 
