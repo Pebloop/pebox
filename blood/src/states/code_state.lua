@@ -8,8 +8,10 @@ function CodeState.events(event, window, data)
     -- if keyboard
     if event[1] == 'key' then
         if event[2] == keys.leftCtrl then
-            data.isLetMenuOpen = not data.isLetMenuOpen
-            data.isDirty = true
+            if data.directory then
+                data.isLetMenuOpen = not data.isLetMenuOpen
+                data.isDirty = true
+            end
         elseif event[2] == keys.left then
             data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
         elseif event[2] == keys.right then
@@ -53,8 +55,10 @@ function CodeState.events(event, window, data)
         if event[3] == wx and event[4] == 1 then
             data.exit = true
         elseif Utils.isBox(1, 1, 4, 1, event[3], event[4]) then
-            data.isLetMenuOpen = not data.isLetMenuOpen
-            data.isDirty = true
+            if data.directory then
+                data.isLetMenuOpen = not data.isLetMenuOpen
+                data.isDirty = true
+            end
         elseif Utils.isBox(7, 1, 3, 1, event[3], event[4]) then
             data.currentFile = File:new("new_file")
             data.codeCursor.x = 1

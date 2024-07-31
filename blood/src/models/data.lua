@@ -9,7 +9,8 @@ local Data = {
     state = nil,
     stateData = {},
     snackbar = nil,
-    snackbarTimer = 0
+    snackbarTimer = 0,
+    directory = nil
 }
 
 function Data:new(window)
@@ -29,6 +30,7 @@ function Data:new(window)
     o.stateData = {}
     o.snackbar = nil
     o.snackbarTimer = 0
+    o.directory = nil
     return o
 end
 
