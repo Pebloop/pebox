@@ -132,7 +132,7 @@ function LuaLang.pretty(code, window, data)
                 else
                     if c == '-' then
                         local after = string.sub(code, i + 1, i + 1)
-                        local before = string.sub(buffer, 1, string.len(buffer) - 1)
+                        local before = string.sub(code, i - 1, i - 1)
                         if after ~= '-' and before ~= '-' then
                             Pretty.append(doc, Pretty.token(buffer, Colors.text))
                             Pretty.append(doc, Pretty.token(c, Colors.text2))
