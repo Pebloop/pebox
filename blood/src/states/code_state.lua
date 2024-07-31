@@ -29,7 +29,11 @@ function CodeState.events(event, window, data)
                 return
             end
             local position = Utils.computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
-            local newCursorX = data.currentFile.content:sub(position - 1, position - 1) == '\n' and string.len(string.match(data.currentFile.content, "[^\n]*$", position - 2)) + 1 or data.codeCursor.x - 1
+            local lines = {}
+            for line in string.gmatch(data.currentFile.content, "[^\n]+") do
+                table.insert(lines, line)
+            end
+            local newCursorX = string.len(lines[data.codeCursor.y - 1]) + 1
             data.currentFile.content = string.sub(data.currentFile.content, 1, position - 2) .. string.sub(data.currentFile.content, position)
             if data.codeCursor.x > 1 then
                 data.codeCursor.x = data.codeCursor.x - 1
