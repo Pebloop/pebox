@@ -1,4 +1,4 @@
-local pretty = require "cc.pretty"
+local Pretty = require "src/pretty"
 local Colors = require "src/data/colors"
 
 local LuaLang = {}
@@ -34,16 +34,17 @@ local function colorToken(token)
 end
 
 function LuaLang.pretty(code, window)
+    local doc = Pretty.doc()
 
+    -- simple tokenization
     for line in string.gmatch(code, "[^\n]+") do
         for token in string.gmatch(line, "%S+") do
-            window.setTextColor(colorToken(token))
-            window.write(token)
-            window.write(" ")
+            Pretty.append(doc, Pretty.token(token, colorToken(token)))
+            Pretty.append(doc, Pretty.space())
         end
-        window.setCursorPos(1, window.getCursorY() + 1)
+        Pretty.append(doc, Pretty.newline())
     end
-    
+    Pretty.print(doc, window)
 end
 
 return LuaLang
