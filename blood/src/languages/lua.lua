@@ -8,7 +8,7 @@ local keyChar = {
  }
 
  local isNotVar = {
-    " ", "\n", "(", ")", "{", "}", "[", "]", ";", ",", ":", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", "!", "&", "|"
+    " ", "\n", "(", ")", "{", "}", "[", "]", ";", ",", ":", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", "!", "&", "|", "."
  }
 
 local tokenColors = {
@@ -223,5 +223,9 @@ function LuaLang.pretty(code, window, data)
 end
 
 ----------------- Completion -----------------
+function LuaLang.complete(code, x, y)
+    
+end
+
 
 return LuaLang
