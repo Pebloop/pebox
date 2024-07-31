@@ -63,7 +63,7 @@ function LuaLang.pretty(code, window)
                     state = "comment"
                 elseif buffer == "\"" then
                     state = "string"
-                elseif buffer == "(" then
+                elseif c == "(" then
                     if tokens[#tokens] == "function" then
                         Pretty.append(doc, Pretty.token(buffer, Colors.text))
                         Pretty.append(doc, Pretty.token("(", Colors.text))
