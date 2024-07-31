@@ -8,7 +8,7 @@ local keyChar = {
  }
 
  local isNotVar = {
-    " ", "\n", "(", ")", "{", "}", "[", "]", ";", ",", ":", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", "!", "&", "|", "."
+    "\n", "(", ")", "{", "}", "[", "]", ";", ",", ":", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", "!", "&", "|", "."
  }
 
 local tokenColors = {
@@ -212,7 +212,9 @@ function LuaLang.pretty(code, window, data)
                 buffer = buffer .. c
             end
         elseif state == "variable" then
-            if c == "\n" then
+            if c == " " then
+                Pretty.append(doc, Pretty.space())
+            elseif c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text5))
                 Pretty.append(doc, Pretty.newline())
                 tokens[#tokens + 1] = buffer
@@ -231,6 +233,7 @@ function LuaLang.pretty(code, window, data)
                 variables[#variables + 1] = buffer
                 buffer = ""
             else
+                local isSeparator = false
                 for j, sc in ipairs(isNotVar) do
                     if c == sc then
                         Pretty.append(doc, Pretty.token(buffer, Colors.text5))
@@ -239,10 +242,13 @@ function LuaLang.pretty(code, window, data)
                         variables[#variables + 1] = buffer
                         buffer = ""
                         state = "init"
+                        isSeparator = true
                         break
                     end
                 end
-                buffer = buffer .. c
+                if not isSeparator then
+                    buffer = buffer .. c
+                end
             end
         end
 
