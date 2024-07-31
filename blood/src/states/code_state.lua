@@ -4,6 +4,12 @@ local Utils = require('src.utils')
 
 function CodeState.events(event, window, data)
     local wx, wy = window.getSize()
+    local lines = {}
+    if data.currentFile then
+        for line in string.gmatch(data.currentFile.content, "[^\n]*\n?") do
+            table.insert(lines, line)
+        end
+    end
 
     -- if keyboard
     if event[1] == 'key' then
@@ -31,10 +37,6 @@ function CodeState.events(event, window, data)
                 return
             end
             local position = Utils.computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
-            local lines = {}
-            for line in string.gmatch(data.currentFile.content, "[^\n]*\n?") do
-                table.insert(lines, line)
-            end
             local newCursorX = 0
             if data.codeCursor.y > 1 then
                 newCursorX = string.len(lines[data.codeCursor.y - 1]) + 1
