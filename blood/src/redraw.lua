@@ -64,8 +64,7 @@ local function drawCode(data)
     data.codeWindow.setCursorPos(1, 1)
 
     local code = data.currentFile.content
-    local doc = LuaLang.pretty(code)
-    data.codeWindow.write(doc)
+    LuaLang.pretty(code)
 end
 
 function  Redraw.exec(window, data)
