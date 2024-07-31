@@ -24,13 +24,13 @@ local tokenColors = {
     ["true"] = Colors.text2,
     ["false"] = Colors.text2,
     ["nil"] = Colors.text2,
-
 }
 
 function LuaLang.pretty(code, window)
     local doc = Pretty.doc()
     local buffer = ""
     local state = "init"
+    local tokens = {}
 
     for c in code:gmatch(".") do
         if state == "init" then
@@ -48,8 +48,15 @@ function LuaLang.pretty(code, window)
                     state = "comment"
                 elseif buffer == "\"" then
                     state = "string"
+                elseif buffer == "(" then
+                    if tokens[#tokens] == "function" then
+                        state = "function-args"
+                    else
+                        buffer = buffer .. c
+                    end
                 elseif tokenColors[buffer] then
                     Pretty.append(doc, Pretty.token(buffer, tokenColors[buffer]))
+                    tokens[#tokens + 1] = buffer
                     buffer = ""
                 end
             end
@@ -72,6 +79,19 @@ function LuaLang.pretty(code, window)
             else
                 buffer = buffer .. c
             end
+        elseif state == "function-args" then
+            if c == ")" then
+                buffer = buffer .. c
+                Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+                buffer = ""
+                state = "init"
+            elseif c == "," then
+                Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+                Pretty.append(doc, Pretty.token(c, Colors.text))
+                buffer = ""
+            else
+                buffer = buffer .. c
+            end
         end
     end
 
@@ -81,6 +101,8 @@ function LuaLang.pretty(code, window)
         Pretty.append(doc, Pretty.token(buffer, Colors.text4))
     elseif state == "string" then
         Pretty.append(doc, Pretty.token(buffer, Colors.text3))
+    elseif state == "function-args" then
+        Pretty.append(doc, Pretty.token(buffer, Colors.text6))
     end
 
     Pretty.print(doc, window)
