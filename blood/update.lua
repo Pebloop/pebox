@@ -18,5 +18,5 @@ loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/blood/src/models/
 
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/blood/src/data/colors.lua", "src/data/colors.lua")
 
-loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/blood/src/states/main_state.lua", "src/states/main_state.lua")
+loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/blood/src/states/code_state.lua", "src/states/code_state.lua")
 loadFile("https://raw.githubusercontent.com/Pebloop/pebox/main/blood/src/states/save_as_state.lua", "src/states/save_as_state.lua")

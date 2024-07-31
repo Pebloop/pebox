@@ -1,3 +1,4 @@
+local File = require('src.models.file')
 local CodeState = {}
 local Utils = require('src.utils')
 
