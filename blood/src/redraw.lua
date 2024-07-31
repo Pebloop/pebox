@@ -100,11 +100,11 @@ function  Redraw.exec(window, data)
     end
     
     if data.isLetMenuOpen then
-        data.codeWindow.reposition(15, data.scroll + 2, window.getSize() - 15, #lines + 1)
+        data.codeWindow.reposition(15, data.scroll + 1, window.getSize() - 15, #lines + 1)
         data.codeWindow.redraw()
         drawLeftMenu(window)
     else
-        data.codeWindow.reposition(1, data.scroll + 2, window.getSize(), #lines + 1)
+        data.codeWindow.reposition(1, data.scroll + 1, window.getSize(), #lines + 1)
         data.codeWindow.redraw()
     end
     drawHeader(window)
