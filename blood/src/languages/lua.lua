@@ -115,7 +115,7 @@ function LuaLang.pretty(code, window, data)
                         if arg == b then
                             for k, sc in ipairs(isNotVar) do
                                 if c == sc then
-                                    Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+                                    Pretty.append(doc, Pretty.token(b, Colors.text6))
                                     Pretty.append(doc, Pretty.token(c, Colors.text))
                                     buffer = ""
                                     break
@@ -130,7 +130,7 @@ function LuaLang.pretty(code, window, data)
                         if var == b then
                             for k, sc in ipairs(isNotVar) do
                                 if c == sc then
-                                    Pretty.append(doc, Pretty.token(buffer, Colors.text5))
+                                    Pretty.append(doc, Pretty.token(b, Colors.text5))
                                     Pretty.append(doc, Pretty.token(c, Colors.text))
                                     buffer = ""
                                     break
