@@ -9,8 +9,8 @@ term.setPaletteColor(Colors.firstElevation, 0x4f4f4f) -- 1st elevation color
 term.setPaletteColor(Colors.text2, 0xb04f4f) -- 2nd text color
 term.setPaletteColor(Colors.text3, 0xFF0000) -- 3rd text color
 term.setPaletteColor(Colors.text4, 0x0000FF) -- 4th text color
-term.setPaletteColor(Colors.text5, 0xFFFF00) -- 5th text color
-term.setPaletteColor(Colors.text6, 0xcf7b4e) -- 6th text color
+term.setPaletteColor(Colors.text5, 0x3b8ab8) -- 5th text color
+term.setPaletteColor(Colors.text6, 0xf59562) -- 6th text color
 
 local wx, wy = term.getSize()
 local mainWindow = window.create(term.current(), 1, 1, wx, wy)
