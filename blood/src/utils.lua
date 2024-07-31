@@ -57,7 +57,7 @@ function Utils.computeContentPosition(data, x, y)
     local position = 1
     for i = 1, y - 1 do
         if lines[i] ~= nil then
-            position = position + string.len(lines[i]) + 1
+            position = position + string.len(lines[i])
         end
     end
     position = position + x - 1
