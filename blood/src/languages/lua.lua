@@ -134,7 +134,6 @@ function LuaLang.pretty(code, window, data)
                         local b = string.sub(code, i + 1, i + 1)
                         if b ~= '-' then
                             Pretty.append(doc, Pretty.token(buffer, Colors.text))
-                            Pretty.append(doc, Pretty.token(c, Colors.text2))
                             buffer = ""
                         end
 
