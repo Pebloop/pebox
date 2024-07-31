@@ -5,11 +5,12 @@ local LuaLang = {}
 
 local keyChar = {
     "=", "+", "*", "/", "%", "^", "#"
- }
+}
 
- local isNotVar = {
-    "\n", "(", ")", "{", "}", "[", "]", ";", ",", ":", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", "!", "&", "|", "."
- }
+local isNotVar = {
+    "\n", "(", ")", "{", "}", "[", "]", ";", ",", ":", "=", "+", "-", "*", "/", "%", "^", "#", "<", ">", "!", "&", "|",
+    "."
+}
 
 local tokenColors = {
     ["function"] = Colors.text2,
@@ -69,7 +70,6 @@ function LuaLang.pretty(code, window, data)
 
     local i = 1
     for c in string.gmatch(code, ".") do
-
         -- debug
         --local dx, dy = window.getCursorPos()
         --window.setCursorPos(20, 20)
@@ -104,7 +104,7 @@ function LuaLang.pretty(code, window, data)
             else
                 buffer = buffer .. c
 
-                local b = string.sub(buffer, string.len(buffer) - 1 , string.len(buffer))
+                local b = string.sub(buffer, string.len(buffer) - 1, string.len(buffer))
                 if b == "--" then
                     Pretty.append(doc, Pretty.token(buffer:sub(1, string.len(buffer) - 2), Colors.text))
                     Pretty.append(doc, Pretty.token("--", Colors.text4))
@@ -128,60 +128,58 @@ function LuaLang.pretty(code, window, data)
                     Pretty.append(doc, Pretty.token(buffer, tokenColors[buffer]))
                     tokens[#tokens + 1] = buffer
                     buffer = ""
-                -- if buffer is a function argument
+                    -- if buffer is a function argument
                 else
                     if c == '-' then
                         local b = string.sub(code, i + 1, i + 1)
                         if b ~= '-' then
                             Pretty.append(doc, Pretty.token(buffer, Colors.text))
-                            buffer = ""
-                        end
-
-                    end
-
-                    for j, sc in ipairs(keyChar) do
-                        if c == sc then
-                            local b = string.sub(buffer, 1, string.len(buffer) - 1)
-                            Pretty.append(doc, Pretty.token(b, Colors.text))
                             Pretty.append(doc, Pretty.token(c, Colors.text2))
                             buffer = ""
-                            break
                         end
-                    end
+                    else
+                        for j, sc in ipairs(keyChar) do
+                            if c == sc then
+                                local b = string.sub(buffer, 1, string.len(buffer) - 1)
+                                Pretty.append(doc, Pretty.token(b, Colors.text))
+                                Pretty.append(doc, Pretty.token(c, Colors.text2))
+                                buffer = ""
+                                break
+                            end
+                        end
 
-                    -- if buffer is an argument
-                    for j, arg in ipairs(args) do
-                        local b = string.sub(buffer, 1, string.len(buffer) - 1)
-                        if arg == b then
-                            for k, sc in ipairs(isNotVar) do
-                                if c == sc then
-                                    Pretty.append(doc, Pretty.token(b, Colors.text6))
-                                    Pretty.append(doc, Pretty.token(c, Colors.text))
-                                    buffer = ""
-                                    break
+                        -- if buffer is an argument
+                        for j, arg in ipairs(args) do
+                            local b = string.sub(buffer, 1, string.len(buffer) - 1)
+                            if arg == b then
+                                for k, sc in ipairs(isNotVar) do
+                                    if c == sc then
+                                        Pretty.append(doc, Pretty.token(b, Colors.text6))
+                                        Pretty.append(doc, Pretty.token(c, Colors.text))
+                                        buffer = ""
+                                        break
+                                    end
+                                end
+                            end
+                        end
+
+                        -- if buffer is a variable
+                        for j, var in ipairs(variables) do
+                            local b = string.sub(buffer, 1, string.len(buffer) - 1)
+                            if var == b then
+                                for k, sc in ipairs(isNotVar) do
+                                    if c == sc then
+                                        Pretty.append(doc, Pretty.token(b, Colors.text5))
+                                        Pretty.append(doc, Pretty.token(c, Colors.text))
+                                        buffer = ""
+                                        break
+                                    end
                                 end
                             end
                         end
                     end
-
-                    -- if buffer is a variable
-                    for j, var in ipairs(variables) do
-                        local b = string.sub(buffer, 1, string.len(buffer) - 1)
-                        if var == b then
-                            for k, sc in ipairs(isNotVar) do
-                                if c == sc then
-                                    Pretty.append(doc, Pretty.token(b, Colors.text5))
-                                    Pretty.append(doc, Pretty.token(c, Colors.text))
-                                    buffer = ""
-                                    break
-                                end
-                            end
-                        end
-                    end
-
                 end
             end
-
         elseif state == "comment" then
             if c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text4))
@@ -286,6 +284,5 @@ end
 function LuaLang.complete(code, x, y)
 
 end
-
 
 return LuaLang
