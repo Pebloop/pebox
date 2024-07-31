@@ -103,7 +103,7 @@ function LuaLang.pretty(code, window, data)
                 Pretty.append(doc, Pretty.newline())
             else
                 buffer = buffer .. c
-                local b = string.sub(buffer, string.len(buffer) - 1, string.len(buffer))
+                local b = string.sub(buffer, string.len(buffer), string.len(buffer)) .. c
                 if b == "--" then
                     Pretty.append(doc, Pretty.token(buffer, Colors.text))
                     buffer = ""
