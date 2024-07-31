@@ -52,11 +52,9 @@ function LuaLang.pretty(code, window)
                     state = "variable"
                     Pretty.append(doc, Pretty.token(buffer, Colors.text))
                     buffer = ""
-                    Pretty.append(doc, Pretty.space())
                 else
                     Pretty.append(doc, Pretty.token(buffer, Colors.text))
                     buffer = ""
-                    Pretty.append(doc, Pretty.space())
                 end
             elseif c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text))
