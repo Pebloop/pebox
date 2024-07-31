@@ -33,7 +33,10 @@ function CodeState.events(event, window, data)
             for line in string.gmatch(data.currentFile.content, "[^\n]+") do
                 table.insert(lines, line)
             end
-            local newCursorX = string.len(lines[data.codeCursor.y - 1]) + 1
+            local newCursorX = 0
+            if data.codeCursor.y > 1 then
+                newCursorX = string.len(lines[data.codeCursor.y - 1]) + 1
+            end
             data.currentFile.content = string.sub(data.currentFile.content, 1, position - 2) .. string.sub(data.currentFile.content, position)
             if data.codeCursor.x > 1 then
                 data.codeCursor.x = data.codeCursor.x - 1
