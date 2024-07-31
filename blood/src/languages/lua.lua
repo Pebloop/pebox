@@ -43,17 +43,17 @@ function LuaLang.pretty(code, window, data)
     for c in string.gmatch(code, ".") do
 
         -- debug
-        local dx, dy = window.getCursorPos()
-        window.setCursorPos(20, 20)
-        window.write("         ")
-        window.setCursorPos(20, 20)
-        window.write(state)
-        window.setCursorPos(20, 21)
-        window.write("                          ")
-        window.setCursorPos(20, 21)
-        window.write(buffer)
-        window.setCursorPos(dx, dy)
-        os.pullEvent("key")
+        --local dx, dy = window.getCursorPos()
+        --window.setCursorPos(20, 20)
+        --window.write("         ")
+        --window.setCursorPos(20, 20)
+        --window.write(state)
+        --window.setCursorPos(20, 21)
+        --window.write("                          ")
+        --window.setCursorPos(20, 21)
+        --window.write(buffer)
+        --window.setCursorPos(dx, dy)
+        --os.pullEvent("key")
 
 
 
