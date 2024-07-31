@@ -88,6 +88,7 @@ end
 function  Redraw.exec(window, data)
     window.setBackgroundColor(Colors.background)
     window.setTextColor(Colors.text)
+    window.setCursorBlink(false)
     window.clear()
     data.codeWindow.redraw()
 
@@ -133,6 +134,7 @@ function  Redraw.exec(window, data)
         end
     end
 
+    window.setCursorBlink(true)
     data.isDirty = false
 end
 
