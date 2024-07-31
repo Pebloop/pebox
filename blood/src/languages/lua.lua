@@ -219,6 +219,7 @@ function LuaLang.pretty(code, window, data)
                 if buffer ~= "" then
                     variables[#variables + 1] = buffer
                 end
+                buffer = ""
             elseif c == "\n" then
                 Pretty.append(doc, Pretty.token(buffer, Colors.text5))
                 Pretty.append(doc, Pretty.newline())
