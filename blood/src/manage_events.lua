@@ -4,9 +4,9 @@ local SaveAsState = require('src.states.save_as_state')
 local ManageEvents = {}
 
 function ManageEvents.exec(event, window, data)
-    if data.popup == nil then
+    if data.state == nil then
         CodeState.events(event, window, data)
-    elseif data.popup == "save-as" then
+    elseif data.state == "save-as" then
         SaveAsState.events(event, window, data)
     end
 end

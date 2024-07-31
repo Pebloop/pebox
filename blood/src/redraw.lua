@@ -74,9 +74,7 @@ local function drawCode(data)
         if lines[i] == nil then
             break
         end
-        data.codeWindow.setCursorPos(1, i)
-        local p = pretty.pretty(lines[i])
-        data.codeWindow.write(pretty.render(p))
+        data.codeWindow.write(lines[i])
     end
 end
 
