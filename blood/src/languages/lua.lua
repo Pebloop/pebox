@@ -28,6 +28,7 @@ local tokenColors = {
     ["true"] = Colors.text2,
     ["false"] = Colors.text2,
     ["nil"] = Colors.text2,
+    ["local"] = Colors.text
 }
 
 function LuaLang.pretty(code, window)
@@ -43,9 +44,15 @@ function LuaLang.pretty(code, window)
         if state == "init" then
             if c == " " then
                 if tokens[#tokens] == "local" then
-                    Pretty.append(doc, Pretty.token(buffer, Colors.text6))
-                    variables[#variables + 1] = buffer
+                    state = "variable"
+                    Pretty.append(doc, Pretty.token(buffer, Colors.text))
                     buffer = ""
+                    Pretty.append(doc, Pretty.space())
+                elseif state == "variable" then
+                    state = "init"
+                    Pretty.append(doc, Pretty.token(buffer, Colors.text6))
+                    buffer = ""
+                    Pretty.append(doc, Pretty.space())
                 else
                     Pretty.append(doc, Pretty.token(buffer, Colors.text))
                     buffer = ""
