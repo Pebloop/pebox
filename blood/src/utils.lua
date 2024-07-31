@@ -10,7 +10,7 @@ function Utils.computeNewCursorPosition(data, x, y)
     end
     local content = data.currentFile.content
     local lines = {}
-    for line in string.gmatch(content, "[^\n]+") do
+    for line in string.gmatch(content, "[^\n]*\n?") do
         table.insert(lines, line)
     end
     local line = lines[y]
@@ -51,7 +51,7 @@ function Utils.computeContentPosition(data, x, y)
     end
     local content = data.currentFile.content
     local lines = {}
-    for line in string.gmatch(content, "[^\n]+") do
+    for line in string.gmatch(content, "[^\n]*\n?") do
         table.insert(lines, line)
     end
     local position = 1
