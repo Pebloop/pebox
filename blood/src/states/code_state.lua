@@ -94,7 +94,13 @@ function CodeState.events(event, window, data)
         end
         data.isDirty = true
     elseif event[1] == 'mouse_scroll' then
-        data.scroll = data.scroll + event[2]
+        data.scroll = data.scroll - event[2]
+        if data.scroll < 0 then
+            data.scroll = 0
+        end
+        if data.scroll > #lines - wy + 1 then
+            data.scroll = #lines - wy + 1
+        end
         data.isDirty = true
     end
 end
