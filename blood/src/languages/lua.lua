@@ -38,6 +38,7 @@ local function isIdentifier(word, before, after)
                     return true
                 end
             end
+        end
     end
     return false
 end
