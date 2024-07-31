@@ -1,3 +1,5 @@
+local File = require('src.models.file')
+
 local OpenAsState = {}
 
 function OpenAsState.events(event, window, data)
