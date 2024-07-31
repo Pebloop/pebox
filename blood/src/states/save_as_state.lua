@@ -18,6 +18,7 @@ function SaveAsState.events(event, window, data)
                 data.currentFile.write(data.currentFile.content)
                 data.currentFile.close()
                 data.state = nil
+                data.isDirty = true
             end
         elseif event[2] == keys.backspace then
             data.stateData.path = data.stateData.path:sub(1, #data.stateData.path - 1)
