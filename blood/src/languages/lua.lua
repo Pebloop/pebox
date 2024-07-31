@@ -4,7 +4,27 @@ local Colors = require "src/data/colors"
 local LuaLang = {}
 
 local tokenColors = {
-    ["function"] = Colors.text2
+    ["function"] = Colors.text2,
+    ["if"] = Colors.text2,
+    ["then"] = Colors.text2,
+    ["else"] = Colors.text2,
+    ["elseif"] = Colors.text2,
+    ["end"] = Colors.text2,
+    ["for"] = Colors.text2,
+    ["do"] = Colors.text2,
+    ["while"] = Colors.text2,
+    ["repeat"] = Colors.text2,
+    ["until"] = Colors.text2,
+    ["return"] = Colors.text2,
+    ["break"] = Colors.text2,
+    ["in"] = Colors.text2,
+    ["and"] = Colors.text2,
+    ["or"] = Colors.text2,
+    ["not"] = Colors.text2,
+    ["true"] = Colors.text2,
+    ["false"] = Colors.text2,
+    ["nil"] = Colors.text2,
+
 }
 
 function LuaLang.pretty(code, window)
