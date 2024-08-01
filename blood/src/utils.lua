@@ -25,7 +25,7 @@ function Utils.computeNewCursorPosition(data, x, y)
         y = wy - 1
     end
 
-    return x, y, data.scroll
+    return x, y
 end
 
 function Utils.computeContentPosition(data, x, y)
