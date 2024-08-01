@@ -19,13 +19,14 @@ function CodeState.events(event, window, data)
                 data.isDirty = true
             end
         elseif event[2] == keys.left then
-            --data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
+            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
         elseif event[2] == keys.right then
             data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x + 1, data.codeCursor.y)
         elseif event[2] == keys.up then
             data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y - 1)
         elseif event[2] == keys.down then
             data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y + 1)
+            data.scroll = data.scroll + 2
         elseif event[2] == keys.enter then
             local position = Utils.computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
             data.currentFile.content = string.sub(data.currentFile.content, 1, position - 1) .. '\n' .. string.sub(data.currentFile.content, position)
