@@ -19,6 +19,8 @@ local codeContentWindow = window.create(codeWindow, 1, 1, wx, wy - 1)
 
 -- set the window background color
 mainWindow.setBackgroundColor(1)
+codeWindow.setBackgroundColor(1)
+codeContentWindow.setBackgroundColor(1)
 codeWindow.setCursorBlink(true)
 
 mainWindow.clear()
