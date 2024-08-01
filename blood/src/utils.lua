@@ -16,11 +16,11 @@ function Utils.computeNewCursorPosition(data, x, y)
     end
     local line = lines[y]
    
-    if y < 1 then
+    if y <= 1 then
         data.scroll = data.scroll - 1
         y = 1
     end
-    if y > wy - 1 then
+    if y => wy - 1 then
         data.scroll = data.scroll + 1
         y = wy - 1
     end
