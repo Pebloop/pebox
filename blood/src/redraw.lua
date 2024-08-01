@@ -89,8 +89,8 @@ function  Redraw.exec(window, data)
     window.setBackgroundColor(Colors.background)
     window.setTextColor(Colors.text)
     window.setCursorBlink(false)
-    window.clear()
-    data.codeWindow.redraw()
+    -- window.clear()
+    --data.codeWindow.redraw()
 
     local lines = {}
     if data.currentFile ~= nil then
@@ -101,15 +101,15 @@ function  Redraw.exec(window, data)
     
     if data.isLetMenuOpen then
         data.codeWindow.reposition(15, data.scroll + 1, window.getSize() - 15, #lines + 1)
-        data.codeWindow.redraw()
+        --data.codeWindow.redraw()
         drawLeftMenu(window)
     else
         data.codeWindow.reposition(1, data.scroll + 1, window.getSize(), #lines + 1)
-        data.codeWindow.redraw()
+        --data.codeWindow.redraw()
     end
     drawHeader(window)
     drawCode(data)
-    window.redraw()
+    --window.redraw()
 
     -- popups
     if data.state ~= nil then
