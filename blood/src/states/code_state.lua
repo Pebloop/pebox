@@ -19,8 +19,7 @@ function CodeState.events(event, window, data)
                 data.isDirty = true
             end
         elseif event[2] == keys.left then
-            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
-            data.scroll = data.scroll - 1
+            --data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
         elseif event[2] == keys.right then
             data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x + 1, data.codeCursor.y)
         elseif event[2] == keys.up then
