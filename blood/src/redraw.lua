@@ -78,7 +78,6 @@ local function drawCode(data)
     local wx, wy = data.codeWindow.getSize()
     data.codeWindow.setBackgroundColor(Colors.background)
     data.codeWindow.setTextColor(Colors.text)
-    --data.codeWindow.clear()
     data.codeWindow.setCursorPos(1, 1)
 
     local code = data.currentFile.content
@@ -89,8 +88,6 @@ function  Redraw.exec(window, data)
     window.setBackgroundColor(Colors.background)
     window.setTextColor(Colors.text)
     window.setCursorBlink(false)
-    -- window.clear()
-    --data.codeWindow.redraw()
 
     local lines = {}
     if data.currentFile ~= nil then
@@ -101,15 +98,12 @@ function  Redraw.exec(window, data)
     
     if data.isLetMenuOpen then
         data.codeWindow.reposition(15, data.scroll + 1, window.getSize() - 15, #lines + 1)
-        --data.codeWindow.redraw()
         drawLeftMenu(window)
     else
         data.codeWindow.reposition(1, data.scroll + 1, window.getSize(), #lines + 1)
-        --data.codeWindow.redraw()
     end
     drawHeader(window)
     drawCode(data)
-    --window.redraw()
 
     -- popups
     if data.state ~= nil then

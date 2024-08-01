@@ -21,6 +21,10 @@ local codeContentWindow = window.create(codeWindow, 1, 1, wx, wy - 1)
 mainWindow.setBackgroundColor(1)
 codeWindow.setCursorBlink(true)
 
+mainWindow.clear()
+codeWindow.clear()
+codeContentWindow.clear()
+
 local data = Data:new(codeContentWindow, codeWindow)
 
 -- mai loop
