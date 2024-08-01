@@ -9,37 +9,20 @@ function Utils.computeNewCursorPosition(data, x, y)
         return 1, 1
     end
     local content = data.currentFile.content
+    local wx, wy  = data.codeWrapperWindow.getSize()
     local lines = {}
     for line in string.gmatch(content, "[^\n]*\n?") do
         table.insert(lines, line)
     end
     local line = lines[y]
-    if line == nil then
-        return x, y
-    end
-    if x > string.len(line) + 1 and y < table.getn(lines) then
-        x = 1
-        y = y + 1
-    elseif x < 1 and y > 1 then
-        y = y - 1
-        x = string.len(lines[y]) + 1
-    elseif x < 1 and y == 1 then
-        x = 1
-    end
-
-    -- if still out of bound
+   
     if y < 1 then
+        data.scroll = data.scroll - 1
         y = 1
     end
-    if y > table.getn(lines) then
-        y = table.getn(lines)
-        x = string.len(lines[y]) + 1
-    end
-    if x < 1 then
-        x = 1
-    end
-    if x > string.len(lines[y]) + 1 then
-        x = string.len(lines[y]) + 1
+    if y > wy - 1 then
+        data.scroll = data.scroll + 1
+        y = wy - 1
     end
 
     return x, y
