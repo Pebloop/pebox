@@ -35,7 +35,7 @@ function CodeState.events(event, window, data)
             for line in string.gmatch(data.currentFile.content, "[^\n]*\n?") do
                 table.insert(lines, line)
             end
-            for i = data.codeCursor.y, #lines do
+            for i = data.codeCursor.y - 1, #lines do
                 data.dirtyLines[#data.dirtyLines + 1] = i
             end
             data.codeWindow.reposition(1, data.scroll + 1, wx, #lines + 1)
