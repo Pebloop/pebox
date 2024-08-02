@@ -31,7 +31,6 @@ function Pretty.printLine(doc, window, line)
     window.setCursorPos(1, lineIndex)
     window.clearLine()
     window.write(line)
-    
 end
 
 function Pretty.token(text, color)
