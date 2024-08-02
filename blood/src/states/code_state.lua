@@ -35,8 +35,10 @@ function CodeState.events(event, window, data)
             for line in string.gmatch(data.currentFile.content, "[^\n]*\n?") do
                 table.insert(lines, line)
             end
+            for i = data.codeCursor.y, #lines do
+                data.dirtyLines[#data.dirtyLines + 1] = i
+            end
             data.codeWindow.reposition(1, data.scroll + 1, wx, #lines + 1)
-            data.dirtyLines = {-1}
             data.codeCursor.y = data.codeCursor.y + 1
             data.isDirty = true
 
@@ -54,11 +56,13 @@ function CodeState.events(event, window, data)
                 data.dirtyLines = {data.codeCursor.y}
                 data.codeCursor.x = data.codeCursor.x - 1
             else
-                data.dirtyLines = {-1}
                 local wx, wy = data.codeWrapperWindow.getSize()
                 local lines = {}
                 for line in string.gmatch(data.currentFile.content, "[^\n]*\n?") do
                     table.insert(lines, line)
+                end
+                for i = data.codeCursor.y, #lines do
+                    data.dirtyLines[#data.dirtyLines + 1] = i
                 end
                 data.codeWindow.reposition(1, data.scroll + 1, wx, #lines + 1)
                 data.codeCursor.x = newCursorX
