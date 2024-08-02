@@ -25,7 +25,7 @@ function Pretty.printLine(doc, window, line)
                     if doc[j].text == "\n" then
                         break
                     end
-                    lineContent = lineContent .. doc[j]
+                    lineContent[#lineContent + 1] = doc[j]
                 end
                 break
             end
