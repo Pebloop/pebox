@@ -2,6 +2,7 @@ local Pretty = {}
 local Colors = require('src.data.colors')
 
 function Pretty.print(doc, window)
+    window.clear()
     for _, token in ipairs(doc) do
         window.setTextColor(token.color)
         window.write(token.text)
@@ -15,7 +16,7 @@ end
 
 function Pretty.printLine(doc, window, line)
     local lineIndex = 1
-    local lineContent = ""
+    local lineContent = {}
     for i, token in ipairs(doc) do
         if token.text == "\n" then
             lineIndex = lineIndex + 1
@@ -24,7 +25,7 @@ function Pretty.printLine(doc, window, line)
                     if doc[j].text == "\n" then
                         break
                     end
-                    lineContent = lineContent .. doc[j].text
+                    lineContent = lineContent .. doc[j]
                 end
                 break
             end
@@ -32,7 +33,10 @@ function Pretty.printLine(doc, window, line)
     end
     window.setCursorPos(1, lineIndex)
     window.clearLine()
-    window.write(lineContent)
+    for _, token in ipairs(lineContent) do
+        window.setTextColor(token.color)
+        window.write(token.text)
+    end
 end
 
 function Pretty.token(text, color)
