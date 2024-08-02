@@ -28,6 +28,7 @@ function OpenAsState.events(event, window, data)
                     file.close()
                     data.state = nil
                     data.isDirty = true
+                    data.dirtyLines = {-1}
                 end
             end
         elseif event[2] == keys.backspace then

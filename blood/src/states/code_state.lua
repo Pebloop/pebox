@@ -32,6 +32,8 @@ function CodeState.events(event, window, data)
             data.codeCursor.x = 1
             data.codeCursor.y = data.codeCursor.y + 1
             data.isDirty = true
+            data.dirtyLines = {data.codeCursor.y, data.codeCursor.y + 1}
+
         elseif event[2] == keys.backspace then
             if data.codeCursor.x == 1 and data.codeCursor.y == 1 then
                 return

@@ -13,6 +13,27 @@ function Pretty.print(doc, window)
     window.setTextColor(Colors.text)
 end
 
+function Pretty.printLine(doc, window, line)
+    local lineIndex = 1
+    local line = ""
+    for i, token in ipairs(doc) do
+        if token.text == "\n" then
+            lineIndex = lineIndex + 1
+            for j = i + 1, #doc do
+                if doc[j].text == "\n" then
+                    break
+                end
+                line = line .. doc[j].text
+            end
+            break
+        end
+    end
+    window.setCursorPos(1, lineIndex)
+    window.clearLine()
+    window.write(line)
+    
+end
+
 function Pretty.token(text, color)
     return {
         text = text,

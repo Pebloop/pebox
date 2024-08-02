@@ -278,7 +278,15 @@ function LuaLang.pretty(code, window, data)
         Pretty.append(doc, Pretty.token(buffer, Colors.text))
     end
 
-    Pretty.print(doc, window)
+    if #data.printLines > 0 then
+        if data.dirtyLines[1] == -1 then
+            Pretty.print(doc, window)
+        else
+            for i, changedLine in ipairs(data.dirtyLines) do
+                Pretty.printLine(doc, window, changedLine)
+            end
+        end
+    end
 end
 
 ----------------- Completion -----------------

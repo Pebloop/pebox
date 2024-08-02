@@ -1,5 +1,6 @@
 local Data = {
     isDirty = true,
+    dirtyLines = {},
     isLetMenuOpen = false,
     exit = false,
     currentFile = nil,
@@ -22,6 +23,7 @@ function Data:new(window, wrapperWindow)
 
     -- setup data
     o.isDirty = true
+    o.dirtyLines = {}
     o.isLetMenuOpen = false
     o.exit = false
     o.currentFile = nil
