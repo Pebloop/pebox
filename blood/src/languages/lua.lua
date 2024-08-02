@@ -278,7 +278,7 @@ function LuaLang.pretty(code, window, data)
         Pretty.append(doc, Pretty.token(buffer, Colors.text))
     end
 
-    if #data.printLines > 0 then
+    if #data.dirtyLines > 0 then
         if data.dirtyLines[1] == -1 then
             Pretty.print(doc, window)
         else
@@ -287,6 +287,8 @@ function LuaLang.pretty(code, window, data)
             end
         end
     end
+
+    data.dirtyLines = {}
 end
 
 ----------------- Completion -----------------
