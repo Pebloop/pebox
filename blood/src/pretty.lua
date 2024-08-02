@@ -17,6 +17,16 @@ end
 function Pretty.printLine(doc, window, line)
     local lineIndex = 1
     local lineContent = {}
+
+    for _, token in ipairs(doc) do
+        window.setTextColor(token.color)
+        window.write(token.text)
+        if token.text == "\n" then
+            local x, y = window.getCursorPos()
+            window.setCursorPos(1, y + 1)
+        end
+    end
+
     for i, token in ipairs(doc) do
         if token.text == "\n" then
             lineIndex = lineIndex + 1
