@@ -15,22 +15,24 @@ end
 
 function Pretty.printLine(doc, window, line)
     local lineIndex = 1
-    local line = ""
+    local lineContent = ""
     for i, token in ipairs(doc) do
         if token.text == "\n" then
             lineIndex = lineIndex + 1
-            for j = i + 1, #doc do
-                if doc[j].text == "\n" then
-                    break
+            if lineIndex == line then
+                for j = i + 1, #doc do
+                    if doc[j].text == "\n" then
+                        break
+                    end
+                    lineContent = lineContent .. doc[j].text
                 end
-                line = line .. doc[j].text
+                break
             end
-            break
         end
     end
     window.setCursorPos(1, lineIndex)
     window.clearLine()
-    window.write(line)
+    window.write(lineContent)
 end
 
 function Pretty.token(text, color)
