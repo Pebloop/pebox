@@ -3,6 +3,7 @@ local Colors = require('src.data.colors')
 
 function Pretty.print(doc, window)
     window.clear()
+    window.setCursorPos(1, 1)
     for _, token in ipairs(doc) do
         window.setTextColor(token.color)
         window.write(token.text)
@@ -18,6 +19,7 @@ function Pretty.printLine(doc, window, line)
     local lineIndex = 1
     local lineContent = {}
 
+    window.setCursorPos(1, 1)
     for _, token in ipairs(doc) do
         window.setTextColor(token.color)
         window.write(token.text)
