@@ -283,7 +283,7 @@ function LuaLang.pretty(code, window, data)
             Pretty.print(doc, window)
         else
             for i, changedLine in ipairs(data.dirtyLines) do
-                Pretty.printLine(doc, window, changedLine)
+                Pretty.printLine(doc, window, changedLine - data.scroll )
             end
         end
     end
