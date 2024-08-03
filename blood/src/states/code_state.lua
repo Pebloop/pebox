@@ -42,6 +42,7 @@ function CodeState.events(event, window, data)
             end
             data.codeWindow.reposition(1, data.scroll + 1, wx, #lines + 1)
             data.codeCursor.y = data.codeCursor.y + 1
+            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y, "down")
             data.isDirty = true
 
         elseif event[2] == keys.backspace then
@@ -70,6 +71,7 @@ function CodeState.events(event, window, data)
                 data.codeCursor.x = newCursorX
                 data.codeCursor.y = data.codeCursor.y - 1
             end
+            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y, "left")
             data.isDirty = true
         end
 
@@ -126,6 +128,7 @@ function CodeState.events(event, window, data)
         if data.scroll < - #lines + wy - 1 then
             data.scroll = - #lines + wy - 1
         end
+        data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y, "right")
         data.isDirty = true
     end
 end
