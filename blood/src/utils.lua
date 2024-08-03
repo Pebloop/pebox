@@ -14,16 +14,16 @@ function Utils.computeNewCursorPosition(data, x, y, direction)
     for line in string.gmatch(content, "[^\n]*\n?") do
         table.insert(lines, line)
     end
-    local line = lines[y]
+    local line = lines[y - data.scroll]
 
     if line == nil then
         if direction == "up" then
             y = y + 1
-            line = lines[y]
+            line = lines[y - data.scroll]
         end
         if direction == "down" then
             y = y - 1
-            line = lines[y]
+            line = lines[y - data.scroll]
         end
     end
 
@@ -40,11 +40,13 @@ function Utils.computeNewCursorPosition(data, x, y, direction)
         if x > string.len(line) + 1 then
             x = 1
             y = y + 1
+            line = lines[y - data.scroll]
         end
         if x < 1 then
             if y > 1 then
                 y = y - 1
-                x = string.len(lines[y]) + 1
+                line = lines[y - data.scroll]
+                x = string.len(lines[y - data.scroll]) + 1
             else
                 x = 1
             end
