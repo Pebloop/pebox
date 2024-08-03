@@ -27,7 +27,7 @@ function CodeState.events(event, window, data)
             data.isDirty = true
         elseif event[2] == keys.down then
             data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y + 1, "vertical")
-            data.isDirty = trues
+            data.isDirty = true
         elseif event[2] == keys.enter then
             local position = Utils.computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
             data.currentFile.content = string.sub(data.currentFile.content, 1, position - 1) .. '\n' .. string.sub(data.currentFile.content, position)
