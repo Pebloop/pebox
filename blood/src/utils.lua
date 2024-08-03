@@ -16,7 +16,16 @@ function Utils.computeNewCursorPosition(data, x, y, direction)
     end
     local line = lines[y]
 
-    if direction == "vertical" then
+    if line == nil then
+        if direction == "up" then
+            y = y - 1
+        end
+        if direction == "down" then
+            y = y + 1
+        end
+    end
+
+    if direction == "up" or direction == "down" then
         if x > string.len(line) then
             x = string.len(line)
         end
@@ -25,7 +34,7 @@ function Utils.computeNewCursorPosition(data, x, y, direction)
         end
     end
 
-    if direction == "horizontal" then
+    if direction == "left" or direction == "right" then
         if x > string.len(line) + 1 then
             x = 1
             y = y + 1
