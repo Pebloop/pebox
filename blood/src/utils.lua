@@ -15,12 +15,31 @@ function Utils.computeNewCursorPosition(data, x, y)
         table.insert(lines, line)
     end
     local line = lines[y]
+
+    if x <= 1 then
+        if y > 1 then
+            y = y - 1
+            line = lines[y]
+            x = string.len(line) + 1
+        else
+            x = 1
+        end
+    end
+
+    if x > string.len(line) + 1 then
+        if y < #lines then
+            y = y + 1
+            x = 1
+        else
+            x = string.len(line) + 1
+        end
+    end
    
     if y <= 1 then
         data.scroll = data.scroll + 1
         y = 1
     end
-    if y >= wy - 1 then
+    if y >= wy then
         data.scroll = data.scroll - 1
         y = wy - 1
     end
