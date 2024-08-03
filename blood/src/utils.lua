@@ -18,10 +18,12 @@ function Utils.computeNewCursorPosition(data, x, y, direction)
 
     if line == nil then
         if direction == "up" then
-            y = y - 1
+            y = y + 1
+            line = lines[y]
         end
         if direction == "down" then
-            y = y + 1
+            y = y - 1
+            line = lines[y]
         end
     end
 
