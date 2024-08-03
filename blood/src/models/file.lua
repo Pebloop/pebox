@@ -16,4 +16,12 @@ function File:new(name, path, content)
     return o
 end
 
+function File:save()
+    if self.path then
+        local file = fs.open(self.path, 'w')
+        file.write(self.content)
+        file.close()
+    end
+end
+
 return File
