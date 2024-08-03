@@ -4,7 +4,7 @@ function Utils.isBox(boxX, boxY, boxWidth, boxHeight, mouseX, mouseY)
     return mouseX >= boxX and mouseX <= boxX + boxWidth and mouseY >= boxY and mouseY <= boxY + boxHeight
 end
 
-function Utils.computeNewCursorPosition(data, x, y)
+function Utils.computeNewCursorPosition(data, x, y, direction)
     if data.currentFile == nil then
         return 1, 1
     end
@@ -16,22 +16,27 @@ function Utils.computeNewCursorPosition(data, x, y)
     end
     local line = lines[y]
 
-    if x <= 1 then
-        if y > 1 then
-            y = y - 1
-            line = lines[y]
-            x = string.len(line) + 1
-        else
+    if direction == "vertical" then
+        if x > string.len(line) then
+            x = string.len(line)
+        end
+        if x < 1 then
             x = 1
         end
     end
 
-    if x > string.len(line) + 1 then
-        if y < #lines then
-            y = y + 1
+    if direction == "horizontal" then
+        if x > string.len(line) + 1 then
             x = 1
-        else
-            x = string.len(line) + 1
+            y = y + 1
+        end
+        if x < 1 then
+            if y > 1 then
+                y = y - 1
+                x = string.len(lines[y]) + 1
+            else
+                x = 1
+            end
         end
     end
    

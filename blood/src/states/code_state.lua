@@ -19,14 +19,14 @@ function CodeState.events(event, window, data)
                 data.isDirty = true
             end
         elseif event[2] == keys.left then
-            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y)
+            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x - 1, data.codeCursor.y, "horizontal")
         elseif event[2] == keys.right then
-            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x + 1, data.codeCursor.y)
+            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x + 1, data.codeCursor.y, "horizontal")
         elseif event[2] == keys.up then
-            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y - 1)
+            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y - 1, "vertical")
             data.isDirty = true
         elseif event[2] == keys.down then
-            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y + 1)
+            data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, data.codeCursor.x, data.codeCursor.y + 1, "vertical")
             data.isDirty = trues
         elseif event[2] == keys.enter then
             local position = Utils.computeContentPosition(data, data.codeCursor.x, data.codeCursor.y)
