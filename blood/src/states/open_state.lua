@@ -22,6 +22,15 @@ function OpenAsState.events(event, window, data)
                     data.directory = data.stateData.path
                 else
                     local file = fs.open(data.stateData.path, 'r')
+
+                    if file == nil then
+                        data.snackbar = "File not found"
+                        data.snackbarTimer = 3
+                        data.stateData.path = ""
+                        data.isDirty = true
+                        return
+                    end
+
                     -- get filename from path
                     local filename = data.stateData.path:match("^.+/(.+)$")
                     data.currentFile = File:new(filename, data.stateData.path, file.readAll())
