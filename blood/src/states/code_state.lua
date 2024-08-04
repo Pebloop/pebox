@@ -108,9 +108,9 @@ function CodeState.events(event, window, data)
             if data.isLetMenuOpen then
                 if Utils.isBox(15, 2, wx - 15, wy - 1, event[3], event[4]) then
                     data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, event[3] - 15, event[4] + data.scroll - 1, "right")
-                else
-                    data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, event[3], event[4] + data.scroll - 1, "right")
                 end
+            elseif Utils.isBox(1, 2, wx, wy - 1, event[3], event[4]) then
+                data.codeCursor.x, data.codeCursor.y = Utils.computeNewCursorPosition(data, event[3], event[4] + data.scroll - 1, "right")
             end
         end
 
