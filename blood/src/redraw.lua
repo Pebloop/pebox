@@ -55,7 +55,7 @@ end
 
 local function drawOpenPopup(mainWindow, data)
     local wx, wy = mainWindow.getSize()
-    local popupWindow = window.create(mainWindow, wx / 2 - 10, wy / 2 - 4, 20, 8)
+    local popupWindow = window.create(mainWindow, wx / 2 - 15, wy / 2 - 4, 30, 8)
     popupWindow.setBackgroundColor(Colors.firstElevation)
     popupWindow.setTextColor(Colors.text)
     popupWindow.clear()
